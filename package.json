@@ -2,6 +2,7 @@
   "name": "rjls-systems",
   "version": "0.1.6",
   "private": true,
+  "packageManager": "pnpm@11.10.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
