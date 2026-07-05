@@ -6,12 +6,28 @@ export const RJLS = {
   heroSummary:
     "RJLS Systems helps businesses adopt AI without losing control of security, output quality, developer workflows, or cost.",
   primaryCta: "Email RJLS",
-  founder: {
-    name: "Lukas Sorensen",
-    title: "Founder, AI Integration Consultant",
-    summary:
-      "Lukas brings more than 10 years of production software architecture experience, including applied AI assistant work, MCP-style tool integrations, and developer enablement for real business systems.",
-  },
+  about:
+    "RJLS Systems helps organizations turn AI from scattered experimentation into controlled business capability. The firm focuses on practical adoption plans, secure integration patterns, governance, observability, and cost controls that let teams use AI with confidence.",
+  clientOutcomes: [
+    "Clear visibility into how AI is already being used across the business.",
+    "Practical controls for sensitive data, tool access, outputs, and spend.",
+    "Reliable AI integration patterns that developers can maintain and leadership can govern.",
+    "A prioritized roadmap that separates urgent risk reduction from longer-term opportunity.",
+  ],
+  team: [
+    {
+      name: "Lukas Sorensen",
+      role: "Co-founder",
+      photoAlt: "Placeholder headshot for Lukas Sorensen",
+      bio: "Placeholder bio for Lukas Sorensen. Add a short client-facing summary of focus areas, responsibilities, and relevant RJLS Systems perspective.",
+    },
+    {
+      name: "Ralph Jenson",
+      role: "Co-founder",
+      photoAlt: "Placeholder headshot for Ralph Jenson",
+      bio: "Placeholder bio for Ralph Jenson. Add a short client-facing summary of focus areas, responsibilities, and relevant RJLS Systems perspective.",
+    },
+  ],
   services: [
     {
       title: "AI Readiness Audit",
