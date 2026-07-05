@@ -1,5 +1,5 @@
-export { getResumeTool } from "./getResumeTool";
+export { getAIReadinessAuditTool } from "./getAIReadinessAuditTool";
+export { getAIRiskChecklistTool } from "./getAIRiskChecklistTool";
+export { getCostAndObservabilityGuidanceTool } from "./getCostAndObservabilityGuidanceTool";
 export { getContactInfoTool } from "./getContactInfoTool";
-export { getBlogAndProjectsTool } from "./getBlogAndProjectsTool";
-export { getBlogPostByIdTool } from "./getBlogPostByIdTool";
-export { getProjectByIdTool } from "./getProjectByIdTool";
+export { getServiceCatalogTool } from "./getServiceCatalogTool";

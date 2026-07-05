@@ -4,20 +4,20 @@ import { SystemMessage } from "@langchain/core/messages";
 import { createAgent } from "langchain";
 import { toBaseMessages } from "@ai-sdk/langchain";
 import { createUIMessageStream, createUIMessageStreamResponse, isToolUIPart, UIMessage } from "ai";
-import { MAIN_RESUME_AI_SYSTEM_PROMPT } from "@/constants/system-prompts/MainResumeAISystemPrompt";
+import { RJLS_SYSTEM_PROMPT } from "@/constants/system-prompts/RJLSSystemPrompt";
 import {
-  getBlogAndProjectsTool,
-  getBlogPostByIdTool,
+  getAIReadinessAuditTool,
+  getAIRiskChecklistTool,
+  getCostAndObservabilityGuidanceTool,
   getContactInfoTool,
-  getProjectByIdTool,
-  getResumeTool,
+  getServiceCatalogTool,
 } from "./tools";
 
 const MAX_INPUT_LENGTH = 2000;
 const MAX_MESSAGES = 20;
 const REASONING_MODEL_PREFIXES = ["o1", "o3", "gpt-5"];
 
-const SYSTEM_PROMPT = MAIN_RESUME_AI_SYSTEM_PROMPT;
+const SYSTEM_PROMPT = RJLS_SYSTEM_PROMPT;
 
 type StreamEvent = {
   data?: Record<string, unknown>;
@@ -175,10 +175,16 @@ export async function POST(req: NextRequest) {
     const baseMessages = await toBaseMessages(trimmedMessages);
     const agentMessages = [new SystemMessage(SYSTEM_PROMPT), ...baseMessages];
 
-    // Create a ReAct agent with all recruiter-facing tools
+    // Create a ReAct agent with RJLS-facing service and assessment tools
     const agent = createAgent({
       model: model,
-      tools: [getResumeTool, getContactInfoTool, getBlogAndProjectsTool, getBlogPostByIdTool, getProjectByIdTool],
+      tools: [
+        getServiceCatalogTool,
+        getAIReadinessAuditTool,
+        getAIRiskChecklistTool,
+        getCostAndObservabilityGuidanceTool,
+        getContactInfoTool,
+      ],
     });
 
     const agentStream = await agent.streamEvents({ messages: agentMessages }, { version: "v2" });

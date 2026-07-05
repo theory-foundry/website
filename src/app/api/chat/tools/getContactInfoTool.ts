@@ -1,11 +1,18 @@
 import { tool } from "@langchain/core/tools";
 import { z } from "zod";
-import { RESUME } from "@/example-data/Resume";
+import { RJLS } from "@/constants/RJLS";
 
-export const getContactInfoTool = tool(async () => JSON.stringify(RESUME.contact, null, 2), {
+export const getContactInfoTool = tool(async () => JSON.stringify(
+  {
+    companyName: RJLS.companyName,
+    email: RJLS.contactEmail,
+    website: RJLS.website,
+  },
+  null,
+  2,
+), {
   name: "get_contact_info",
   description:
-    "Returns Lukas A Sorensen's contact information including email, website, GitHub, and LinkedIn. " +
-    "Use whenever the user asks how to reach Lukas or requests his contact details.",
+    "Returns RJLS Systems contact information. Use whenever the user asks how to reach RJLS or start a conversation.",
   schema: z.object({}),
 });

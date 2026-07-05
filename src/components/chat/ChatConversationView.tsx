@@ -41,7 +41,7 @@ export function ChatConversationView({
   messages,
   showLoadingMessage,
   status,
-  title = "Ask about Lukas",
+  title = "Ask RJLS about AI adoption",
   onCopyResponse,
   onInputChange,
   onNewChat,

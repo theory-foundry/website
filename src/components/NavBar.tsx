@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ThemeSwitchButton from "./ThemeSwitchButton";
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
+import { RJLS } from "@/constants/RJLS";
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -18,16 +18,8 @@ export default function NavBar() {
 
   const links = [
     {
-      href: "/resume",
-      title: "Resume",
-    },
-    {
-      href: "/projects",
-      title: "Projects",
-    },
-    {
-      href: "/blog",
-      title: "Blog",
+      href: "/about",
+      title: "About",
     },
     {
       href: "/contact",
@@ -83,16 +75,10 @@ export default function NavBar() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <Link
-              className={`border-primary-500 flex flex-shrink-0 items-center overflow-hidden rounded-full`}
+              className={`border-primary-500 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-cyan-600 text-sm font-bold text-white`}
               href="/"
             >
-              <Image
-                className="h-10 w-auto"
-                src="/images/LUKAS_HEADSHOT_SMALL.png"
-                alt="Lukas Sorensen"
-                width={40}
-                height={40}
-              />
+              <span aria-label={RJLS.companyName}>RJ</span>
             </Link>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">

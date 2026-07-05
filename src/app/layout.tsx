@@ -6,14 +6,15 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import NavBar from "@/components/NavBar";
 import { Body } from "@/components/Body";
 import { cn } from "@/lib/utils";
+import { RJLS } from "@/constants/RJLS";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Lukas A Sorensen",
-  description: "Lukas A Sorensen | Full Stack Engineer",
+  title: RJLS.companyName,
+  description: RJLS.tagline,
 };
 
 export default function RootLayout({

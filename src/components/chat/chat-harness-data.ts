@@ -1,6 +1,6 @@
 import type { ChatStatus, DynamicToolUIPart, ReasoningUIPart, TextUIPart, UIMessage } from "ai";
 
-export type ChatHarnessScenarioId = "recruiter-brief" | "tool-error" | "approval" | "markdown-stream";
+export type ChatHarnessScenarioId = "service-brief" | "tool-error" | "approval" | "markdown-stream";
 
 export type ChatHarnessFrame = {
   delayMs: number;
@@ -74,32 +74,33 @@ const dynamicToolPart = ({
   }
 };
 
-const recruiterReasoning =
-  "Checking the resume and project data first so the answer lands on seniority, shipped work, and recent AI-specific experience.";
+const serviceReasoning =
+  "Checking the RJLS service catalog first so the answer stays grounded in the firm's actual offer.";
 
-const recruiterToolInput = { sections: ["summary", "experience", "projects"], tone: "recruiter-friendly" };
+const serviceToolInput = { sections: ["services", "commonProblems", "bestFit"], tone: "business-leader" };
 
-const recruiterToolOutput = {
-  focus: ["10+ years of full stack delivery", "recent AI assistant work", "architecture and mentorship"],
+const serviceToolOutput = {
+  focus: ["AI readiness audits", "secure AI architecture", "developer AI integrations"],
   strongestSignals: [
-    "Built production web apps across React, Next.js, Node.js, and cloud tooling.",
-    "Led architecture and mentored engineering teams.",
-    "Spent the last year driving AI integration work for DIGIDECK.",
+    "Helps leaders find unmanaged AI usage and integration risk.",
+    "Designs controls for data boundaries, tool access, and output quality.",
+    "Connects business governance with developer implementation practices.",
   ],
 };
 
-const projectToolInput = { projectArea: "recent work", request: "strongest differentiator" };
+const riskToolInput = { categories: ["employee usage", "developer integrations", "cost control"] };
 
 const markdownText = `Here is a markdown-heavy response for spacing and typography work:
 
 1. Highlights
 - Strong React and Next.js depth
-- Product-minded AI integration work
-- Experience across frontend, backend, and cloud delivery
+- Practical AI readiness audits
+- Secure AI integration patterns
+- Cost and observability controls
 
 2. Sample code
 \`\`\`ts
-const stack = ["React", "Next.js", "TypeScript", "LangGraph", "AWS"];
+const stack = ["Next.js", "TypeScript", "LangChain", "MCP", "OpenAI"];
 const strongestAngle = stack.join(" / ");
 \`\`\`
 
@@ -108,43 +109,43 @@ This transcript is fully scripted so you can iterate on layout without spending 
 
 export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
   {
-    description: "Streams reasoning, a successful tool call, and a recruiter-ready answer.",
+    description: "Streams reasoning, a successful tool call, and a business-facing service answer.",
     frames: [
       {
         delayMs: 400,
         parts: [
-          reasoningPart("Reviewing Lukas's background and recent AI work...", "streaming"),
-          textPart("Pulling together the strongest recruiter-facing highlights...", "streaming"),
+          reasoningPart("Reviewing RJLS service positioning and common client needs...", "streaming"),
+          textPart("Pulling together the most relevant AI adoption guidance...", "streaming"),
         ],
         status: "streaming",
       },
       {
         delayMs: 900,
         parts: [
-          reasoningPart(recruiterReasoning),
+          reasoningPart(serviceReasoning),
           dynamicToolPart({
-            input: recruiterToolInput,
+            input: serviceToolInput,
             state: "input-available",
-            toolCallId: "resume-lookup",
-            toolName: "get_resume",
+            toolCallId: "service-lookup",
+            toolName: "get_service_catalog",
           }),
-          textPart("I checked the resume first so the summary stays concrete and evidence-based.", "streaming"),
+          textPart("I checked the service catalog first so the answer stays concrete.", "streaming"),
         ],
         status: "streaming",
       },
       {
         delayMs: 850,
         parts: [
-          reasoningPart(recruiterReasoning),
+          reasoningPart(serviceReasoning),
           dynamicToolPart({
-            input: recruiterToolInput,
-            output: recruiterToolOutput,
+            input: serviceToolInput,
+            output: serviceToolOutput,
             state: "output-available",
-            toolCallId: "resume-lookup",
-            toolName: "get_resume",
+            toolCallId: "service-lookup",
+            toolName: "get_service_catalog",
           }),
           textPart(
-            "Lukas is a senior full stack engineer with 10+ years of experience shipping production web applications, leading architecture, and mentoring teams. His recent standout work is AI-focused: he has spent the last year building AI capabilities for DIGIDECK while still bringing strong depth in React, Next.js, TypeScript, Node.js, and cloud delivery.",
+            "RJLS Systems helps businesses adopt AI with more control over security, output quality, developer integrations, and cost. The usual starting point is an AI readiness audit that maps current usage, risk, and high-value next steps.",
             "streaming",
           ),
         ],
@@ -153,24 +154,24 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
       {
         delayMs: 700,
         parts: [
-          reasoningPart(recruiterReasoning),
+          reasoningPart(serviceReasoning),
           dynamicToolPart({
-            input: recruiterToolInput,
-            output: recruiterToolOutput,
+            input: serviceToolInput,
+            output: serviceToolOutput,
             state: "output-available",
-            toolCallId: "resume-lookup",
-            toolName: "get_resume",
+            toolCallId: "service-lookup",
+            toolName: "get_service_catalog",
           }),
           textPart(
-            "Lukas is a senior full stack engineer with 10+ years of experience shipping production web applications, leading architecture, and mentoring teams. His recent standout work is AI-focused: he has spent the last year building AI capabilities for DIGIDECK while still bringing strong depth in React, Next.js, TypeScript, Node.js, and cloud delivery.\n\nFor a hiring manager, the signal is that he combines hands-on implementation with product thinking, technical leadership, and modern AI integration experience.",
+            "RJLS Systems helps businesses adopt AI with more control over security, output quality, developer integrations, and cost. The usual starting point is an AI readiness audit that maps current usage, risk, and high-value next steps.\n\nFor leadership, the value is a practical roadmap instead of scattered AI experiments.",
           ),
         ],
         status: "ready",
       },
     ],
-    id: "recruiter-brief",
-    label: "Recruiter brief",
-    prompt: "Give me a recruiter-ready summary of Lukas and mention the recent AI work.",
+    id: "service-brief",
+    label: "Service brief",
+    prompt: "How can RJLS help us adopt AI safely?",
   },
   {
     description: "Shows a failed tool invocation and the assistant's fallback copy.",
@@ -178,38 +179,38 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
       {
         delayMs: 350,
         parts: [
-          reasoningPart("Looking for the strongest recent project signal and how to frame it clearly...", "streaming"),
-          textPart("Checking project data before I answer...", "streaming"),
+          reasoningPart("Looking for AI risk categories before recommending a next step...", "streaming"),
+          textPart("Checking the risk checklist before I answer...", "streaming"),
         ],
         status: "streaming",
       },
       {
         delayMs: 800,
         parts: [
-          reasoningPart("Looking for the strongest recent project signal and how to frame it clearly..."),
+          reasoningPart("Looking for AI risk categories before recommending a next step..."),
           dynamicToolPart({
-            input: projectToolInput,
+            input: riskToolInput,
             state: "input-available",
-            toolCallId: "projects-lookup",
-            toolName: "get_blog_and_projects",
+            toolCallId: "risk-lookup",
+            toolName: "get_ai_risk_checklist",
           }),
-          textPart("The project lookup is running now.", "streaming"),
+          textPart("The risk checklist lookup is running now.", "streaming"),
         ],
         status: "streaming",
       },
       {
         delayMs: 850,
         parts: [
-          reasoningPart("Looking for the strongest recent project signal and how to frame it clearly..."),
+          reasoningPart("Looking for AI risk categories before recommending a next step..."),
           dynamicToolPart({
-            errorText: "Portfolio service timed out after 8 seconds in harness mode.",
-            input: projectToolInput,
+            errorText: "Risk checklist service timed out after 8 seconds in harness mode.",
+            input: riskToolInput,
             state: "output-error",
-            toolCallId: "projects-lookup",
-            toolName: "get_blog_and_projects",
+            toolCallId: "risk-lookup",
+            toolName: "get_ai_risk_checklist",
           }),
           textPart(
-            "The project lookup failed, so I would fall back to the strongest known signal: Lukas's DIGIDECK AI Assistant work. It shows applied AI delivery, systems thinking, and real product impact rather than a toy demo.",
+            "The checklist lookup failed, so I would fall back to the core RJLS guidance: start by identifying unmanaged employee AI usage, sensitive data exposure, missing output review, and unbounded model spend.",
           ),
         ],
         status: "ready",
@@ -217,7 +218,7 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
     ],
     id: "tool-error",
     label: "Tool error",
-    prompt: "What is the strongest recent project and why does it matter?",
+    prompt: "What AI risks should we check first?",
   },
   {
     description: "Exercises approval-related tool states without calling any external system.",
@@ -235,10 +236,10 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
         parts: [
           reasoningPart("Showing what a blocked tool flow looks like in the transcript UI..."),
           dynamicToolPart({
-            input: { destination: "crm", reason: "Need access to private recruiter notes" },
+            input: { destination: "lead system", reason: "Need permission to send contact details externally" },
             state: "approval-requested",
-            toolCallId: "crm-access",
-            toolName: "open_recruiter_crm",
+            toolCallId: "lead-access",
+            toolName: "open_lead_system",
           }),
           textPart("The assistant is waiting for approval before it can continue.", "streaming"),
         ],
@@ -249,10 +250,10 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
         parts: [
           reasoningPart("Showing what a blocked tool flow looks like in the transcript UI..."),
           dynamicToolPart({
-            input: { destination: "crm", reason: "Need access to private recruiter notes" },
+            input: { destination: "lead system", reason: "Need permission to send contact details externally" },
             state: "approval-responded",
-            toolCallId: "crm-access",
-            toolName: "open_recruiter_crm",
+            toolCallId: "lead-access",
+            toolName: "open_lead_system",
           }),
           textPart(
             "Approval was denied, so the assistant stays on the safe path and explains what happened.",
@@ -266,10 +267,10 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
         parts: [
           reasoningPart("Showing what a blocked tool flow looks like in the transcript UI..."),
           dynamicToolPart({
-            input: { destination: "crm", reason: "Need access to private recruiter notes" },
+            input: { destination: "lead system", reason: "Need permission to send contact details externally" },
             state: "output-denied",
-            toolCallId: "crm-access",
-            toolName: "open_recruiter_crm",
+            toolCallId: "lead-access",
+            toolName: "open_lead_system",
           }),
           textPart(
             "That action was blocked because the requested system needs explicit approval. In a real flow, the assistant would ask the user to approve access or choose a safer alternative.",
