@@ -2,17 +2,17 @@ export const RJLS = {
   companyName: "RJLS Systems",
   contactEmail: "lukasasorensen@gmail.com",
   website: "rjlssystems.com",
-  tagline: "Secure, reliable AI integration for businesses that need control.",
+  tagline: "Complete AI chat integrations for your business, applications, APIs, and data.",
   heroSummary:
-    "RJLS Systems helps businesses adopt AI without losing control of security, output quality, developer workflows, or cost.",
-  primaryCta: "Email RJLS",
+    "We build complete AI chat experiences that connect to your applications, APIs, and data so customers and employees can find information and complete approved updates using natural language.",
+  primaryCta: "Discuss your AI integration",
   about:
-    "RJLS Systems helps organizations turn AI from scattered experimentation into controlled business capability. The firm focuses on practical adoption plans, secure integration patterns, governance, observability, and cost controls that let teams use AI with confidence.",
+    "RJLS Systems is an AI integration consultancy. We design and build the secure service behind the AI, connect it to the systems your business already trusts, and deliver a chat experience people can actually use. The result is a complete capability your team can operate, govern, and improve—not another disconnected AI experiment.",
   clientOutcomes: [
-    "Clear visibility into how AI is already being used across the business.",
-    "Practical controls for sensitive data, tool access, outputs, and spend.",
-    "Reliable AI integration patterns that developers can maintain and leadership can govern.",
-    "A prioritized roadmap that separates urgent risk reduction from longer-term opportunity.",
+    "A useful AI chat experience shaped around your customers, employees, and business workflows.",
+    "Secure connections to the applications, APIs, documents, and records your business already uses.",
+    "Read and update actions that respect existing identity, permissions, validation, and approval rules.",
+    "A production-ready integration your business can monitor, maintain, and keep under control.",
   ],
   team: [
     {
@@ -30,31 +30,71 @@ export const RJLS = {
   ],
   services: [
     {
-      title: "AI Readiness Audit",
+      title: "Use-case and experience design",
       summary:
-        "A focused assessment of how employees and developers use AI today, where risk is accumulating, and which improvements should happen first.",
+        "We identify the conversations and actions that create real value, then define a focused experience for your customers or team.",
     },
     {
-      title: "Secure AI Architecture",
+      title: "Connected AI service",
       summary:
-        "Practical design for model access, data boundaries, prompt and tool controls, output review, observability, and cost governance.",
+        "We build the secure integration layer that lets AI use only the approved tools, APIs, and business data needed for each request.",
     },
     {
-      title: "Developer AI Integrations",
+      title: "Custom chat frontend",
       summary:
-        "Implementation guidance for AI features, MCP-style tools, agent workflows, evals, logging, and production reliability.",
+        "We create an AI chat interface for your website, application, customer portal, or internal workspace that feels like part of your product.",
     },
     {
-      title: "Employee AI Governance",
+      title: "Production reliability and control",
       summary:
-        "Clear policies, approved workflows, and lightweight training so teams can use AI productively without creating unmanaged risk.",
+        "We add testing, monitoring, auditability, cost controls, and safe failure paths so the integration remains dependable after launch.",
     },
   ],
-  problems: [
-    "Employees using unmanaged AI tools with sensitive business context.",
-    "AI features shipping without evals, monitoring, or cost controls.",
-    "Developers integrating tools and agents without clear security boundaries.",
-    "Leadership lacking a practical roadmap for safe AI adoption.",
+  integrationOutcomes: [
+    "Let users find the right document or record without learning another search system.",
+    "Turn a conversation into an approved update through your existing APIs.",
+    "Use the identity and permissions your application already relies on.",
+    "Keep sensitive data, available actions, and business rules under your control.",
+  ],
+  workflow: [
+    {
+      title: "A user asks",
+      summary: "A customer or employee describes what they need in everyday language.",
+    },
+    {
+      title: "The AI understands",
+      summary: "The assistant identifies the relevant information or permitted business action.",
+    },
+    {
+      title: "Your systems respond",
+      summary: "The integration securely uses your APIs, authentication, and business rules.",
+    },
+    {
+      title: "The result stays controlled",
+      summary: "The user receives an answer, reviews an update, or confirms a sensitive action.",
+    },
+  ],
+  useCases: [
+    {
+      title: "Customer self-service",
+      summary:
+        "Help customers find account information, understand documents, and complete approved changes from one conversation.",
+    },
+    {
+      title: "Internal knowledge and operations",
+      summary:
+        "Give teams a simpler way to search business records, prepare work, and update internal systems with fewer manual steps.",
+    },
+    {
+      title: "AI inside your product",
+      summary: "Add a branded assistant to an existing application or portal without rebuilding the systems behind it.",
+    },
+  ],
+  safeguards: [
+    "Existing authentication and permissions remain the source of truth.",
+    "AI can access only the tools, data, and actions approved for the workflow.",
+    "Sensitive updates can require validation, review, or explicit confirmation.",
+    "Requests, actions, failures, and costs can be monitored and audited.",
   ],
   auditDeliverables: [
     "Current-state AI usage and integration review.",

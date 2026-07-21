@@ -77,14 +77,14 @@ const dynamicToolPart = ({
 const serviceReasoning =
   "Checking the RJLS service catalog first so the answer stays grounded in the firm's actual offer.";
 
-const serviceToolInput = { sections: ["services", "commonProblems", "bestFit"], tone: "business-leader" };
+const serviceToolInput = { sections: ["services", "commonOutcomes", "bestFit"], tone: "business-leader" };
 
 const serviceToolOutput = {
-  focus: ["AI readiness audits", "secure AI architecture", "developer AI integrations"],
+  focus: ["connected AI services", "custom chat frontends", "secure business-system integrations"],
   strongestSignals: [
-    "Helps leaders find unmanaged AI usage and integration risk.",
-    "Designs controls for data boundaries, tool access, and output quality.",
-    "Connects business governance with developer implementation practices.",
+    "Connects AI chat to approved APIs, applications, and business data.",
+    "Uses existing identity, permissions, validation, and approval rules.",
+    "Delivers the user experience and production controls as one complete integration.",
   ],
 };
 
@@ -94,9 +94,9 @@ const markdownText = `Here is a markdown-heavy response for spacing and typograp
 
 1. Highlights
 - Strong React and Next.js depth
-- Practical AI readiness audits
-- Secure AI integration patterns
-- Cost and observability controls
+- Connected AI chat experiences
+- Secure API and data integrations
+- Production reliability and control
 
 2. Sample code
 \`\`\`ts
@@ -115,7 +115,7 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
         delayMs: 400,
         parts: [
           reasoningPart("Reviewing RJLS service positioning and common client needs...", "streaming"),
-          textPart("Pulling together the most relevant AI adoption guidance...", "streaming"),
+          textPart("Pulling together the most relevant AI integration guidance...", "streaming"),
         ],
         status: "streaming",
       },
@@ -145,7 +145,7 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
             toolName: "get_service_catalog",
           }),
           textPart(
-            "RJLS Systems helps businesses adopt AI with more control over security, output quality, developer integrations, and cost. The usual starting point is an AI readiness audit that maps current usage, risk, and high-value next steps.",
+            "RJLS Systems designs and builds complete AI chat experiences connected to a business's applications, APIs, authentication, and data. The assistant can find information and complete approved updates while existing permissions and business rules remain in control.",
             "streaming",
           ),
         ],
@@ -163,7 +163,7 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
             toolName: "get_service_catalog",
           }),
           textPart(
-            "RJLS Systems helps businesses adopt AI with more control over security, output quality, developer integrations, and cost. The usual starting point is an AI readiness audit that maps current usage, risk, and high-value next steps.\n\nFor leadership, the value is a practical roadmap instead of scattered AI experiments.",
+            "RJLS Systems designs and builds complete AI chat experiences connected to a business's applications, APIs, authentication, and data. The assistant can find information and complete approved updates while existing permissions and business rules remain in control.\n\nRJLS delivers both the connected AI service and the customer-facing or internal chat interface, so the result is a usable business capability rather than disconnected infrastructure.",
           ),
         ],
         status: "ready",
@@ -171,7 +171,7 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
     ],
     id: "service-brief",
     label: "Service brief",
-    prompt: "How can RJLS help us adopt AI safely?",
+    prompt: "How could RJLS connect AI chat to our business systems?",
   },
   {
     description: "Shows a failed tool invocation and the assistant's fallback copy.",

@@ -9,9 +9,13 @@ export const getServiceCatalogTool = tool(
         companyName: RJLS.companyName,
         tagline: RJLS.tagline,
         services: RJLS.services,
-        commonProblems: RJLS.problems,
+        commonOutcomes: RJLS.integrationOutcomes,
+        exampleUseCases: RJLS.useCases,
+        safeguards: RJLS.safeguards,
         bestFit:
-          "Business leaders who want practical control over AI usage, secure developer integrations, reliable outputs, and visible AI spend.",
+          "Businesses that want a customer-facing or internal AI chat interface connected to an existing website, application, API, document workflow, or database-backed system.",
+        delivery:
+          "RJLS can design and build the complete integration: the user experience, AI service, connections to approved APIs and business data, authentication-aware controls, testing, monitoring, and production support.",
       },
       null,
       2,

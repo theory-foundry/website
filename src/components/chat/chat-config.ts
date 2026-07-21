@@ -7,7 +7,7 @@ export const chatTransport = new DefaultChatTransport({ api: "/api/chat" });
 export const CHAT_PROMPT_MAX_LENGTH = 2000;
 
 export const CHAT_SUGGESTIONS = [
-  "How can RJLS help us adopt AI safely?",
-  "What happens in an AI readiness audit?",
-  "How do we control AI cost and output quality?",
+  "How could AI chat connect to our business systems?",
+  "Can an AI assistant safely update our records?",
+  "What would RJLS build for us?",
 ];

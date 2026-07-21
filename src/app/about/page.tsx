@@ -7,20 +7,25 @@ export default function About() {
       <section className="mx-auto max-w-5xl">
         <p className={`mb-3 text-sm font-semibold uppercase tracking-widest ${tw.TEXT_TERTIARY}`}>About</p>
         <h1 className={`max-w-3xl text-4xl font-bold ${tw.TEXT_PRIMARY}`}>
-          AI integration built for business control.
+          We build the connection between AI and your business.
         </h1>
         <p className={`mt-5 max-w-3xl text-lg leading-8 ${tw.TEXT_PRIMARY}`}>{RJLS.about}</p>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {["Governed AI adoption", "Secure integration patterns", "Cost and output control"].map((item) => (
-            <div key={item} className={`rounded-md border border-slate-900/10 p-5 dark:border-white/10 ${tw.BG_SECONDARY}`}>
-              <p className={`font-semibold ${tw.TEXT_PRIMARY}`}>{item}</p>
-            </div>
-          ))}
+          {["Complete AI chat experiences", "Secure system connections", "Reliable, controlled operations"].map(
+            (item) => (
+              <div
+                key={item}
+                className={`rounded-md border border-slate-900/10 p-5 dark:border-white/10 ${tw.BG_SECONDARY}`}
+              >
+                <p className={`font-semibold ${tw.TEXT_PRIMARY}`}>{item}</p>
+              </div>
+            ),
+          )}
         </div>
 
         <div className="mt-14">
-          <h2 className={`text-2xl font-bold ${tw.TEXT_PRIMARY}`}>What clients get</h2>
+          <h2 className={`text-2xl font-bold ${tw.TEXT_PRIMARY}`}>What we deliver</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {RJLS.clientOutcomes.map((outcome) => (
               <div key={outcome} className="border-t border-slate-900/20 pt-5 dark:border-white/20">

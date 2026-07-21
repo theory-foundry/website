@@ -26,12 +26,12 @@ export function ChatEmptyState({
   hasError,
   input,
   isLoading,
-  placeholder = "Ask about secure AI adoption, audits, integrations, or cost control...",
+  placeholder = "Ask about connecting AI chat to your application, APIs, or data...",
   suggestions = CHAT_SUGGESTIONS,
   status,
   title = (
     <>
-      <Image alt="ai logo" className="h-10 w-auto" height={20} src="/ai.svg" width={20} /> Ask RJLS about AI adoption
+      <Image alt="ai logo" className="h-10 w-auto" height={20} src="/ai.svg" width={20} /> Ask RJLS about AI integration
     </>
   ),
   onInputChange,

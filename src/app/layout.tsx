@@ -13,8 +13,21 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(`https://${RJLS.website}`),
   title: RJLS.companyName,
   description: RJLS.tagline,
+  openGraph: {
+    title: RJLS.companyName,
+    description: RJLS.tagline,
+    images: [{ alt: "RJLS Systems — AI, connected to your business.", height: 630, url: "/og.png", width: 1200 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: RJLS.companyName,
+    description: RJLS.tagline,
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({

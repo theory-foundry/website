@@ -22,6 +22,10 @@ export default function NavBar() {
       title: "About",
     },
     {
+      href: "/ai-readiness-audit",
+      title: "AI Readiness Audit",
+    },
+    {
       href: "/contact",
       title: "Contact",
     },
@@ -44,7 +48,7 @@ export default function NavBar() {
               type="button"
               className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
-              aria-expanded="false"
+              aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <span className="absolute -inset-0.5"></span>
