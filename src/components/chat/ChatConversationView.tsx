@@ -32,7 +32,7 @@ type ChatConversationViewProps = {
 export function ChatConversationView({
   bottomRef,
   copyError,
-  eyebrow = "AI Chat",
+  eyebrow = "AI chat",
   hasError,
   input,
   inputPlaceholder = "Ask a follow-up...",
@@ -51,15 +51,15 @@ export function ChatConversationView({
 }: ChatConversationViewProps) {
   return (
     <div
-      className={`flex h-full min-h-[70vh] w-full flex-col overflow-hidden rounded-3xl border border-slate-900/10 ${tw.BG_SECONDARY} shadow-2xl dark:border-white/10`}
+      className={`flex h-full min-h-[32rem] w-full flex-col overflow-hidden rounded-xl border border-zinc-900/10 ${tw.BG_SECONDARY} shadow-[0_24px_70px_-34px_rgba(24,24,27,0.45)] dark:border-white/10 dark:shadow-[0_24px_70px_-34px_rgba(13,148,136,0.32)]`}
     >
-      <div className="flex items-center justify-between gap-4 border-b border-slate-900/10 px-6 py-5 dark:border-white/10">
+      <div className="flex items-center justify-between gap-4 border-b border-zinc-900/10 px-5 py-4 sm:px-6 dark:border-white/10">
         <div>
-          <p className={`text-xs font-medium uppercase tracking-[0.24em] ${tw.TEXT_SECONDARY}`}>{eyebrow}</p>
-          <h1 className={`mt-2 text-2xl font-semibold ${tw.TEXT_PRIMARY}`}>{title}</h1>
+          <p className={`font-mono text-xs ${tw.TEXT_SECONDARY}`}>{eyebrow}</p>
+          <h2 className={`mt-1 text-lg font-semibold tracking-[-0.025em] ${tw.TEXT_PRIMARY}`}>{title}</h2>
         </div>
         <button
-          className={`rounded-full border border-slate-900/10 px-4 py-2 text-sm transition hover:bg-slate-900/5 dark:border-white/10 dark:hover:bg-white/5 ${tw.BTN_NONE}`}
+          className={`whitespace-nowrap rounded-md border border-zinc-900/10 px-3 py-2 text-sm transition duration-200 hover:bg-zinc-900/5 active:translate-y-px dark:border-white/10 dark:hover:bg-white/[0.08] ${tw.BTN_NONE}`}
           onClick={onNewChat}
           type="button"
         >
@@ -67,7 +67,7 @@ export function ChatConversationView({
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-10 py-6">
+      <div className="flex-1 overflow-y-auto px-5 py-6 sm:px-8">
         <ChatMessageList
           bottomRef={bottomRef}
           copyError={copyError}
@@ -79,7 +79,7 @@ export function ChatConversationView({
         />
       </div>
 
-      <div className={`border-t border-slate-900/10 p-4 dark:border-white/10 ${tw.BG_PRIMARY}`}>
+      <div className={`border-t border-zinc-900/10 p-4 dark:border-white/10 ${tw.BG_PRIMARY}`}>
         <ChatPromptInput
           className="mx-auto w-full max-w-3xl"
           input={input}
@@ -92,8 +92,8 @@ export function ChatConversationView({
           textareaClassName="max-h-40 min-h-[3.25rem]"
         />
         {hasError && (
-          <p className="mt-3 text-center text-sm text-red-500 dark:text-red-400">
-            Something went wrong. Please try again.
+          <p className="mt-3 text-center text-sm text-red-700 dark:text-red-300">
+            The assistant could not connect. Please try again.
           </p>
         )}
       </div>

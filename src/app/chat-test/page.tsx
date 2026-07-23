@@ -7,7 +7,7 @@ const ChatPlayground = dynamic(() => import("@/components/chat/ChatPlayground"),
 
 export default function ChatPage() {
   return (
-    <main className={`flex min-h-screen flex-col ${tw.BG_PRIMARY} px-6 py-10`}>
+    <main className={`flex min-h-screen flex-col ${tw.BG_PRIMARY} px-6 py-10`} id="main-content">
       <div className="mx-auto flex w-full max-w-6xl flex-1">
         <ChatPlayground />
       </div>

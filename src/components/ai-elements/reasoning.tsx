@@ -113,7 +113,7 @@ export const Reasoning = memo(
       <ReasoningContext.Provider value={contextValue}>
         <Collapsible
           className={cn(
-            `not-prose mb-4 w-full max-w-2xl self-start overflow-hidden rounded-xl border border-slate-900/10 shadow-sm dark:border-white/10 ${tw.BG_SECONDARY}`,
+            `not-prose mb-4 w-full max-w-2xl self-start overflow-hidden rounded-lg border border-zinc-900/10 dark:border-white/10 ${tw.BG_SECONDARY}`,
             className,
           )}
           onOpenChange={handleOpenChange}
@@ -133,7 +133,7 @@ export type ReasoningTriggerProps = ComponentProps<typeof CollapsibleTrigger> & 
 
 const defaultGetThinkingMessage = (isStreaming: boolean, duration?: number) => {
   if (isStreaming || duration === 0) {
-    return <Shimmer duration={1}>Thinking...</Shimmer>;
+    return <Shimmer duration={1}>Thinking</Shimmer>;
   }
   if (duration === undefined) {
     return <p>Thought for a few seconds</p>;
@@ -146,21 +146,21 @@ export const ReasoningTrigger = memo(
     const { isStreaming, isOpen, duration } = useReasoning();
 
     return (
-        <CollapsibleTrigger
-          className={cn(
-            "flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-slate-950/60 transition-colors hover:text-slate-950/80 dark:text-white/55 dark:hover:text-white/80",
-            className,
-          )}
+      <CollapsibleTrigger
+        className={cn(
+          "flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100",
+          className,
+        )}
         {...props}
       >
         {children ?? (
           <>
             <div className="flex min-w-0 flex-1 items-center gap-2">
-              <span className="inline-flex items-center gap-1 rounded-full border border-slate-900/10 bg-slate-900/5 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-950/55 dark:border-white/10 dark:bg-white/5 dark:text-white/45">
+              <span className="inline-flex items-center gap-1 rounded-md border border-zinc-900/10 bg-zinc-900/5 px-2 py-0.5 font-mono text-[10px] font-medium text-zinc-600 dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
                 <BrainIcon className="size-3" />
                 Reasoning
               </span>
-              <span className="min-w-0 truncate text-xs text-slate-950/60 dark:text-white/55">
+              <span className="min-w-0 truncate text-xs text-zinc-600 dark:text-zinc-400">
                 {getThinkingMessage(isStreaming, duration)}
               </span>
             </div>
@@ -183,14 +183,14 @@ const streamdownPlugins = { cjk, code, math, mermaid };
 export const ReasoningContent = memo(({ className, children, ...props }: ReasoningContentProps) => (
   <CollapsibleContent
     className={cn(
-      "border-t border-slate-900/10 px-3 pb-3 pt-2.5 text-xs leading-6 dark:border-white/10",
-      "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=open]:animate-in text-slate-950/70 dark:text-white/60 outline-none",
+      "border-t border-zinc-900/10 px-3 pb-3 pt-2.5 text-xs leading-6 dark:border-white/10",
+      "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=open]:animate-in text-zinc-700 outline-none dark:text-zinc-300",
       className,
     )}
     {...props}
   >
     <Streamdown
-      className="break-words [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_code]:rounded [&_code]:bg-slate-900/10 dark:[&_code]:bg-black/20 [&_code]:px-1 [&_code]:py-0.5 [&_ol]:pl-5 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-slate-900/10 dark:[&_pre]:bg-black/30 [&_pre]:p-3 [&_ul]:pl-5"
+      className="break-words [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_code]:rounded [&_code]:bg-zinc-900/10 [&_code]:px-1 [&_code]:py-0.5 dark:[&_code]:bg-white/10 [&_ol]:pl-5 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-zinc-900/10 [&_pre]:p-3 dark:[&_pre]:bg-white/[0.08] [&_ul]:pl-5"
       plugins={streamdownPlugins}
     >
       {children}

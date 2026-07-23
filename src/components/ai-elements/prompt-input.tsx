@@ -44,7 +44,7 @@ export const PromptInput = ({ className, onSubmit, children, ...props }: PromptI
   return (
     <form
       className={cn(
-        `rounded-3xl border border-slate-900/10 p-3 shadow-lg dark:border-white/10 ${tw.BG_SECONDARY}`,
+        `rounded-lg border border-zinc-900/10 p-3 shadow-[0_14px_40px_-26px_rgba(24,24,27,0.55)] transition focus-within:border-teal-700/45 focus-within:ring-2 focus-within:ring-teal-700/10 dark:border-white/10 dark:shadow-[0_14px_40px_-26px_rgba(13,148,136,0.35)] dark:focus-within:border-teal-300/45 dark:focus-within:ring-teal-300/10 ${tw.BG_SECONDARY}`,
         className,
       )}
       onSubmit={handleSubmit}
@@ -89,7 +89,7 @@ export const PromptInputTextarea = ({
   return (
     <textarea
       className={cn(
-        `min-h-[3.25rem] w-full resize-none bg-transparent px-1 py-2 text-sm outline-none placeholder:text-slate-950/40 dark:placeholder:text-white/40 ${tw.TEXT_PRIMARY}`,
+        `min-h-[3.25rem] w-full resize-none bg-transparent px-1 py-2 text-sm outline-none placeholder:text-zinc-500 dark:placeholder:text-zinc-500 ${tw.TEXT_PRIMARY}`,
         className,
       )}
       name={name}
@@ -105,7 +105,7 @@ export type PromptInputFooterProps = HTMLAttributes<HTMLDivElement>;
 export const PromptInputFooter = ({ className, ...props }: PromptInputFooterProps) => (
   <div
     className={cn(
-      "mt-2 flex items-center justify-between gap-3 border-t border-slate-900/10 pt-3 dark:border-white/10",
+      "mt-2 flex items-center justify-between gap-3 border-t border-zinc-900/10 pt-3 dark:border-white/10",
       className,
     )}
     {...props}
@@ -154,7 +154,7 @@ export const PromptInputSubmit = ({
     <button
       aria-label={isGenerating ? "Stop" : "Submit"}
       className={cn(
-        `inline-flex size-10 items-center justify-center rounded-full transition disabled:cursor-not-allowed disabled:opacity-40 ${tw.BTN_PRIMARY}`,
+        `inline-flex size-9 items-center justify-center rounded-md transition duration-200 hover:-translate-y-0.5 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-40 ${tw.BTN_PRIMARY}`,
         className,
       )}
       onClick={handleClick}

@@ -68,7 +68,7 @@ export default function ChatUI() {
   }
 
   return (
-    <div className="flex h-full min-h-[70vh] w-full flex-1">
+    <div className="flex h-full min-h-[32rem] w-full flex-1">
       {hasMessages ? (
         <ChatConversationView
           bottomRef={bottomRef}

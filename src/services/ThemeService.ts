@@ -10,6 +10,10 @@ export default class ThemeService {
   }
 
   getThemeFromLocalStorage() {
-    return localStorage?.theme === "light" ? "light" : "dark"
+    if (localStorage?.theme === "light" || localStorage?.theme === "dark") {
+      return localStorage.theme;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   }
 }

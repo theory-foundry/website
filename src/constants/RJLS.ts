@@ -7,7 +7,7 @@ export const RJLS = {
     "We build complete AI chat experiences that connect to your applications, APIs, and data so customers and employees can find information and complete approved updates using natural language.",
   primaryCta: "Discuss your AI integration",
   about:
-    "RJLS Systems is an AI integration consultancy. We design and build the secure service behind the AI, connect it to the systems your business already trusts, and deliver a chat experience people can actually use. The result is a complete capability your team can operate, govern, and improve—not another disconnected AI experiment.",
+    "RJLS Systems is an AI integration consultancy. We design and build the secure service behind the AI, connect it to the systems your business already trusts, and deliver a chat experience people can actually use. The result is a complete capability your team can operate, govern, and improve. It is not another disconnected AI experiment.",
   clientOutcomes: [
     "A useful AI chat experience shaped around your customers, employees, and business workflows.",
     "Secure connections to the applications, APIs, documents, and records your business already uses.",
@@ -18,14 +18,10 @@ export const RJLS = {
     {
       name: "Lukas Sorensen",
       role: "Co-founder",
-      photoAlt: "Placeholder headshot for Lukas Sorensen",
-      bio: "Placeholder bio for Lukas Sorensen. Add a short client-facing summary of focus areas, responsibilities, and relevant RJLS Systems perspective.",
     },
     {
       name: "Ralph Jenson",
       role: "Co-founder",
-      photoAlt: "Placeholder headshot for Ralph Jenson",
-      bio: "Placeholder bio for Ralph Jenson. Add a short client-facing summary of focus areas, responsibilities, and relevant RJLS Systems perspective.",
     },
   ],
   services: [
