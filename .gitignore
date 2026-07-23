@@ -38,3 +38,8 @@ next-env.d.ts
 .claude/
 .agents/
 .copilot/
+.omx/
+.omc/
+
+# taste skill
+skill-lock.json
