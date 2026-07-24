@@ -57,8 +57,8 @@ export default function Home() {
 
           <div className="min-w-0 scroll-mt-24" id="ai-assistant">
             <div className="mb-3 flex items-center justify-between gap-4 px-1">
-              <p className={`font-mono text-xs ${tw.TEXT_SECONDARY}`}>Live integration example</p>
-              <p className={`hidden text-xs sm:block ${tw.TEXT_SECONDARY}`}>Ask a question or try a prompt</p>
+              <p className={`font-mono text-xs ${tw.TEXT_SECONDARY}`}>Live, tool-using product demo</p>
+              <p className={`hidden text-xs sm:block ${tw.TEXT_SECONDARY}`}>Ask about RJLS or try a prompt</p>
             </div>
             <HomeChat />
           </div>

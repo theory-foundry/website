@@ -26,13 +26,13 @@ export function ChatEmptyState({
   hasError,
   input,
   isLoading,
-  placeholder = "Describe the product or workflow you want to improve...",
+  placeholder = "Ask about RJLS, our services, or a workflow you want to improve...",
   suggestions = CHAT_SUGGESTIONS,
   status,
   title = (
     <>
       <Image alt="RJLS assistant" className="h-8 w-auto" height={32} src="/ai.svg" width={32} />
-      Explore an AI interface for your product
+      Ask RJLS—and see the integration work
     </>
   ),
   onInputChange,
@@ -48,7 +48,7 @@ export function ChatEmptyState({
           {title}
         </h2>
         <p className={`mt-4 max-w-md text-sm leading-6 ${tw.TEXT_SECONDARY}`}>
-          See how AI could work with your app&apos;s approved data and tools to support one useful workflow.
+          Get answers about our offerings while this working demo uses scoped tools behind the conversation.
         </p>
 
         <ChatPromptInput
