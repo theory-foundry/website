@@ -4,7 +4,6 @@ import Link from "next/link";
 const footerLinks = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
-  { href: "/ai-readiness-audit", label: "AI Readiness Audit" },
 ];
 
 export function Footer() {

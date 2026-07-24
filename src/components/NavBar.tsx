@@ -11,17 +11,12 @@ import ThemeSwitchButton from "./ThemeSwitchButton";
 const publicLinks = [
   { href: "/about", title: "About" },
   { href: "/contact", title: "Contact" },
-  { href: "/ai-readiness-audit", title: "AI Readiness Audit" },
 ];
 
 export default function NavBar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const links = [...publicLinks];
-
-  if (process.env.NODE_ENV === "development") {
-    links.push({ href: "/chat-test", title: "Chat Test" });
-  }
+  const links = publicLinks;
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
