@@ -13,7 +13,7 @@ The site should consistently communicate these goals:
 
 `src/constants/RJLS.ts` is the canonical source for public company facts, services, outcomes, safeguards, team details, and audit deliverables. Keep public copy aligned with it and update it deliberately when business positioning changes.
 
-The primary commercial path is the homepage → exploratory email conversation. `/about` supports delivery fit and `/contact` starts that email conversation. Do not imply that an email books a meeting, captures a lead, or creates a CRM record.
+The primary commercial path is the homepage → exploratory email conversation. `/our-process` supports delivery fit and `/contact` starts that email conversation. Do not imply that an email books a meeting, captures a lead, or creates a CRM record.
 
 ### AI-readiness and future directions
 
@@ -26,7 +26,7 @@ There is no production-ready “AI integration ready” product or view. Treat t
 - **Framework:** Next.js App Router, React 18, TypeScript with `strict: true`.
 - **Styling:** Tailwind CSS with Sass; shared palette/class tokens live in `src/constants/ColorTheme.ts`, global styles in `src/app/globals.css`, and Markdown styles in `src/styles/`.
 - **Layout:** `src/app/layout.tsx` provides fonts, theming, navigation, footer, and global styles.
-- **Public routes:** `/`, `/about`, `/contact`, `/blog`, `/blog/[id]`, and `/ai-readiness-audit`.
+- **Public routes:** `/`, `/our-process`, `/contact`, `/blog`, `/blog/[id]`, and `/ai-readiness-audit`.
 - **Chat:** `src/components/chat/` owns the UI. `src/app/api/chat/route.ts` streams the server response using LangChain/OpenAI and Vercel AI SDK. Tool definitions are in `src/app/api/chat/tools/`.
 - **Assistant policy:** `src/constants/system-prompts/RJLSSystemPrompt.ts` is a product and safety boundary, not incidental copy. Keep it synchronized with any relevant public-positioning change.
 - **Content:** Blog entries are local example data in `src/example-data/Articles.ts`.

@@ -9,7 +9,7 @@ import { useState } from "react";
 import ThemeSwitchButton from "./ThemeSwitchButton";
 
 const publicLinks = [
-  { href: "/about", title: "About" },
+  { href: "/our-process", title: "Our Process" },
   { href: "/contact", title: "Contact" },
 ];
 

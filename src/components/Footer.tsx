@@ -2,7 +2,7 @@ import { RJLS } from "@/constants/RJLS";
 import Link from "next/link";
 
 const footerLinks = [
-  { href: "/about", label: "About" },
+  { href: "/our-process", label: "Our Process" },
   { href: "/contact", label: "Contact" },
 ];
 
