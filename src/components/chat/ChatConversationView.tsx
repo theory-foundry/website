@@ -35,13 +35,13 @@ export function ChatConversationView({
   eyebrow = "AI chat",
   hasError,
   input,
-  inputPlaceholder = "Ask a follow-up...",
+  inputPlaceholder = "Ask about your product, workflow, or next step...",
   isLoading,
   lastAssistantMessageId,
   messages,
   showLoadingMessage,
   status,
-  title = "Ask RJLS about AI integration",
+  title = "Explore an AI interface for your product",
   onCopyResponse,
   onInputChange,
   onNewChat,
@@ -51,15 +51,15 @@ export function ChatConversationView({
 }: ChatConversationViewProps) {
   return (
     <div
-      className={`flex h-full min-h-[32rem] w-full flex-col overflow-hidden rounded-xl border border-zinc-900/10 ${tw.BG_SECONDARY} shadow-[0_24px_70px_-34px_rgba(24,24,27,0.45)] dark:border-white/10 dark:shadow-[0_24px_70px_-34px_rgba(13,148,136,0.32)]`}
+      className={`flex h-full min-h-[32rem] w-full flex-col overflow-hidden rounded-xl border border-forest/10 ${tw.BG_SECONDARY} shadow-[0_24px_70px_-34px_rgba(35,61,77,0.45)] dark:border-cream/20 dark:shadow-[0_24px_70px_-34px_rgba(33,94,97,0.42)]`}
     >
-      <div className="flex items-center justify-between gap-4 border-b border-zinc-900/10 px-5 py-4 sm:px-6 dark:border-white/10">
+      <div className="flex items-center justify-between gap-4 border-b border-forest/10 px-5 py-4 sm:px-6 dark:border-cream/20">
         <div>
           <p className={`font-mono text-xs ${tw.TEXT_SECONDARY}`}>{eyebrow}</p>
           <h2 className={`mt-1 text-lg font-semibold tracking-[-0.025em] ${tw.TEXT_PRIMARY}`}>{title}</h2>
         </div>
         <button
-          className={`whitespace-nowrap rounded-md border border-zinc-900/10 px-3 py-2 text-sm transition duration-200 hover:bg-zinc-900/5 active:translate-y-px dark:border-white/10 dark:hover:bg-white/[0.08] ${tw.BTN_NONE}`}
+          className={`whitespace-nowrap rounded-md border border-forest/10 px-3 py-2 text-sm transition duration-200 hover:bg-forest/5 active:translate-y-px dark:border-cream/20 dark:hover:bg-cream/[0.12] ${tw.BTN_NONE}`}
           onClick={onNewChat}
           type="button"
         >
@@ -79,7 +79,7 @@ export function ChatConversationView({
         />
       </div>
 
-      <div className={`border-t border-zinc-900/10 p-4 dark:border-white/10 ${tw.BG_PRIMARY}`}>
+      <div className={`border-t border-forest/10 p-4 dark:border-cream/20 ${tw.BG_PRIMARY}`}>
         <ChatPromptInput
           className="mx-auto w-full max-w-3xl"
           input={input}

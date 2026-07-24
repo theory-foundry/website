@@ -11,11 +11,11 @@ export function ChatLoadingMessage() {
         <div
           aria-live="polite"
           aria-label="Assistant is responding"
-          className={`relative inline-flex min-w-[12rem] overflow-hidden rounded-lg rounded-bl-sm border border-zinc-900/10 px-4 py-3 text-sm dark:border-white/10 ${tw.BG_SECONDARY} ${tw.TEXT_PRIMARY}`}
+          className={`relative inline-flex min-w-[12rem] overflow-hidden rounded-lg rounded-bl-sm border border-forest/10 px-4 py-3 text-sm dark:border-cream/20 ${tw.BG_SECONDARY} ${tw.TEXT_PRIMARY}`}
           role="status"
         >
           <span className="sr-only">Assistant is responding</span>
-          <span className="loading-shimmer pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,transparent_0%,rgba(24,24,27,0.02)_35%,rgba(13,148,136,0.10)_50%,rgba(24,24,27,0.02)_65%,transparent_100%)] motion-reduce:hidden dark:bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.03)_35%,rgba(94,234,212,0.14)_50%,rgba(255,255,255,0.03)_65%,transparent_100%)]" />
+          <span className="loading-shimmer pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,transparent_0%,rgba(35,61,77,0.02)_35%,rgba(33,94,97,0.16)_50%,rgba(35,61,77,0.02)_65%,transparent_100%)] motion-reduce:hidden dark:bg-[linear-gradient(110deg,transparent_0%,rgba(245,251,230,0.03)_35%,rgba(143,182,160,0.2)_50%,rgba(245,251,230,0.03)_65%,transparent_100%)]" />
           <span className="relative font-medium tracking-[0.01em]">Thinking</span>
         </div>
         <style jsx>{`

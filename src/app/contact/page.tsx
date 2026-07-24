@@ -1,6 +1,13 @@
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 import { RJLS } from "@/constants/RJLS";
 import { ArrowUpRightIcon, MailIcon } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Start an AI Integration Conversation | RJLS Systems",
+  description:
+    "Tell RJLS Systems about the existing product, people, data, and workflow behind a possible AI integration.",
+};
 
 export default function Contact() {
   return (
@@ -13,25 +20,26 @@ export default function Contact() {
           <h1
             className={`max-w-3xl text-5xl font-semibold leading-[1.02] tracking-[-0.05em] md:text-6xl ${tw.TEXT_PRIMARY}`}
           >
-            Tell us where AI should do real work.
+            Start with the workflow you want to improve.
           </h1>
           <p className={`mt-8 max-w-[62ch] text-lg leading-8 ${tw.TEXT_SECONDARY}`}>
-            Share the people, systems, and workflow involved. We can help shape a focused opportunity and build the
-            complete integration.
+            Tell us about the existing product, who uses it, and the information or action they need. A rough example
+            is enough to start an exploratory conversation.
           </p>
         </div>
 
-        <aside className="self-start rounded-xl bg-zinc-100 p-7 md:p-9 dark:bg-zinc-900">
-          <MailIcon className="size-6 text-teal-700 dark:text-teal-300" strokeWidth={1.75} />
+        <aside className="self-start rounded-xl bg-mist p-7 md:p-9 dark:bg-night-surface">
+          <MailIcon className="size-6 text-forest dark:text-mint" strokeWidth={1.75} />
           <h2 className={`mt-6 text-2xl font-semibold tracking-[-0.03em] ${tw.TEXT_PRIMARY}`}>Start with an email</h2>
           <p className={`mt-3 text-sm leading-6 ${tw.TEXT_SECONDARY}`}>
-            A few sentences about the workflow are enough for an initial conversation.
+            The link opens an email with the right subject. We will review the context and reply to arrange an
+            exploratory call if the work looks like a fit.
           </p>
           <a
-            className="mt-8 inline-flex max-w-full items-center gap-2 break-all text-sm font-semibold text-teal-800 underline decoration-teal-700/40 underline-offset-4 transition hover:text-teal-950 active:translate-y-px dark:text-teal-300 dark:hover:text-teal-100"
+            className="mt-8 inline-flex max-w-full items-center gap-2 break-all text-sm font-semibold text-forest underline decoration-forest/40 underline-offset-4 transition hover:text-night active:translate-y-px dark:text-mint dark:hover:text-mist"
             href={`mailto:${RJLS.contactEmail}?subject=RJLS Systems AI integration inquiry`}
           >
-            {RJLS.contactEmail}
+            Email RJLS to start the conversation
             <ArrowUpRightIcon className="size-4 flex-none" strokeWidth={1.75} />
           </a>
         </aside>

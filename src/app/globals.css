@@ -5,24 +5,26 @@
 
 :root {
   color-scheme: light;
-  --page: #fafafa;
-  --page-deep: #f4f4f5;
-  --ink: #18181b;
-  --muted: #52525b;
-  --line: rgba(24, 24, 27, 0.13);
-  --accent: #0f766e;
-  --accent-strong: #115e59;
+  --page: #f5fbe6;
+  --page-deep: #edf5dd;
+  --ink: #233d4d;
+  --muted: #215e61;
+  --line: rgba(35, 61, 77, 0.14);
+  --accent: #215e61;
+  --accent-strong: #17494c;
+  --focus: #215e61;
 }
 
 .dark {
   color-scheme: dark;
-  --page: #09090b;
-  --page-deep: #18181b;
-  --ink: #f4f4f5;
-  --muted: #a1a1aa;
-  --line: rgba(244, 244, 245, 0.13);
-  --accent: #5eead4;
-  --accent-strong: #99f6e4;
+  --page: #08151d;
+  --page-deep: #123039;
+  --ink: #f5fbe6;
+  --muted: #c5d7b8;
+  --line: rgba(245, 251, 230, 0.2);
+  --accent: #8fb6a0;
+  --accent-strong: #c5d7b8;
+  --focus: #8fb6a0;
 }
 
 html {
@@ -53,7 +55,7 @@ body::after {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus);
   outline-offset: 3px;
 }
 

@@ -26,13 +26,13 @@ export function ChatEmptyState({
   hasError,
   input,
   isLoading,
-  placeholder = "Ask about connecting AI chat to your application, APIs, or data...",
+  placeholder = "Describe the product or workflow you want to improve...",
   suggestions = CHAT_SUGGESTIONS,
   status,
   title = (
     <>
       <Image alt="RJLS assistant" className="h-8 w-auto" height={32} src="/ai.svg" width={32} />
-      Ask RJLS about AI integration
+      Explore an AI interface for your product
     </>
   ),
   onInputChange,
@@ -40,7 +40,7 @@ export function ChatEmptyState({
   onSubmit,
 }: ChatEmptyStateProps) {
   return (
-    <div className="flex w-full flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-900/10 bg-zinc-100/90 shadow-[0_24px_70px_-34px_rgba(24,24,27,0.45)] dark:border-white/10 dark:bg-zinc-900/90 dark:shadow-[0_24px_70px_-34px_rgba(13,148,136,0.32)]">
+    <div className="flex w-full flex-1 items-center justify-center overflow-hidden rounded-xl border border-forest/10 bg-mist/90 shadow-[0_24px_70px_-34px_rgba(35,61,77,0.45)] dark:border-cream/20 dark:bg-night-surface/90 dark:shadow-[0_24px_70px_-34px_rgba(33,94,97,0.42)]">
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center px-5 py-12 text-center sm:px-8">
         <h2
           className={`flex items-center gap-3 text-2xl font-semibold tracking-[-0.035em] sm:text-3xl ${tw.TEXT_PRIMARY}`}
@@ -48,7 +48,7 @@ export function ChatEmptyState({
           {title}
         </h2>
         <p className={`mt-4 max-w-md text-sm leading-6 ${tw.TEXT_SECONDARY}`}>
-          Explore how a governed assistant could work with your applications, APIs, and data.
+          See how a domain-aware assistant could use approved data and tools to support one useful workflow.
         </p>
 
         <ChatPromptInput
@@ -67,7 +67,7 @@ export function ChatEmptyState({
           <div className="mt-5 grid w-full max-w-2xl gap-2 sm:grid-cols-3">
             {suggestions.map((suggestion) => (
               <button
-                className={`rounded-md border border-zinc-900/10 bg-zinc-50 px-3 py-3 text-left text-xs leading-5 transition duration-200 hover:-translate-y-0.5 hover:border-teal-700/35 hover:bg-white active:translate-y-px dark:border-white/10 dark:bg-zinc-950 dark:hover:border-teal-300/35 dark:hover:bg-zinc-950 ${tw.TEXT_SECONDARY}`}
+                className={`rounded-md border border-forest/10 bg-cream px-3 py-3 text-left text-xs leading-5 transition duration-200 hover:-translate-y-0.5 hover:border-forest/35 hover:bg-cream active:translate-y-px dark:border-cream/20 dark:bg-night dark:hover:border-mint/35 dark:hover:bg-night ${tw.TEXT_SECONDARY}`}
                 key={suggestion}
                 onClick={() => onInputChange(suggestion)}
                 type="button"

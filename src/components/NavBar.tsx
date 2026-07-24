@@ -10,8 +10,8 @@ import ThemeSwitchButton from "./ThemeSwitchButton";
 
 const publicLinks = [
   { href: "/about", title: "About" },
-  { href: "/ai-readiness-audit", title: "AI Readiness Audit" },
   { href: "/contact", title: "Contact" },
+  { href: "/ai-readiness-audit", title: "AI Readiness Audit" },
 ];
 
 export default function NavBar() {
@@ -28,15 +28,15 @@ export default function NavBar() {
   return (
     <nav
       aria-label="Primary navigation"
-      className="sticky top-0 z-40 border-b border-zinc-900/10 bg-zinc-50 dark:border-white/10 dark:bg-zinc-950"
+      className="sticky top-0 z-40 border-b border-forest/10 bg-cream dark:border-cream/20 dark:bg-night"
     >
       <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-6 px-6 lg:px-10">
         <Link
-          className="group inline-flex min-w-0 items-center gap-3 rounded-md font-semibold text-zinc-950 focus-visible:outline-none dark:text-zinc-100"
+          className="group inline-flex min-w-0 items-center gap-3 rounded-md font-semibold text-navy focus-visible:outline-none dark:text-cream"
           href="/"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <span className="grid size-10 flex-none place-items-center rounded-md bg-teal-700 font-mono text-xs text-zinc-50 transition-transform duration-200 group-hover:-translate-y-0.5 group-active:translate-y-px dark:bg-teal-300 dark:text-zinc-950">
+          <span className="grid size-10 flex-none place-items-center rounded-md bg-forest font-mono text-xs text-cream transition-transform duration-200 group-hover:-translate-y-0.5 group-active:translate-y-px dark:bg-forest dark:text-cream">
             RJ
           </span>
           <span className="truncate tracking-[-0.02em]">{RJLS.companyName}</span>
@@ -51,8 +51,8 @@ export default function NavBar() {
                 aria-current={active ? "page" : undefined}
                 className={`rounded-md px-3 py-2 text-sm font-medium transition duration-200 active:translate-y-px ${
                   active
-                    ? "bg-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-950"
-                    : "text-zinc-600 hover:bg-zinc-900/5 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-white/[0.08] dark:hover:text-zinc-100"
+                    ? "bg-forest text-cream dark:bg-mist dark:text-navy"
+                    : "text-forest hover:bg-forest/5 hover:text-navy dark:text-sage dark:hover:bg-cream/[0.12] dark:hover:text-cream"
                 }`}
                 href={link.href}
                 key={link.href}
@@ -69,7 +69,7 @@ export default function NavBar() {
             aria-controls="mobile-menu"
             aria-expanded={isMobileMenuOpen}
             aria-label={isMobileMenuOpen ? "Close main menu" : "Open main menu"}
-            className="grid size-10 place-items-center rounded-md border border-zinc-900/10 text-zinc-700 transition hover:bg-zinc-900/5 active:translate-y-px md:hidden dark:border-white/10 dark:text-zinc-300 dark:hover:bg-white/[0.08]"
+            className="grid size-10 place-items-center rounded-md border border-forest/10 text-navy transition hover:bg-forest/5 active:translate-y-px md:hidden dark:border-cream/20 dark:text-sage dark:hover:bg-cream/[0.12]"
             onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
             type="button"
           >
@@ -84,7 +84,7 @@ export default function NavBar() {
 
       {isMobileMenuOpen && (
         <div
-          className="border-t border-zinc-900/10 bg-zinc-50 px-6 pb-6 pt-3 md:hidden dark:border-white/10 dark:bg-zinc-950"
+          className="border-t border-forest/10 bg-cream px-6 pb-6 pt-3 md:hidden dark:border-cream/20 dark:bg-night"
           id="mobile-menu"
         >
           <div className="mx-auto flex max-w-7xl flex-col gap-1">
@@ -96,8 +96,8 @@ export default function NavBar() {
                   aria-current={active ? "page" : undefined}
                   className={`rounded-md px-3 py-3 text-base font-medium transition active:translate-y-px ${
                     active
-                      ? "bg-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-950"
-                      : "text-zinc-700 hover:bg-zinc-900/5 dark:text-zinc-300 dark:hover:bg-white/[0.08]"
+                      ? "bg-forest text-cream dark:bg-mist dark:text-navy"
+                      : "text-navy hover:bg-forest/5 dark:text-sage dark:hover:bg-cream/[0.12]"
                   }`}
                   href={link.href}
                   key={link.href}

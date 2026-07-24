@@ -8,7 +8,9 @@ export const getAIReadinessAuditTool = tool(
       {
         offer: "AI Readiness Audit",
         purpose:
-          "Give leadership a clear picture of current AI usage, practical risks, integration opportunities, and the highest-value next steps.",
+          "Give leadership a clear picture of current AI usage, practical risks, integration opportunities, and prioritized next steps before broader implementation.",
+        bestFor:
+          "Organizations specifically looking to assess current AI usage, risks, controls, and implementation priorities. It is a supporting diagnostic offer, not the default next step for a clear integration inquiry.",
         stages: [
           "Discover current employee AI usage, approved tools, policies, and developer integrations.",
           "Review data exposure, access boundaries, prompt and tool controls, output quality, and operational visibility.",
@@ -16,6 +18,8 @@ export const getAIReadinessAuditTool = tool(
           "Deliver an executive summary and implementation roadmap.",
         ],
         deliverables: RJLS.auditDeliverables,
+        nextStep:
+          `Email ${RJLS.contactEmail} with the subject "AI Readiness Audit" to start an audit-specific conversation.`,
       },
       null,
       2,
@@ -23,7 +27,7 @@ export const getAIReadinessAuditTool = tool(
   {
     name: "get_ai_readiness_audit",
     description:
-      "Returns the RJLS Systems AI readiness audit process, purpose, stages, and deliverables.",
+      "Returns the RJLS Systems AI readiness audit fit, process, purpose, stages, deliverables, and inquiry path.",
     schema: z.object({}),
   },
 );

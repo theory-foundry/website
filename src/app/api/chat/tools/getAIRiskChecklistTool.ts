@@ -19,11 +19,11 @@ export const getAIRiskChecklistTool = tool(
             checks: [
               "Are model calls isolated behind controlled APIs?",
               "Do tools enforce least-privilege access and scoped actions?",
-              "Can the business audit prompts, tool calls, outputs, and costs?",
+              "Are prompts, tool calls, outputs, and costs logged in a reviewable format appropriate to the workflow?",
             ],
           },
           {
-            name: "Output reliability",
+            name: "Output quality and failure handling",
             checks: [
               "Are critical outputs evaluated before release?",
               "Are there fallback paths when models fail or produce low-confidence responses?",
@@ -46,7 +46,7 @@ export const getAIRiskChecklistTool = tool(
   {
     name: "get_ai_risk_checklist",
     description:
-      "Returns a structured checklist of AI adoption risks across employee usage, developer integrations, output reliability, and cost control.",
+      "Returns a structured checklist of AI adoption risks across employee usage, scoped developer integrations, output quality and failure handling, and cost control.",
     schema: z.object({}),
   },
 );

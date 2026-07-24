@@ -1,7 +1,18 @@
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 import { RJLS } from "@/constants/RJLS";
+import type { Metadata } from "next";
 
-const capabilities = ["Complete AI chat experiences", "Secure system connections", "Reliable, controlled operations"];
+export const metadata: Metadata = {
+  title: "About Our AI Integration Work | RJLS Systems",
+  description:
+    "RJLS Systems helps small product companies add focused, domain-aware AI interfaces to applications with meaningful data and workflows.",
+};
+
+const capabilities = [
+  "Focused around a valuable workflow",
+  "Built into your existing product",
+  "Controls matched to each action",
+];
 
 export default function About() {
   return (
@@ -11,18 +22,22 @@ export default function About() {
         <h1
           className={`max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.05em] md:text-6xl ${tw.TEXT_PRIMARY}`}
         >
-          We build the connection between AI and your business.
+          Custom AI integration for products with real work to do.
         </h1>
-        <p className={`mt-8 max-w-[68ch] text-lg leading-8 ${tw.TEXT_SECONDARY}`}>{RJLS.about}</p>
+        <p className={`mt-8 max-w-[68ch] text-lg leading-8 ${tw.TEXT_SECONDARY}`}>
+          We work with founders and technical teams at small product companies whose applications already hold useful
+          data and support meaningful workflows. We design the experience, connect only the approved parts of those
+          systems, and build the service behind the interface.
+        </p>
 
         <div className="mt-16 grid gap-4 md:grid-cols-[1.35fr_0.65fr]">
-          <div className="rounded-xl bg-teal-700 p-8 text-zinc-50 md:p-10 dark:bg-teal-300 dark:text-zinc-950">
+          <div className="rounded-xl bg-forest p-8 text-cream md:p-10 dark:bg-forest dark:text-cream">
             <p className="font-mono text-xs opacity-75">What we focus on</p>
             <p className="mt-8 max-w-xl text-3xl font-semibold leading-tight tracking-[-0.035em]">{capabilities[0]}</p>
           </div>
           <div className="grid gap-4">
             {capabilities.slice(1).map((item) => (
-              <div className="rounded-xl bg-zinc-100 p-6 dark:bg-zinc-900" key={item}>
+              <div className="rounded-xl bg-mist p-6 dark:bg-night-surface" key={item}>
                 <p className={`font-semibold tracking-[-0.02em] ${tw.TEXT_PRIMARY}`}>{item}</p>
               </div>
             ))}
@@ -30,12 +45,18 @@ export default function About() {
         </div>
       </section>
 
-      <section className="border-y border-zinc-900/10 bg-zinc-100/65 px-6 py-16 lg:px-10 lg:py-24 dark:border-white/10 dark:bg-zinc-900/65">
+      <section className="border-y border-forest/10 bg-mist/65 px-6 py-16 lg:px-10 lg:py-24 dark:border-cream/20 dark:bg-night-surface/65">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.72fr_1.28fr]">
-          <h2 className={`text-4xl font-semibold tracking-[-0.04em] ${tw.TEXT_PRIMARY}`}>What we deliver</h2>
+          <div>
+            <h2 className={`text-4xl font-semibold tracking-[-0.04em] ${tw.TEXT_PRIMARY}`}>Why custom integration</h2>
+            <p className={`mt-5 max-w-[44ch] leading-7 ${tw.TEXT_SECONDARY}`}>
+              A useful assistant needs the language, data, permissions, and decision points of your product—not a
+              generic chat layer placed on top.
+            </p>
+          </div>
           <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
             {RJLS.clientOutcomes.map((outcome) => (
-              <div className="border-t border-zinc-900/15 pt-5 dark:border-white/15" key={outcome}>
+              <div className="border-t border-forest/15 pt-5 dark:border-cream/25" key={outcome}>
                 <p className={`leading-7 ${tw.TEXT_SECONDARY}`}>{outcome}</p>
               </div>
             ))}
@@ -47,10 +68,10 @@ export default function About() {
         <h2 className={`text-4xl font-semibold tracking-[-0.04em] ${tw.TEXT_PRIMARY}`}>The team</h2>
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {RJLS.team.map((member) => (
-            <article className="flex items-center gap-5 rounded-xl bg-zinc-100 p-6 dark:bg-zinc-900" key={member.name}>
+            <article className="flex items-center gap-5 rounded-xl bg-mist p-6 dark:bg-night-surface" key={member.name}>
               <div
                 aria-hidden="true"
-                className="grid size-14 flex-none place-items-center rounded-md bg-zinc-950 font-mono text-sm font-semibold text-zinc-50 dark:bg-zinc-100 dark:text-zinc-950"
+                className="grid size-14 flex-none place-items-center rounded-md bg-navy font-mono text-sm font-semibold text-cream dark:bg-mist dark:text-navy"
               >
                 {member.name
                   .split(" ")

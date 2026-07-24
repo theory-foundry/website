@@ -23,18 +23,31 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${RJLS.website}`),
-  title: RJLS.companyName,
-  description: RJLS.tagline,
+  title: {
+    default: "Domain-Aware AI Interfaces | RJLS Systems",
+    template: "%s",
+  },
+  description:
+    "RJLS Systems builds domain-aware AI interfaces for existing applications, using only the data, tools, and actions approved for each workflow.",
   openGraph: {
-    title: RJLS.companyName,
-    description: RJLS.tagline,
-    images: [{ alt: "RJLS Systems, AI connected to your business.", height: 630, url: "/og.png", width: 1200 }],
+    title: "Domain-Aware AI Interfaces | RJLS Systems",
+    description:
+      "Add a useful AI interface to an existing application or service, with access and actions scoped to the workflow.",
+    images: [
+      {
+        alt: "RJLS Systems builds domain-aware AI interfaces for existing products.",
+        height: 630,
+        url: "/og.png",
+        width: 1200,
+      },
+    ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: RJLS.companyName,
-    description: RJLS.tagline,
+    title: "Domain-Aware AI Interfaces | RJLS Systems",
+    description:
+      "Add a useful AI interface to an existing application or service, with access and actions scoped to the workflow.",
     images: ["/og.png"],
   },
 };
@@ -50,7 +63,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Body>
             <a
-              className="fixed left-4 top-4 z-50 -translate-y-24 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-zinc-50 transition-transform focus:translate-y-0 dark:bg-teal-300 dark:text-zinc-950"
+              className="fixed left-4 top-4 z-50 -translate-y-24 rounded-md bg-forest px-4 py-2 text-sm font-semibold text-cream transition-transform hover:bg-navy focus:translate-y-0 dark:bg-forest dark:text-cream dark:hover:bg-mist dark:hover:text-navy"
               href="#main-content"
             >
               Skip to content

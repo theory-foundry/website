@@ -21,7 +21,7 @@ export default function BlogArticle() {
             This article is not available.
           </h1>
           <Link
-            className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-teal-800 underline underline-offset-4 dark:text-teal-300"
+            className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-forest underline underline-offset-4 dark:text-mint"
             href="/blog"
           >
             <ArrowLeftIcon className="size-4" strokeWidth={1.75} />
@@ -36,13 +36,13 @@ export default function BlogArticle() {
     <main className={`min-h-screen ${tw.BG_PRIMARY}`} id="main-content">
       <article className="mx-auto max-w-3xl px-6 py-14 lg:px-10 lg:py-20">
         <Link
-          className={`inline-flex items-center gap-2 text-sm font-semibold underline decoration-zinc-400 underline-offset-4 transition hover:text-teal-800 dark:decoration-zinc-600 dark:hover:text-teal-300 ${tw.TEXT_PRIMARY}`}
+          className={`inline-flex items-center gap-2 text-sm font-semibold underline decoration-sage-muted underline-offset-4 transition hover:text-forest dark:decoration-sage-muted dark:hover:text-mint ${tw.TEXT_PRIMARY}`}
           href="/blog"
         >
           <ArrowLeftIcon className="size-4" strokeWidth={1.75} />
           Back to insights
         </Link>
-        <header className="mt-12 border-b border-zinc-900/15 pb-10 dark:border-white/15">
+        <header className="mt-12 border-b border-forest/15 pb-10 dark:border-cream/25">
           <time className={`font-mono text-xs tabular-nums ${tw.TEXT_SECONDARY}`}>
             {article.createdDate.toLocaleDateString("en-US", {
               day: "2-digit",

@@ -26,7 +26,7 @@ export default function ThemeSwitchButton(props: ButtonHTMLAttributes<HTMLButton
     <button
       {...props}
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-      className="group grid size-10 place-items-center rounded-md border border-zinc-900/10 text-zinc-700 transition duration-200 hover:bg-zinc-900/5 active:translate-y-px dark:border-white/10 dark:text-zinc-300 dark:hover:bg-white/[0.08]"
+      className="group grid size-10 place-items-center rounded-md border border-forest/10 text-navy transition duration-200 hover:bg-forest/5 active:translate-y-px dark:border-cream/20 dark:text-sage dark:hover:bg-cream/[0.12]"
       onClick={() => changeTheme(theme === "light" ? "dark" : "light")}
       type="button"
     >

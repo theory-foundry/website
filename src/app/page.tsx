@@ -10,9 +10,16 @@ import {
   MessageSquareTextIcon,
   PlugZapIcon,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 
 const workflowIcons = [MessageSquareTextIcon, PlugZapIcon, DatabaseIcon, FingerprintIcon];
+
+export const metadata: Metadata = {
+  title: "Domain-Aware AI for Existing Products | RJLS Systems",
+  description:
+    "Add a useful AI interface to an existing application or service, connected only to the data, tools, and actions approved for the workflow.",
+};
 
 export default function Home() {
   return (
@@ -22,27 +29,28 @@ export default function Home() {
         <div className="relative mx-auto grid min-h-[calc(100dvh-4.5rem)] w-full max-w-7xl items-center gap-10 px-6 py-10 lg:grid-cols-[0.82fr_1.18fr] lg:px-10 lg:py-12">
           <div className="max-w-xl">
             <p className={`mb-5 font-mono text-xs font-medium uppercase tracking-[0.18em] ${tw.TEXT_TERTIARY}`}>
-              AI connected to your business
+              AI for an existing product or service
             </p>
             <h1 className={`text-5xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-6xl ${tw.TEXT_PRIMARY}`}>
-              Put AI to work inside the systems you already trust.
+              Add a useful AI interface to the product people already use.
             </h1>
             <p className={`mt-6 max-w-[52ch] text-lg leading-8 ${tw.TEXT_SECONDARY}`}>
-              We build secure AI chat experiences for your applications, APIs, data, and business workflows.
+              We help small product companies turn meaningful application data and workflows into a domain-aware
+              assistant that can find relevant information and prepare or complete permitted actions.
             </p>
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-teal-700 px-5 py-3 text-sm font-semibold text-zinc-50 transition duration-200 hover:-translate-y-0.5 hover:bg-teal-800 active:translate-y-px dark:bg-teal-300 dark:text-zinc-950 dark:hover:bg-teal-200"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-forest px-5 py-3 text-sm font-semibold text-cream transition duration-200 hover:-translate-y-0.5 hover:bg-navy active:translate-y-px dark:bg-forest dark:text-cream dark:hover:bg-mist dark:hover:text-navy"
                 href={`mailto:${RJLS.contactEmail}?subject=RJLS Systems AI integration inquiry`}
               >
                 {RJLS.primaryCta}
                 <ArrowRightIcon className="size-4" strokeWidth={1.75} />
               </a>
               <a
-                className={`inline-flex items-center gap-2 rounded-md py-2 text-sm font-semibold underline decoration-zinc-400 underline-offset-4 transition hover:text-teal-800 active:translate-y-px dark:decoration-zinc-600 dark:hover:text-teal-300 ${tw.TEXT_PRIMARY}`}
+                className={`inline-flex items-center gap-2 rounded-md py-2 text-sm font-semibold underline decoration-sage-muted underline-offset-4 transition hover:text-forest active:translate-y-px dark:decoration-sage-muted dark:hover:text-mint ${tw.TEXT_PRIMARY}`}
                 href="#ai-assistant"
               >
-                Try the assistant
+                Try the example assistant
               </a>
             </div>
           </div>
@@ -57,11 +65,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-zinc-900/10 bg-zinc-100/70 px-6 py-10 lg:px-10 dark:border-white/10 dark:bg-zinc-900/70">
+      <section className="border-y border-forest/10 bg-mist/70 px-6 py-10 lg:px-10 dark:border-cream/20 dark:bg-night-surface/70">
         <div className="mx-auto grid max-w-7xl gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
           {RJLS.integrationOutcomes.map((outcome) => (
             <div className="flex items-start gap-3" key={outcome}>
-              <span className="mt-1 grid size-5 flex-none place-items-center rounded bg-teal-700 text-zinc-50 dark:bg-teal-300 dark:text-zinc-950">
+              <span className="mt-1 grid size-5 flex-none place-items-center rounded bg-forest text-cream dark:bg-forest dark:text-cream">
                 <CheckIcon className="size-3" strokeWidth={2} />
               </span>
               <p className={`text-sm leading-6 ${tw.TEXT_SECONDARY}`}>{outcome}</p>
@@ -72,9 +80,9 @@ export default function Home() {
 
       <section className="px-6 py-20 lg:px-10 lg:py-28">
         <div className="mx-auto grid max-w-7xl items-stretch gap-10 lg:grid-cols-[0.88fr_1.12fr]">
-          <div className="relative min-h-[24rem] overflow-hidden rounded-xl bg-zinc-200 lg:min-h-[40rem] dark:bg-zinc-900">
+          <div className="relative min-h-[24rem] overflow-hidden rounded-xl bg-mist lg:min-h-[40rem] dark:bg-night-surface">
             <Image
-              alt="Organized network connections linking secure business systems"
+              alt="Organized connections between an AI interface and approved business systems"
               className="dark:contrast-110 object-cover grayscale-[0.3] dark:brightness-75"
               fill
               sizes="(min-width: 1024px) 42vw, 100vw"
@@ -82,17 +90,17 @@ export default function Home() {
             />
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,transparent_0%,rgba(9,9,11,0.16)_100%)]"
+              className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,transparent_0%,rgba(35,61,77,0.20)_100%)]"
             />
           </div>
 
           <div className="flex flex-col justify-center lg:pl-8">
             <h2 className={`max-w-2xl text-4xl font-semibold tracking-[-0.04em] md:text-5xl ${tw.TEXT_PRIMARY}`}>
-              One conversation, connected to real work.
+              One conversation, grounded in your product and workflow.
             </h2>
             <p className={`mt-5 max-w-[62ch] text-lg leading-8 ${tw.TEXT_SECONDARY}`}>
-              We connect the assistant to the systems your business already uses, then place clear controls around every
-              request and action.
+              The assistant uses only the approved data, tools, and actions needed for the job. Existing identity,
+              permissions, validation, and business rules remain in charge.
             </p>
 
             <div className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
@@ -100,8 +108,8 @@ export default function Home() {
                 const Icon = workflowIcons[index];
 
                 return (
-                  <article className="border-t border-zinc-900/15 pt-5 dark:border-white/15" key={step.title}>
-                    <Icon className="size-5 text-teal-700 dark:text-teal-300" strokeWidth={1.75} />
+                  <article className="border-t border-forest/15 pt-5 dark:border-cream/25" key={step.title}>
+                    <Icon className="size-5 text-forest dark:text-mint" strokeWidth={1.75} />
                     <h3 className={`mt-4 text-lg font-semibold tracking-[-0.02em] ${tw.TEXT_PRIMARY}`}>{step.title}</h3>
                     <p className={`mt-2 text-sm leading-6 ${tw.TEXT_SECONDARY}`}>{step.summary}</p>
                   </article>
@@ -112,23 +120,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-zinc-900/10 bg-zinc-100/65 px-6 py-20 lg:px-10 lg:py-28 dark:border-white/10 dark:bg-zinc-900/65">
+      <section className="border-y border-forest/10 bg-mist/65 px-6 py-20 lg:px-10 lg:py-28 dark:border-cream/20 dark:bg-night-surface/65">
         <div className="mx-auto max-w-7xl">
           <p className={`mb-4 font-mono text-xs font-medium uppercase tracking-[0.18em] ${tw.TEXT_TERTIARY}`}>
-            Built around your domain
+            A focused place to start
           </p>
           <h2 className={`max-w-3xl text-4xl font-semibold tracking-[-0.04em] md:text-5xl ${tw.TEXT_PRIMARY}`}>
-            A complete integration, shaped for your business.
+            Learn from one useful workflow before expanding.
           </h2>
           <p className={`mt-5 max-w-[62ch] text-lg leading-8 ${tw.TEXT_SECONDARY}`}>
-            We learn the workflow, build the service, connect the systems, and deliver the interface as one working
-            product.
+            A deliberate first integration gives your team something concrete to test with real users, observe, and
+            improve. We shape the experience, connect the approved systems, and deliver the interface as one focused
+            product capability.
           </p>
 
           <div className="mt-14 grid gap-x-12 gap-y-10 md:grid-cols-2">
             {RJLS.services.map((service) => (
               <article
-                className="grid gap-3 border-l-2 border-teal-700/40 pl-6 dark:border-teal-300/40"
+                className="grid gap-3 border-l-2 border-forest/40 pl-6 dark:border-mint/40"
                 key={service.title}
               >
                 <h3 className={`text-xl font-semibold tracking-[-0.025em] ${tw.TEXT_PRIMARY}`}>{service.title}</h3>
@@ -143,7 +152,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <h2 className={`max-w-2xl text-4xl font-semibold tracking-[-0.04em] md:text-5xl ${tw.TEXT_PRIMARY}`}>
-              Useful wherever people need your systems.
+              Useful when people need answers or a next action.
             </h2>
             <div className="mt-12 grid gap-8 md:grid-cols-2">
               {RJLS.useCases.map((useCase, index) => (
@@ -155,18 +164,19 @@ export default function Home() {
             </div>
           </div>
 
-          <aside className="self-start rounded-xl bg-zinc-100 p-7 md:p-9 dark:bg-zinc-900">
-            <KeyRoundIcon className="size-6 text-teal-700 dark:text-teal-300" strokeWidth={1.75} />
+          <aside className="self-start rounded-xl bg-mist p-7 md:p-9 dark:bg-night-surface">
+            <KeyRoundIcon className="size-6 text-forest dark:text-mint" strokeWidth={1.75} />
             <h2 className={`mt-6 text-3xl font-semibold tracking-[-0.035em] ${tw.TEXT_PRIMARY}`}>
-              Secure by design. Controlled by you.
+              Clear boundaries for every connection.
             </h2>
             <p className={`mt-4 leading-7 ${tw.TEXT_SECONDARY}`}>
-              We define what the assistant can see, what it can do, and when a person needs to stay in the loop.
+              You approve what the assistant can access and do. Sensitive changes can stay behind validation, review,
+              or explicit confirmation.
             </p>
             <div className="mt-8 space-y-5">
               {RJLS.safeguards.map((safeguard) => (
                 <div className="flex gap-3" key={safeguard}>
-                  <CheckIcon className="mt-1 size-4 flex-none text-teal-700 dark:text-teal-300" strokeWidth={2} />
+                  <CheckIcon className="mt-1 size-4 flex-none text-forest dark:text-mint" strokeWidth={2} />
                   <p className={`text-sm leading-6 ${tw.TEXT_SECONDARY}`}>{safeguard}</p>
                 </div>
               ))}
@@ -175,13 +185,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-zinc-900/10 px-6 py-16 lg:px-10 lg:py-20 dark:border-white/10">
+      <section className="border-t border-forest/10 px-6 py-16 lg:px-10 lg:py-20 dark:border-cream/20">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <h2 className={`max-w-3xl text-3xl font-semibold tracking-[-0.035em] md:text-4xl ${tw.TEXT_PRIMARY}`}>
-            Start with one workflow that matters.
+            Have an existing workflow where AI could be genuinely useful?
           </h2>
           <a
-            className="inline-flex flex-none items-center justify-center gap-2 whitespace-nowrap rounded-md bg-teal-700 px-5 py-3 text-sm font-semibold text-zinc-50 transition duration-200 hover:-translate-y-0.5 hover:bg-teal-800 active:translate-y-px dark:bg-teal-300 dark:text-zinc-950 dark:hover:bg-teal-200"
+            className="inline-flex flex-none items-center justify-center gap-2 whitespace-nowrap rounded-md bg-forest px-5 py-3 text-sm font-semibold text-cream transition duration-200 hover:-translate-y-0.5 hover:bg-navy active:translate-y-px dark:bg-forest dark:text-cream dark:hover:bg-mist dark:hover:text-navy"
             href={`mailto:${RJLS.contactEmail}?subject=RJLS Systems AI integration inquiry`}
           >
             {RJLS.primaryCta}

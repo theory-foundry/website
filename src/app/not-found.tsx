@@ -17,7 +17,7 @@ export default function NotFound() {
           The page may have moved, or the address may be incomplete.
         </p>
         <Link
-          className="mt-8 inline-flex items-center gap-2 rounded-md bg-teal-700 px-5 py-3 text-sm font-semibold text-zinc-50 transition hover:-translate-y-0.5 hover:bg-teal-800 active:translate-y-px dark:bg-teal-300 dark:text-zinc-950 dark:hover:bg-teal-200"
+          className="mt-8 inline-flex items-center gap-2 rounded-md bg-forest px-5 py-3 text-sm font-semibold text-cream transition hover:-translate-y-0.5 hover:bg-navy active:translate-y-px dark:bg-forest dark:text-cream dark:hover:bg-mist dark:hover:text-navy"
           href="/"
         >
           <ArrowLeftIcon className="size-4" strokeWidth={1.75} />

@@ -14,9 +14,9 @@ export default function Blog() {
           Practical notes on systems and infrastructure.
         </h1>
 
-        <div className="mt-16 border-t border-zinc-900/15 dark:border-white/15">
+        <div className="mt-16 border-t border-forest/15 dark:border-cream/25">
           {Articles.map((article) => (
-            <article className="group border-b border-zinc-900/15 dark:border-white/15" key={article.id}>
+            <article className="group border-b border-forest/15 dark:border-cream/25" key={article.id}>
               <Link
                 className="grid gap-5 py-8 transition duration-200 hover:translate-x-1 sm:grid-cols-[9rem_1fr_auto] sm:items-center"
                 href={`/blog/${article.id}`}
@@ -33,7 +33,7 @@ export default function Blog() {
                   <p className={`mt-3 max-w-[65ch] leading-7 ${tw.TEXT_SECONDARY}`}>{article.articleDescription}</p>
                 </div>
                 <ArrowUpRightIcon
-                  className="size-5 text-teal-700 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 dark:text-teal-300"
+                  className="size-5 text-forest transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 dark:text-mint"
                   strokeWidth={1.75}
                 />
               </Link>

@@ -13,9 +13,11 @@ export const getServiceCatalogTool = tool(
         exampleUseCases: RJLS.useCases,
         safeguards: RJLS.safeguards,
         bestFit:
-          "Businesses that want a customer-facing or internal AI chat interface connected to an existing website, application, API, document workflow, or database-backed system.",
+          "Founders and technical teams at small product companies whose existing applications or services already contain meaningful data and workflows.",
         delivery:
-          "RJLS can design and build the complete integration: the user experience, AI service, connections to approved APIs and business data, authentication-aware controls, testing, monitoring, and production support.",
+          "RJLS can design and build a focused, domain-aware AI interface: the user experience, connected AI service, and scoped connections to approved APIs, tools, and business data. Existing identity, permissions, validation, and business rules remain authoritative, while testing, logging, observability, cost controls, and failure paths are defined for the agreed workflow and operating environment.",
+        nextStep:
+          `For a clear integration inquiry, email ${RJLS.contactEmail} to request an exploratory call. The email starts a conversation; it does not book a meeting.`,
       },
       null,
       2,
@@ -23,7 +25,7 @@ export const getServiceCatalogTool = tool(
   {
     name: "get_service_catalog",
     description:
-      "Returns RJLS Systems service offerings, positioning, ideal client fit, and common business problems the firm solves.",
+      "Returns RJLS Systems service offerings, ideal fit, scoped delivery approach, safeguards, and common integration outcomes.",
     schema: z.object({}),
   },
 );
