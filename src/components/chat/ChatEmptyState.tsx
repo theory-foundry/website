@@ -48,7 +48,7 @@ export function ChatEmptyState({
           {title}
         </h2>
         <p className={`mt-4 max-w-md text-sm leading-6 ${tw.TEXT_SECONDARY}`}>
-          See how a domain-aware assistant could use approved data and tools to support one useful workflow.
+          See how AI could work with your app&apos;s approved data and tools to support one useful workflow.
         </p>
 
         <ChatPromptInput

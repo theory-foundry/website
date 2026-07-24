@@ -16,9 +16,9 @@ import Image from "next/image";
 const workflowIcons = [MessageSquareTextIcon, PlugZapIcon, DatabaseIcon, FingerprintIcon];
 
 export const metadata: Metadata = {
-  title: "Domain-Aware AI for Existing Products | RJLS Systems",
+  title: "AI for Your App's Data and Workflows | RJLS Systems",
   description:
-    "Add a useful AI interface to an existing application or service, connected only to the data, tools, and actions approved for the workflow.",
+    "Add a focused AI capability to an existing application, connected only to the data, tools, and actions approved for the workflow.",
 };
 
 export default function Home() {
@@ -35,8 +35,8 @@ export default function Home() {
               Add a useful AI interface to the product people already use.
             </h1>
             <p className={`mt-6 max-w-[52ch] text-lg leading-8 ${tw.TEXT_SECONDARY}`}>
-              We help small product companies turn meaningful application data and workflows into a domain-aware
-              assistant that can find relevant information and prepare or complete permitted actions.
+              We help small product companies add AI that works with their app&apos;s data and workflows, so customers
+              or employees can find relevant information and prepare or complete permitted actions.
             </p>
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a
@@ -132,6 +132,18 @@ export default function Home() {
             A deliberate first integration gives your team something concrete to test with real users, observe, and
             improve. We shape the experience, connect the approved systems, and deliver the interface as one focused
             product capability.
+          </p>
+          <p className={`mt-5 max-w-[76ch] leading-7 ${tw.TEXT_SECONDARY}`}>
+            Ralph brings decades of experience across engineering, DevOps, and security. Lukas brings substantial
+            engineering and recent hands-on AI-integration experience, including work with startups and complex
+            environments. That perspective helps us define the workflow, connect approved APIs and backend services,
+            choose models and test cases, set budgets and rate limits, and establish observability, cost visibility,
+            and a documented control baseline your engineering team can understand and continue.
+          </p>
+          <p className={`mt-4 max-w-[76ch] leading-7 ${tw.TEXT_SECONDARY}`}>
+            As models and tools change, the practical question is how each option behaves on representative cases for
+            the agreed workflow. Starting with one useful workflow makes those evaluations, model choices, and usage
+            limits specific enough to review before expanding.
           </p>
 
           <div className="mt-14 grid gap-x-12 gap-y-10 md:grid-cols-2">

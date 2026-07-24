@@ -19,7 +19,7 @@ export function Footer() {
             {RJLS.companyName}
           </Link>
           <p className="mt-4 max-w-md text-sm leading-6 text-forest dark:text-sage">
-            Add a domain-aware AI interface to an existing product, with access and actions scoped to the workflow.
+            Add AI that works with your app&apos;s data and workflows, with access and actions scoped to the job.
           </p>
           <a
             className="mt-4 inline-flex text-sm font-semibold text-forest underline decoration-forest/40 underline-offset-4 transition-colors hover:text-night dark:text-mint dark:hover:text-mist"

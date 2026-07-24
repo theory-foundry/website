@@ -24,18 +24,18 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${RJLS.website}`),
   title: {
-    default: "Domain-Aware AI Interfaces | RJLS Systems",
+    default: "AI for Your App's Data and Workflows | RJLS Systems",
     template: "%s",
   },
   description:
-    "RJLS Systems builds domain-aware AI interfaces for existing applications, using only the data, tools, and actions approved for each workflow.",
+    "RJLS Systems adds focused AI capabilities to existing applications, using only the data, tools, and actions approved for each workflow.",
   openGraph: {
-    title: "Domain-Aware AI Interfaces | RJLS Systems",
+    title: "AI for Your App's Data and Workflows | RJLS Systems",
     description:
       "Add a useful AI interface to an existing application or service, with access and actions scoped to the workflow.",
     images: [
       {
-        alt: "RJLS Systems builds domain-aware AI interfaces for existing products.",
+        alt: "RJLS Systems builds AI that works with existing products' data and workflows.",
         height: 630,
         url: "/og.png",
         width: 1200,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Domain-Aware AI Interfaces | RJLS Systems",
+    title: "AI for Your App's Data and Workflows | RJLS Systems",
     description:
       "Add a useful AI interface to an existing application or service, with access and actions scoped to the workflow.",
     images: ["/og.png"],

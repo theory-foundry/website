@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About Our AI Integration Work | RJLS Systems",
   description:
-    "RJLS Systems helps small product companies add focused, domain-aware AI interfaces to applications with meaningful data and workflows.",
+    "RJLS Systems helps small product companies add focused AI capabilities that work with their applications' data and workflows.",
 };
 
 const capabilities = [
@@ -85,6 +85,13 @@ export default function About() {
             </article>
           ))}
         </div>
+        <p className={`mt-10 max-w-[76ch] text-lg leading-8 ${tw.TEXT_SECONDARY}`}>
+          Ralph brings decades of experience across engineering, DevOps, and security. Lukas brings substantial
+          engineering and recent hands-on AI-integration experience, including work with startups and complex
+          environments. This breadth informs practical choices about workflow boundaries, API and backend integration,
+          model evaluation, testing, observability, cost controls, and a handoff that an internal engineering team can
+          understand and take forward.
+        </p>
       </section>
     </main>
   );

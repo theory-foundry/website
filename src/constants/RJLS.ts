@@ -2,14 +2,14 @@ export const RJLS = {
   companyName: "RJLS Systems",
   contactEmail: "lukasasorensen@gmail.com",
   website: "rjlssystems.com",
-  tagline: "Domain-aware AI interfaces for existing applications, services, and workflows.",
+  tagline: "AI that works with your app's data and workflows.",
   heroSummary:
-    "We build domain-aware AI interfaces that connect to approved application data and tools so people can find relevant information and prepare or complete permitted actions.",
+    "We add focused AI capabilities to existing products so people can find relevant information and prepare or complete permitted actions using approved application data and tools.",
   primaryCta: "Request an exploratory call",
   about:
     "RJLS Systems is an AI integration consultancy. We design and build the service behind the AI, connect it to approved parts of the systems your business already uses, and deliver an interface people can use. The result is a focused capability your team can test, govern, and improve.",
   clientOutcomes: [
-    "A domain-aware AI interface shaped around your customers, employees, and business workflows.",
+    "A focused AI capability shaped around your customers, employees, and business workflows.",
     "Scoped connections to the approved applications, APIs, documents, and records the workflow needs.",
     "Information retrieval and permitted actions that honor existing identity, permissions, validation, and approval rules.",
     "Testing, logging, cost visibility, and failure handling appropriate to the agreed integration scope.",
@@ -59,7 +59,7 @@ export const RJLS = {
     },
     {
       title: "The AI understands",
-      summary: "The assistant identifies the relevant information or permitted business action.",
+      summary: "The assistant identifies information or an action relevant to the agreed workflow.",
     },
     {
       title: "Your systems respond",
@@ -67,7 +67,7 @@ export const RJLS = {
     },
     {
       title: "The result stays controlled",
-      summary: "The user receives an answer, reviews an update, or confirms a sensitive action.",
+      summary: "The user receives an answer, reviews an update, or confirms a sensitive action before it proceeds.",
     },
   ],
   useCases: [
