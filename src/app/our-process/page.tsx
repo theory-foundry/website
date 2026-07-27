@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const capabilities = [
   "Focused around a valuable workflow",
   "Built into your existing product",
-  "Controls matched to each action",
+  "Tailored to your mission",
 ];
 
 const openingStage = [
@@ -125,7 +125,7 @@ export default function OurProcess() {
           </div>
           <p className="mt-10 max-w-[76ch] text-lg leading-8 text-sage">
             Ralph brings decades of experience across engineering, DevOps, and security. Lukas brings substantial
-            engineering and recent hands-on AI-integration experience, including work with startups and complex
+            engineering and recent hands-on AI-integration experience, including work integrating AI & MCP with startups and complex
             environments. This breadth informs practical choices about workflow boundaries, API and backend integration,
             model evaluation, testing, observability, cost controls, and a handoff that an internal engineering team can
             understand and take forward.
