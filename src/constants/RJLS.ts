@@ -59,7 +59,7 @@ export const RJLS = {
     },
     {
       title: "The AI understands",
-      summary: "The assistant identifies information or an action relevant to the agreed workflow.",
+      summary: "The assistant understands your business domain and customer's needs.",
     },
     {
       title: "Your systems respond",
@@ -67,7 +67,7 @@ export const RJLS = {
     },
     {
       title: "The result stays controlled",
-      summary: "The user receives an answer, reviews an update, or confirms a sensitive action before it proceeds.",
+      summary: "The user receives an answer, reviews an update, and guardrails keep the AI from accessing sensitive information.",
     },
   ],
   useCases: [

@@ -133,13 +133,6 @@ export default function Home() {
             improve. We shape the experience, connect the approved systems, and deliver the interface as one focused
             product capability.
           </p>
-          <p className={`mt-5 max-w-[76ch] leading-7 ${tw.TEXT_SECONDARY}`}>
-            Ralph brings decades of experience across engineering, DevOps, and security. Lukas brings substantial
-            engineering and recent hands-on AI-integration experience, including work with startups and complex
-            environments. That perspective helps us define the workflow, connect approved APIs and backend services,
-            choose models and test cases, set budgets and rate limits, and establish observability, cost visibility,
-            and a documented control baseline your engineering team can understand and continue.
-          </p>
           <p className={`mt-4 max-w-[76ch] leading-7 ${tw.TEXT_SECONDARY}`}>
             As models and tools change, the practical question is how each option behaves on representative cases for
             the agreed workflow. Starting with one useful workflow makes those evaluations, model choices, and usage

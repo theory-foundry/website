@@ -64,3 +64,11 @@ There is no production-ready “AI integration ready” product or view. Treat t
 3. Run `pnpm lint` and `pnpm build` for changes that can affect production behavior. If either cannot run, report the exact gap.
 4. For visual or interaction changes, manually check the affected route at desktop and mobile widths in light and dark themes; use `/chat-test` for chat-state changes.
 5. Update `README.md` when setup, environment variables, routes, or developer workflows change. Note that it currently mentions a `/chat` route; the actual testing route is `/chat-test`.
+
+### pnpm and Corepack troubleshooting
+
+- `package.json` pins pnpm `11.10.0` through its `packageManager` field. The expected setup is a Corepack-provided `pnpm` shim, and `pnpm --version` must return `11.10.0`.
+- If `pnpm lint`, `pnpm build`, or even `pnpm --version` produces no output for an extended period, check `pnpm --pm-on-fail=ignore --version`. A different version indicates that a globally installed pnpm is trying to download and switch to the pinned version before running the requested command. Restricted network access can make that bootstrap wait through silent retries.
+- Verify that `command -v pnpm` resolves to the Corepack shim rather than directly to an npm-global pnpm package. On this machine the expected shim is `/opt/homebrew/bin/pnpm -> ../lib/node_modules/corepack/dist/pnpm.js`.
+- To repair a missing or incorrect Corepack setup, run `corepack enable pnpm` and `corepack install --global pnpm@11.10.0`, then restart Codex and verify `pnpm --version`. When Codex performs this repair, it must request sandbox escalation because the operation needs registry access and writes outside the repository.
+- Use `--pm-on-fail=ignore` only as a diagnostic bypass. Do not make it the normal project configuration because it skips the repository's pnpm version pin.
