@@ -1,0 +1,13 @@
+{
+  "/api/chat/route": "/api/chat",
+  "/icon.png/route": "/icon.png",
+  "/_not-found/page": "/_not-found",
+  "/about/page": "/about",
+  "/blog/page": "/blog",
+  "/chat-test/page": "/chat-test",
+  "/blog/[id]/page": "/blog/[id]",
+  "/contact/page": "/contact",
+  "/our-process/page": "/our-process",
+  "/ai-readiness-audit/page": "/ai-readiness-audit",
+  "/page": "/"
+}
