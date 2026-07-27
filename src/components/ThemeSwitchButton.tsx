@@ -1,15 +1,14 @@
 "use client";
-import { ButtonHTMLAttributes, useCallback, useEffect, useState } from "react";
-import ThemeService from "@/services/ThemeService";
+
 import { useThemeContext } from "@/providers/ThemeProvider";
+import ThemeService from "@/services/ThemeService";
+import { MoonIcon, SunIcon } from "lucide-react";
+import { ButtonHTMLAttributes, useCallback, useEffect } from "react";
+
 const themeService = new ThemeService();
 
 export default function ThemeSwitchButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
   const { theme, setTheme } = useThemeContext();
-  const onThemeToggleClick = () => {
-    const nextTheme = theme === "light" ? "dark" : "light";
-    changeTheme(nextTheme);
-  };
 
   const changeTheme = useCallback(
     (newTheme: string) => {
@@ -20,21 +19,22 @@ export default function ThemeSwitchButton(props: ButtonHTMLAttributes<HTMLButton
   );
 
   useEffect(() => {
-    const localStorageTheme = themeService.getThemeFromLocalStorage();
-    changeTheme(localStorageTheme);
+    changeTheme(themeService.getThemeFromLocalStorage());
   }, [changeTheme]);
 
   return (
-    <label className="mt-1 inline-flex cursor-pointer items-center">
-      <input type="checkbox" onChange={onThemeToggleClick} checked={theme === "dark"} className="peer sr-only" />
-      <div
-        className={`peer-focus:ring-voilet-300 dark:peer-focus:ring-voilet-800 peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-slate-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700`}
-      ></div>
+    <button
+      {...props}
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+      className="group grid size-10 place-items-center rounded-md border border-forest/10 text-navy transition duration-200 hover:bg-forest/5 active:translate-y-px dark:border-cream/20 dark:text-sage dark:hover:bg-cream/[0.12]"
+      onClick={() => changeTheme(theme === "light" ? "dark" : "light")}
+      type="button"
+    >
       {theme === "light" ? (
-        <span className={`ms-3 text-lg font-medium text-white`}>☀️</span>
+        <MoonIcon className="size-4 transition-transform group-hover:-rotate-6" strokeWidth={1.75} />
       ) : (
-        <span className={`ms-3 text-lg font-medium text-white`}>🌘</span>
+        <SunIcon className="size-4 transition-transform group-hover:rotate-12" strokeWidth={1.75} />
       )}
-    </label>
+    </button>
   );
 }

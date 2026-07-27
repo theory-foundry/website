@@ -7,6 +7,9 @@ export const getContactInfoTool = tool(async () => JSON.stringify(
     companyName: RJLS.companyName,
     email: RJLS.contactEmail,
     website: RJLS.website,
+    intent: RJLS.primaryCta,
+    nextStep:
+      "Email RJLS with the product, users, and workflow you want to improve. The email starts an exploratory conversation; it does not book or schedule a meeting.",
   },
   null,
   2,

@@ -73,11 +73,7 @@ export function ChatMessage({
                   return (
                     <div className="w-full" key={`${message.id}-text-${index}`}>
                       {showAssistantLabel && (
-                        <div
-                          className={`bold mt-2 text-[11px] font-medium uppercase tracking-[0.22em] ${tw.TEXT_SECONDARY}`}
-                        >
-                          Assistant
-                        </div>
+                        <div className={`mt-2 font-mono text-[11px] font-medium ${tw.TEXT_SECONDARY}`}>Assistant</div>
                       )}
                       <MessageResponse>{part.text}</MessageResponse>
                     </div>

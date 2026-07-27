@@ -2,30 +2,26 @@ export const RJLS = {
   companyName: "RJLS Systems",
   contactEmail: "lukasasorensen@gmail.com",
   website: "rjlssystems.com",
-  tagline: "Complete AI chat integrations for your business, applications, APIs, and data.",
+  tagline: "AI that works with your app's data and workflows.",
   heroSummary:
-    "We build complete AI chat experiences that connect to your applications, APIs, and data so customers and employees can find information and complete approved updates using natural language.",
-  primaryCta: "Discuss your AI integration",
+    "We add focused AI capabilities to existing products so people can find relevant information and prepare or complete permitted actions using approved application data and tools.",
+  primaryCta: "Request an exploratory call",
   about:
-    "RJLS Systems is an AI integration consultancy. We design and build the secure service behind the AI, connect it to the systems your business already trusts, and deliver a chat experience people can actually use. The result is a complete capability your team can operate, govern, and improve—not another disconnected AI experiment.",
+    "RJLS Systems is an AI integration consultancy. We design and build the service behind the AI, connect it to approved parts of the systems your business already uses, and deliver an interface people can use. The result is a focused capability your team can test, govern, and improve.",
   clientOutcomes: [
-    "A useful AI chat experience shaped around your customers, employees, and business workflows.",
-    "Secure connections to the applications, APIs, documents, and records your business already uses.",
-    "Read and update actions that respect existing identity, permissions, validation, and approval rules.",
-    "A production-ready integration your business can monitor, maintain, and keep under control.",
+    "A focused AI capability shaped around your customers, employees, and business workflows.",
+    "Scoped connections to the approved applications, APIs, documents, and records the workflow needs.",
+    "Information retrieval and permitted actions that honor existing identity, permissions, validation, and approval rules.",
+    "Testing, logging, cost visibility, and failure handling appropriate to the agreed integration scope.",
   ],
   team: [
     {
       name: "Lukas Sorensen",
       role: "Co-founder",
-      photoAlt: "Placeholder headshot for Lukas Sorensen",
-      bio: "Placeholder bio for Lukas Sorensen. Add a short client-facing summary of focus areas, responsibilities, and relevant RJLS Systems perspective.",
     },
     {
       name: "Ralph Jenson",
       role: "Co-founder",
-      photoAlt: "Placeholder headshot for Ralph Jenson",
-      bio: "Placeholder bio for Ralph Jenson. Add a short client-facing summary of focus areas, responsibilities, and relevant RJLS Systems perspective.",
     },
   ],
   services: [
@@ -37,7 +33,7 @@ export const RJLS = {
     {
       title: "Connected AI service",
       summary:
-        "We build the secure integration layer that lets AI use only the approved tools, APIs, and business data needed for each request.",
+        "We build a scoped integration layer that lets AI use only the approved tools, APIs, and business data needed for each request.",
     },
     {
       title: "Custom chat frontend",
@@ -45,9 +41,9 @@ export const RJLS = {
         "We create an AI chat interface for your website, application, customer portal, or internal workspace that feels like part of your product.",
     },
     {
-      title: "Production reliability and control",
+      title: "Testing and operating controls",
       summary:
-        "We add testing, monitoring, auditability, cost controls, and safe failure paths so the integration remains dependable after launch.",
+        "We define testing, logging, observability, cost controls, and failure paths for the agreed workflow and operating environment.",
     },
   ],
   integrationOutcomes: [
@@ -63,22 +59,21 @@ export const RJLS = {
     },
     {
       title: "The AI understands",
-      summary: "The assistant identifies the relevant information or permitted business action.",
+      summary: "The assistant understands your business domain and customer's needs.",
     },
     {
       title: "Your systems respond",
-      summary: "The integration securely uses your APIs, authentication, and business rules.",
+      summary: "The integration uses approved APIs while honoring existing authentication, permissions, and business rules.",
     },
     {
       title: "The result stays controlled",
-      summary: "The user receives an answer, reviews an update, or confirms a sensitive action.",
+      summary: "The user receives an answer, reviews an update, and guardrails keep the AI from accessing sensitive information.",
     },
   ],
   useCases: [
     {
-      title: "Customer self-service",
-      summary:
-        "Help customers find account information, understand documents, and complete approved changes from one conversation.",
+      title: "AI inside your product",
+      summary: "AI can interact with your app or business data with secure guardrails. Allow AI to understand your product and interact with it.",
     },
     {
       title: "Internal knowledge and operations",
@@ -86,15 +81,16 @@ export const RJLS = {
         "Give teams a simpler way to search business records, prepare work, and update internal systems with fewer manual steps.",
     },
     {
-      title: "AI inside your product",
-      summary: "Add a branded assistant to an existing application or portal without rebuilding the systems behind it.",
+      title: "Customer self-service",
+      summary:
+        "Help customers find account information, understand documents, and complete approved changes from one conversation.",
     },
   ],
   safeguards: [
     "Existing authentication and permissions remain the source of truth.",
     "AI can access only the tools, data, and actions approved for the workflow.",
     "Sensitive updates can require validation, review, or explicit confirmation.",
-    "Requests, actions, failures, and costs can be monitored and audited.",
+    "Requests, actions, failures, and costs can be logged and observed within the agreed integration scope.",
   ],
   auditDeliverables: [
     "Current-state AI usage and integration review.",

@@ -8,11 +8,11 @@ export interface ICarouselProps {
 }
 export default function Carousel(props: ICarouselProps) {
   return (
-    <div className="relative flex w-full items-center justify-center dark:text-gray-900">
+    <div className="relative flex w-full items-center justify-center dark:text-navy">
       <button
         aria-label="Slide back"
         type="button"
-        className="absolute left-0 z-30 ml-10 rounded-full bg-opacity-50 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:bg-gray-50 focus:dark:bg-gray-600 focus:dark:ring-gray-600"
+        className="absolute left-0 z-30 ml-10 rounded-full bg-opacity-50 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:bg-cream focus:dark:bg-forest focus:dark:ring-forest"
       >
         <svg
           width="8"
@@ -38,7 +38,7 @@ export default function Carousel(props: ICarouselProps) {
               <div className="relative aspect-square h-96">
                 <Image
                   fill
-                  className="object-cover object-center dark:bg-gray-500"
+                  className="object-cover object-center dark:bg-night-surface"
                   src={image.src}
                   alt="Image 1"
                 />
@@ -49,7 +49,7 @@ export default function Carousel(props: ICarouselProps) {
       <button
         aria-label="Slide forward"
         id="next"
-        className="absolute right-0 z-30 mr-10 rounded-full bg-opacity-50 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:bg-gray-50 focus:dark:bg-gray-600 focus:dark:ring-gray-600"
+        className="absolute right-0 z-30 mr-10 rounded-full bg-opacity-50 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:bg-cream focus:dark:bg-forest focus:dark:ring-forest"
       >
         <svg
           width="8"

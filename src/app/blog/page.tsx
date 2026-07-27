@@ -1,45 +1,46 @@
-"use client";
-import { useRouter } from "next/navigation";
-import Articles, { IArticle } from "@/example-data/Articles";
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
-import Image from "next/image";
+import Articles from "@/example-data/Articles";
+import { ArrowUpRightIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function Blog() {
-  const router = useRouter();
-
   return (
-    <main className={`flex min-h-screen flex-col items-center ${tw.BG_PRIMARY} px-8 py-14 md:px-24`}>
-      <h1 className={`mb-10 text-center text-4xl font-bold ${tw.TEXT_SECONDARY}`}>Insights</h1>
-      <div className="max-w-screen-lg space-y-6">
-        <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2">
+    <main className={`min-h-screen ${tw.BG_PRIMARY}`} id="main-content">
+      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
+        <p className={`mb-5 font-mono text-xs font-medium uppercase tracking-[0.18em] ${tw.TEXT_TERTIARY}`}>Insights</p>
+        <h1
+          className={`max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.05em] md:text-6xl ${tw.TEXT_PRIMARY}`}
+        >
+          Practical notes on systems and infrastructure.
+        </h1>
+
+        <div className="mt-16 border-t border-forest/15 dark:border-cream/25">
           {Articles.map((article) => (
-            <ArticleListing
-              article={article}
-              key={`article-listing-${article.id}`}
-              onClick={() => router.push(`/blog/${article.id}`)}
-            />
+            <article className="group border-b border-forest/15 dark:border-cream/25" key={article.id}>
+              <Link
+                className="grid gap-5 py-8 transition duration-200 hover:translate-x-1 sm:grid-cols-[9rem_1fr_auto] sm:items-center"
+                href={`/blog/${article.id}`}
+              >
+                <time className={`font-mono text-xs tabular-nums ${tw.TEXT_SECONDARY}`}>
+                  {article.createdDate.toLocaleDateString("en-US", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </time>
+                <div>
+                  <h2 className={`text-2xl font-semibold tracking-[-0.03em] ${tw.TEXT_PRIMARY}`}>{article.title}</h2>
+                  <p className={`mt-3 max-w-[65ch] leading-7 ${tw.TEXT_SECONDARY}`}>{article.articleDescription}</p>
+                </div>
+                <ArrowUpRightIcon
+                  className="size-5 text-forest transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 dark:text-mint"
+                  strokeWidth={1.75}
+                />
+              </Link>
+            </article>
           ))}
         </div>
-      </div>
+      </section>
     </main>
-  );
-}
-
-function ArticleListing({ article, onClick }: { article: IArticle; onClick: () => void }) {
-  return (
-    <article className="cursor-pointer rounded-md p-4 transition hover:bg-white/10 md:p-8" onClick={onClick}>
-      {article.imageSrc && (
-        <div className="relative h-52 w-full">
-          <Image alt="" fill className="object-cover dark:bg-gray-500" src={article.imageSrc} />
-        </div>
-      )}
-      <div className="flex flex-1 flex-col py-6">
-        <h2 className={`text-lg font-semibold uppercase tracking-wider hover:underline ${tw.TEXT_TERTIARY}`}>
-          {article.title}
-        </h2>
-        <p className={`py-2 leading-7 ${tw.TEXT_PRIMARY}`}>{article.articleDescription}</p>
-        <time className={`pt-3 text-xs ${tw.TEXT_SECONDARY}`}>{article.createdDate?.toLocaleDateString()}</time>
-      </div>
-    </article>
   );
 }

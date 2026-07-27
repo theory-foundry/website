@@ -1,128 +1,107 @@
 "use client";
+
+import { RJLS } from "@/constants/RJLS";
+import { MenuIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+
 import ThemeSwitchButton from "./ThemeSwitchButton";
-import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
-import { RJLS } from "@/constants/RJLS";
+
+const publicLinks = [
+  { href: "/our-process", title: "Our Process" },
+  { href: "/contact", title: "Contact" },
+];
 
 export default function NavBar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const isLocalEnvironment = process.env.NODE_ENV === "development";
+  const links = publicLinks;
 
-  const activeLinkClasses = `rounded-md bg-black/50 px-3 py-2 text-sm font-medium text-white`;
-  const nonActiveLinkClasses = `rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white`;
-  const mobileActiveLinkClasses = `block rounded-md bg-gray-900 px-3 py-2 text-base font-medium ${tw.TEXT_PRIMARY}`;
-  const mobileNonActiveLinkClasse = `block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white`;
-
-  const links = [
-    {
-      href: "/about",
-      title: "About",
-    },
-    {
-      href: "/ai-readiness-audit",
-      title: "AI Readiness Audit",
-    },
-    {
-      href: "/contact",
-      title: "Contact",
-    },
-  ];
-
-  if (isLocalEnvironment) {
-    links.push({
-      href: "/chat-test",
-      title: "Chat Test",
-    });
-  }
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <nav className="bg-gray-800">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            {/* Mobile menu button */}
-            <button
-              type="button"
-              className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-              aria-controls="mobile-menu"
-              aria-expanded={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              <span className="absolute -inset-0.5"></span>
-              <span className="sr-only">Open main menu</span>
-              {/* Icon when menu is closed. Menu open: "hidden", Menu closed: "block"*/}
-              <svg
-                className={`block h-6 w-6 ${isMobileMenuOpen ? "hidden" : ""}`}
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
-              {/* Icon when menu is open. Menu open: "block", Menu closed: "hidden" */}
-              <svg
-                className={`block h-6 w-6 ${!isMobileMenuOpen ? "hidden" : ""}`}
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <Link
-              className={`border-primary-500 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-cyan-600 text-sm font-bold text-white`}
-              href="/"
-            >
-              <span aria-label={RJLS.companyName}>RJ</span>
-            </Link>
-            <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4">
-                {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"  */}
-                {links.map((link) => (
-                  <Link
-                    key={"desktop-" + link.href}
-                    href={link.href}
-                    aria-current="page"
-                    className={pathname.includes(link.href) ? activeLinkClasses : nonActiveLinkClasses}
-                  >
-                    {link.title}
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div className="absolute right-0">
-              <ThemeSwitchButton />
-            </div>
-          </div>
-        </div>
-      </div>
+    <nav
+      aria-label="Primary navigation"
+      className="sticky top-0 z-40 border-b border-forest/10 bg-cream dark:border-cream/20 dark:bg-night"
+    >
+      <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-6 px-6 lg:px-10">
+        <Link
+          className="group inline-flex min-w-0 items-center gap-3 rounded-md font-semibold text-navy focus-visible:outline-none dark:text-cream"
+          href="/"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          <span className="grid size-10 flex-none place-items-center rounded-md bg-forest font-mono text-xs text-cream transition-transform duration-200 group-hover:-translate-y-0.5 group-active:translate-y-px dark:bg-forest dark:text-cream">
+            RJ
+          </span>
+          <span className="truncate tracking-[-0.02em]">{RJLS.companyName}</span>
+        </Link>
 
-      {/* Mobile menu, show/hide based on menu state.  */}
-      {isMobileMenuOpen && (
-        <div className="sm:hidden" id="mobile-menu">
-          <div className="space-y-1 px-2 pb-3 pt-2">
-            {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"  */}
-            {links.map((link) => (
+        <div className="hidden items-center gap-1 md:flex">
+          {links.map((link) => {
+            const active = isActive(link.href);
+
+            return (
               <Link
-                key={"desktop-" + link.href}
+                aria-current={active ? "page" : undefined}
+                className={`rounded-md px-3 py-2 text-sm font-medium transition duration-200 active:translate-y-px ${
+                  active
+                    ? "bg-forest text-cream dark:bg-mist dark:text-navy"
+                    : "text-forest hover:bg-forest/5 hover:text-navy dark:text-sage dark:hover:bg-cream/[0.12] dark:hover:text-cream"
+                }`}
                 href={link.href}
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                }}
-                className={pathname.includes(link.href) ? mobileActiveLinkClasses : mobileNonActiveLinkClasse}
+                key={link.href}
               >
                 {link.title}
               </Link>
-            ))}
+            );
+          })}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <ThemeSwitchButton />
+          <button
+            aria-controls="mobile-menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-label={isMobileMenuOpen ? "Close main menu" : "Open main menu"}
+            className="grid size-10 place-items-center rounded-md border border-forest/10 text-navy transition hover:bg-forest/5 active:translate-y-px md:hidden dark:border-cream/20 dark:text-sage dark:hover:bg-cream/[0.12]"
+            onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
+            type="button"
+          >
+            {isMobileMenuOpen ? (
+              <XIcon className="size-5" strokeWidth={1.75} />
+            ) : (
+              <MenuIcon className="size-5" strokeWidth={1.75} />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {isMobileMenuOpen && (
+        <div
+          className="border-t border-forest/10 bg-cream px-6 pb-6 pt-3 md:hidden dark:border-cream/20 dark:bg-night"
+          id="mobile-menu"
+        >
+          <div className="mx-auto flex max-w-7xl flex-col gap-1">
+            {links.map((link) => {
+              const active = isActive(link.href);
+
+              return (
+                <Link
+                  aria-current={active ? "page" : undefined}
+                  className={`rounded-md px-3 py-3 text-base font-medium transition active:translate-y-px ${
+                    active
+                      ? "bg-forest text-cream dark:bg-mist dark:text-navy"
+                      : "text-navy hover:bg-forest/5 dark:text-sage dark:hover:bg-cream/[0.12]"
+                  }`}
+                  href={link.href}
+                  key={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.title}
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}

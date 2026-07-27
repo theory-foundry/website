@@ -18,7 +18,7 @@
   }
 
   a {
-    color: rgb(139, 92, 246);
+    color: #215e61;
     text-decoration: underline;
   }
 
@@ -58,14 +58,18 @@
 }
 .dark {
   .markdown {
+    a {
+      color: #8fb6a0;
+    }
+
     p {
       code {
-        background-color: rgba(0, 0, 0, 0.2);
-        outline: 4px solid rgba(0, 0, 0, 0.2);
+        background-color: rgba(33, 94, 97, 0.42);
+        outline: 4px solid rgba(33, 94, 97, 0.42);
       }
     }
     pre {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(33, 94, 97, 0.42);
     }
   }
 }
@@ -74,14 +78,14 @@
   .markdown {
     p {
       code {
-        background-color: rgb(51, 65, 85, 0.9);
-        outline: 4px solid rgb(51, 65, 85, 0.9);
-        color: rgb(226 232 240);
+        background-color: rgba(35, 61, 77, 0.96);
+        outline: 4px solid rgba(35, 61, 77, 0.96);
+        color: #f5fbe6;
       }
     }
     pre {
-      color: rgb(226 232 240);
-      background-color: rgb(51, 65, 85, 0.9);
+      color: #f5fbe6;
+      background-color: rgba(35, 61, 77, 0.96);
     }
   }
 }

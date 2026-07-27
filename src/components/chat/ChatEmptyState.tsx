@@ -26,12 +26,13 @@ export function ChatEmptyState({
   hasError,
   input,
   isLoading,
-  placeholder = "Ask about connecting AI chat to your application, APIs, or data...",
+  placeholder = "Ask about RJLS, our services, or a workflow you want to improve...",
   suggestions = CHAT_SUGGESTIONS,
   status,
   title = (
     <>
-      <Image alt="ai logo" className="h-10 w-auto" height={20} src="/ai.svg" width={20} /> Ask RJLS about AI integration
+      <Image alt="RJLS assistant" className="h-8 w-auto" height={32} src="/ai.svg" width={32} />
+      Ask RJLS—and see the integration work
     </>
   ),
   onInputChange,
@@ -39,14 +40,19 @@ export function ChatEmptyState({
   onSubmit,
 }: ChatEmptyStateProps) {
   return (
-    <div className="flex w-full flex-1 items-center justify-center">
-      <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-4 text-center">
-        <h2 className={`flex items-center gap-3 text-xl font-semibold tracking-tight sm:text-5xl ${tw.TEXT_PRIMARY}`}>
+    <div className="flex w-full flex-1 items-center justify-center overflow-hidden rounded-xl border border-forest/10 bg-mist/90 shadow-[0_24px_70px_-34px_rgba(35,61,77,0.45)] dark:border-cream/20 dark:bg-night-surface/90 dark:shadow-[0_24px_70px_-34px_rgba(33,94,97,0.42)]">
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center px-5 py-12 text-center sm:px-8">
+        <h2
+          className={`flex items-center gap-3 text-2xl font-semibold tracking-[-0.035em] sm:text-3xl ${tw.TEXT_PRIMARY}`}
+        >
           {title}
         </h2>
+        <p className={`mt-4 max-w-md text-sm leading-6 ${tw.TEXT_SECONDARY}`}>
+          Get answers about our offerings while this working demo uses scoped tools behind the conversation.
+        </p>
 
         <ChatPromptInput
-          className="mt-10 w-full max-w-2xl"
+          className="mt-8 w-full max-w-2xl"
           input={input}
           isLoading={isLoading}
           onInputChange={onInputChange}
@@ -58,10 +64,10 @@ export function ChatEmptyState({
         />
 
         {suggestions.length > 0 && (
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-5 grid w-full max-w-2xl gap-2 sm:grid-cols-3">
             {suggestions.map((suggestion) => (
               <button
-                className={`rounded-full border border-slate-900/10 px-4 py-2 text-sm transition hover:border-cyan-700/40 hover:bg-slate-900/5 dark:border-white/10 dark:hover:border-cyan-400/40 dark:hover:bg-white/5 ${tw.BG_SECONDARY} ${tw.TEXT_PRIMARY}`}
+                className={`rounded-md border border-forest/10 bg-cream px-3 py-3 text-left text-xs leading-5 transition duration-200 hover:-translate-y-0.5 hover:border-forest/35 hover:bg-cream active:translate-y-px dark:border-cream/20 dark:bg-night dark:hover:border-mint/35 dark:hover:bg-night ${tw.TEXT_SECONDARY}`}
                 key={suggestion}
                 onClick={() => onInputChange(suggestion)}
                 type="button"
@@ -73,8 +79,8 @@ export function ChatEmptyState({
         )}
 
         {hasError && (
-          <p className="mt-6 text-center text-sm text-red-500 dark:text-red-400">
-            Something went wrong. Please try again.
+          <p className="mt-6 text-center text-sm text-red-700 dark:text-red-300">
+            The assistant could not connect. Please try again.
           </p>
         )}
       </div>
