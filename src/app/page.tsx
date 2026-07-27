@@ -121,39 +121,6 @@ export default function Home() {
       </section>
 
       <section className="border-y border-forest/10 bg-mist/65 px-6 py-20 lg:px-10 lg:py-28 dark:border-cream/20 dark:bg-night-surface/65">
-        <div className="mx-auto max-w-7xl">
-          <p className={`mb-4 font-mono text-xs font-medium uppercase tracking-[0.18em] ${tw.TEXT_TERTIARY}`}>
-            A focused place to start
-          </p>
-          <h2 className={`max-w-3xl text-4xl font-semibold tracking-[-0.04em] md:text-5xl ${tw.TEXT_PRIMARY}`}>
-            Learn from one useful workflow before expanding.
-          </h2>
-          <p className={`mt-5 max-w-[62ch] text-lg leading-8 ${tw.TEXT_SECONDARY}`}>
-            A deliberate first integration gives your team something concrete to test with real users, observe, and
-            improve. We shape the experience, connect the approved systems, and deliver the interface as one focused
-            product capability.
-          </p>
-          <p className={`mt-4 max-w-[76ch] leading-7 ${tw.TEXT_SECONDARY}`}>
-            As models and tools change, the practical question is how each option behaves on representative cases for
-            the agreed workflow. Starting with one useful workflow makes those evaluations, model choices, and usage
-            limits specific enough to review before expanding.
-          </p>
-
-          <div className="mt-14 grid gap-x-12 gap-y-10 md:grid-cols-2">
-            {RJLS.services.map((service) => (
-              <article
-                className="grid gap-3 border-l-2 border-forest/40 pl-6 dark:border-mint/40"
-                key={service.title}
-              >
-                <h3 className={`text-xl font-semibold tracking-[-0.025em] ${tw.TEXT_PRIMARY}`}>{service.title}</h3>
-                <p className={`max-w-[55ch] leading-7 ${tw.TEXT_SECONDARY}`}>{service.summary}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-20 lg:px-10 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <h2 className={`max-w-2xl text-4xl font-semibold tracking-[-0.04em] md:text-5xl ${tw.TEXT_PRIMARY}`}>
@@ -169,14 +136,14 @@ export default function Home() {
             </div>
           </div>
 
-          <aside className="self-start rounded-xl bg-mist p-7 md:p-9 dark:bg-night-surface">
+          <aside className="self-start rounded-xl bg-cream p-7 md:p-9 dark:bg-night">
             <KeyRoundIcon className="size-6 text-forest dark:text-mint" strokeWidth={1.75} />
             <h2 className={`mt-6 text-3xl font-semibold tracking-[-0.035em] ${tw.TEXT_PRIMARY}`}>
               Clear boundaries for every connection.
             </h2>
             <p className={`mt-4 leading-7 ${tw.TEXT_SECONDARY}`}>
-              You approve what the assistant can access and do. Sensitive changes can stay behind validation, review,
-              or explicit confirmation.
+              You approve what the assistant can access and do. Sensitive changes can stay behind validation, review, or
+              explicit confirmation.
             </p>
             <div className="mt-8 space-y-5">
               {RJLS.safeguards.map((safeguard) => (
