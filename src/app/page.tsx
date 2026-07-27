@@ -124,7 +124,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <h2 className={`max-w-2xl text-4xl font-semibold tracking-[-0.04em] md:text-5xl ${tw.TEXT_PRIMARY}`}>
-              Useful when people need answers or a next action.
+              Let AI Take Action
             </h2>
             <div className="mt-12 grid gap-8 md:grid-cols-2">
               {RJLS.useCases.map((useCase, index) => (

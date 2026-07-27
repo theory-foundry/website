@@ -72,9 +72,8 @@ export const RJLS = {
   ],
   useCases: [
     {
-      title: "Customer self-service",
-      summary:
-        "Help customers find account information, understand documents, and complete approved changes from one conversation.",
+      title: "AI inside your product",
+      summary: "AI can interact with your app or business data with secure guardrails. Allow AI to understand your product and interact with it.",
     },
     {
       title: "Internal knowledge and operations",
@@ -82,8 +81,9 @@ export const RJLS = {
         "Give teams a simpler way to search business records, prepare work, and update internal systems with fewer manual steps.",
     },
     {
-      title: "AI inside your product",
-      summary: "Add a branded assistant to an existing application or portal without rebuilding the systems behind it.",
+      title: "Customer self-service",
+      summary:
+        "Help customers find account information, understand documents, and complete approved changes from one conversation.",
     },
   ],
   safeguards: [
