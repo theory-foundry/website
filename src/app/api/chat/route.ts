@@ -16,6 +16,14 @@ import {
 const MAX_INPUT_LENGTH = 2000;
 const MAX_MESSAGES = 20;
 const REASONING_MODEL_PREFIXES = ["o1", "o3", "gpt-5"];
+const CHAT_TOOLS = [
+  getServiceCatalogTool,
+  getAIReadinessAuditTool,
+  getAIRiskChecklistTool,
+  getCostAndObservabilityGuidanceTool,
+  getContactInfoTool,
+];
+const CHAT_TOOL_NAMES = CHAT_TOOLS.map((tool) => tool.name);
 
 const SYSTEM_PROMPT = RJLS_SYSTEM_PROMPT;
 
@@ -178,16 +186,21 @@ export async function POST(req: NextRequest) {
     // Create a ReAct agent with RJLS-facing service and assessment tools
     const agent = createAgent({
       model: model,
-      tools: [
-        getServiceCatalogTool,
-        getAIReadinessAuditTool,
-        getAIRiskChecklistTool,
-        getCostAndObservabilityGuidanceTool,
-        getContactInfoTool,
-      ],
+      tools: CHAT_TOOLS,
     });
 
-    const agentStream = await agent.streamEvents({ messages: agentMessages }, { version: "v2" });
+    const agentStream = await agent
+      .withConfig({
+        metadata: {
+          messageCount: trimmedMessages.length,
+          model: modelName,
+          route: "/api/chat",
+          toolNames: CHAT_TOOL_NAMES,
+        },
+        runName: "rjls-marketing-chat",
+        tags: ["rjls-marketing-site", "ai-chat", modelName],
+      })
+      .streamEvents({ messages: agentMessages }, { version: "v2" });
 
     return createUIMessageStreamResponse({
       stream: createUIMessageStream({
