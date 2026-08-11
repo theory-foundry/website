@@ -1,7 +1,13 @@
 "use client";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { RJLS } from "@/constants/RJLS";
-import { MenuIcon, XIcon } from "lucide-react";
+import { ChevronDownIcon, MenuIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -19,6 +25,8 @@ export default function NavBar() {
   const links = publicLinks;
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const isProductsActive = isActive("/products");
+  const isResumeAgentActive = pathname === "/products/resume-agent";
 
   return (
     <nav
@@ -38,6 +46,37 @@ export default function NavBar() {
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className={`group inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition duration-200 focus-visible:outline-none active:translate-y-px ${
+                  isProductsActive
+                    ? "bg-forest text-cream dark:bg-mist dark:text-navy"
+                    : "text-forest hover:bg-forest/5 hover:text-navy focus-visible:bg-forest/5 focus-visible:text-navy dark:text-sage dark:hover:bg-cream/[0.12] dark:hover:text-cream dark:focus-visible:bg-cream/[0.12] dark:focus-visible:text-cream"
+                }`}
+                type="button"
+              >
+                Products
+                <ChevronDownIcon className="size-3.5 transition-transform group-data-[state=open]:rotate-180" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="start"
+              className="w-56 border-0 bg-cream p-1.5 text-navy shadow-none ring-0 dark:bg-night-surface dark:text-cream"
+              sideOffset={8}
+            >
+              <DropdownMenuItem asChild className="cursor-pointer p-0 focus:bg-forest/10 dark:focus:bg-cream/[0.12]">
+                <Link
+                  aria-current={isResumeAgentActive ? "page" : undefined}
+                  className="w-full rounded-md px-3 py-2.5 font-medium outline-none"
+                  href="/products/resume-agent"
+                >
+                  Resume Agent
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           {links.map((link) => {
             const active = isActive(link.href);
 
@@ -83,6 +122,28 @@ export default function NavBar() {
           id="mobile-menu"
         >
           <div className="mx-auto flex max-w-7xl flex-col gap-1">
+            <div className="mb-2 border-b border-forest/10 pb-3 dark:border-cream/20">
+              <p
+                className={`px-3 pb-1 pt-2 font-mono text-xs font-medium uppercase tracking-[0.16em] ${
+                  isProductsActive ? "text-navy dark:text-cream" : "text-forest dark:text-mint"
+                }`}
+              >
+                Products
+              </p>
+              <Link
+                aria-current={isResumeAgentActive ? "page" : undefined}
+                className={`block rounded-md px-3 py-3 text-base font-medium transition active:translate-y-px ${
+                  isResumeAgentActive
+                    ? "bg-forest text-cream dark:bg-mist dark:text-navy"
+                    : "text-navy hover:bg-forest/5 dark:text-sage dark:hover:bg-cream/[0.12]"
+                }`}
+                href="/products/resume-agent"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Resume Agent
+              </Link>
+            </div>
+
             {links.map((link) => {
               const active = isActive(link.href);
 

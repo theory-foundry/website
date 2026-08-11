@@ -16,12 +16,12 @@ Copy `.env.example` to `.env.local` and fill in your credentials:
 cp .env.example .env.local
 ```
 
-| Variable | Required | Description |
-|---|---|---|
-| `OPENAI_API_KEY` | ✅ Yes | Your OpenAI API key (used by the `/chat` AI feature) |
-| `OPENAI_MODEL` | No | OpenAI model to use (defaults to `gpt-4o-mini`) |
+| Variable         | Required | Description                                                   |
+| ---------------- | -------- | ------------------------------------------------------------- |
+| `OPENAI_API_KEY` | ✅ Yes   | Your OpenAI API key (used by the `/chat-test` Live AI option) |
+| `OPENAI_MODEL`   | No       | OpenAI model to use (defaults to `gpt-4o-mini`)               |
 
-> **Note:** The `/chat` page will show an error if `OPENAI_API_KEY` is not set.
+> **Note:** The `/chat-test` Live AI option will show an error if `OPENAI_API_KEY` is not set.
 
 ### 3. Run the development server
 
@@ -31,7 +31,10 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The AI chat is available at [http://localhost:3000/chat](http://localhost:3000/chat).
+The chat testing playground is available at [http://localhost:3000/chat-test](http://localhost:3000/chat-test).
+
+The Resume Agent product showcase is available at
+[http://localhost:3000/products/resume-agent](http://localhost:3000/products/resume-agent).
 
 ## AI Chat Feature
 
