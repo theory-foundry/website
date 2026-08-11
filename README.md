@@ -33,6 +33,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 The chat testing playground is available at [http://localhost:3000/chat-test](http://localhost:3000/chat-test).
 
+The AI Integration & MCP consulting offer is available at
+[http://localhost:3000/products/ai-integration-mcp](http://localhost:3000/products/ai-integration-mcp).
+
 The Resume Agent product showcase is available at
 [http://localhost:3000/products/resume-agent](http://localhost:3000/products/resume-agent).
 

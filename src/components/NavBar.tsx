@@ -26,6 +26,7 @@ export default function NavBar() {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const isProductsActive = isActive("/products");
+  const isAiIntegrationMcpActive = pathname === "/products/ai-integration-mcp";
   const isResumeAgentActive = pathname === "/products/resume-agent";
 
   return (
@@ -67,8 +68,21 @@ export default function NavBar() {
             >
               <DropdownMenuItem asChild className="cursor-pointer p-0 focus:bg-forest/10 dark:focus:bg-cream/[0.12]">
                 <Link
+                  aria-current={isAiIntegrationMcpActive ? "page" : undefined}
+                  className={`w-full rounded-md px-3 py-2.5 font-medium outline-none ${
+                    isAiIntegrationMcpActive ? "bg-forest/10 dark:bg-cream/[0.12]" : ""
+                  }`}
+                  href="/products/ai-integration-mcp"
+                >
+                  AI Integration &amp; MCP
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer p-0 focus:bg-forest/10 dark:focus:bg-cream/[0.12]">
+                <Link
                   aria-current={isResumeAgentActive ? "page" : undefined}
-                  className="w-full rounded-md px-3 py-2.5 font-medium outline-none"
+                  className={`w-full rounded-md px-3 py-2.5 font-medium outline-none ${
+                    isResumeAgentActive ? "bg-forest/10 dark:bg-cream/[0.12]" : ""
+                  }`}
                   href="/products/resume-agent"
                 >
                   Resume Agent
@@ -130,6 +144,18 @@ export default function NavBar() {
               >
                 Products
               </p>
+              <Link
+                aria-current={isAiIntegrationMcpActive ? "page" : undefined}
+                className={`block rounded-md px-3 py-3 text-base font-medium transition active:translate-y-px ${
+                  isAiIntegrationMcpActive
+                    ? "bg-forest text-cream dark:bg-mist dark:text-navy"
+                    : "text-navy hover:bg-forest/5 dark:text-sage dark:hover:bg-cream/[0.12]"
+                }`}
+                href="/products/ai-integration-mcp"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                AI Integration &amp; MCP
+              </Link>
               <Link
                 aria-current={isResumeAgentActive ? "page" : undefined}
                 className={`block rounded-md px-3 py-3 text-base font-medium transition active:translate-y-px ${
