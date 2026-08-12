@@ -16,10 +16,14 @@ Copy `.env.example` to `.env.local` and fill in your credentials:
 cp .env.example .env.local
 ```
 
-| Variable         | Required | Description                                                   |
-| ---------------- | -------- | ------------------------------------------------------------- |
-| `OPENAI_API_KEY` | ✅ Yes   | Your OpenAI API key (used by the `/chat-test` Live AI option) |
-| `OPENAI_MODEL`   | No       | OpenAI model to use (defaults to `gpt-4o-mini`)               |
+| Variable | Required | Description |
+|---|---|---|
+| `OPENAI_API_KEY` | ✅ Yes | Your OpenAI API key (used by the `/chat` AI feature) |
+| `OPENAI_MODEL` | No | OpenAI model to use (defaults to `gpt-4o-mini`) |
+| `LANGSMITH_TRACING` | No | Set to `true` to send LangChain traces for `/api/chat` to LangSmith |
+| `LANGSMITH_API_KEY` | No | LangSmith API key used when tracing is enabled |
+| `LANGSMITH_PROJECT` | No | LangSmith project name for chat traces, e.g. `rjls-marketing-ai` |
+| `LANGSMITH_ENDPOINT` | No | LangSmith API endpoint; only needed for non-default regions or self-hosted LangSmith |
 
 > **Note:** The `/chat-test` Live AI option will show an error if `OPENAI_API_KEY` is not set.
 
@@ -48,6 +52,16 @@ The portfolio includes an embedded LLM chat powered by:
 
 The chat streams token-by-token responses and maintains conversation history in the UI session.
 
+### LangSmith Observability
+
+The `/api/chat` LangChain agent includes a stable run name, tags, and metadata for LangSmith traces:
+
+- Run name: `rjls-marketing-chat`
+- Tags: `rjls-marketing-site`, `ai-chat`, and the configured OpenAI model
+- Metadata: route, model, message count, and available tool names
+
+To enable tracing, set `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, and optionally `LANGSMITH_PROJECT`. LangSmith traces can include prompts, tool inputs, and model outputs, so only enable it in environments where that data handling is approved.
+
 ## Deploy on Vercel
 
 The easiest way to deploy is with the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
@@ -57,6 +71,7 @@ The easiest way to deploy is with the [Vercel Platform](https://vercel.com/new?u
 1. Go to your project in the Vercel dashboard → **Settings → Environment Variables**
 2. Add `OPENAI_API_KEY` with your OpenAI API key
 3. Optionally add `OPENAI_MODEL` to override the default model
+4. Optionally add `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, and `LANGSMITH_PROJECT` to trace `/api/chat` runs in LangSmith
 
 Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
