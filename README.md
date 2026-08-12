@@ -1,4 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Theory Foundry
+
+Theory Foundry is an AI-integration consultancy for small product companies. This repository contains the
+[theoryfoundry.com](https://theoryfoundry.com) marketing site and its embedded AI integration example.
 
 ## Getting Started
 
@@ -16,14 +19,14 @@ Copy `.env.example` to `.env.local` and fill in your credentials:
 cp .env.example .env.local
 ```
 
-| Variable | Required | Description |
-|---|---|---|
-| `OPENAI_API_KEY` | ✅ Yes | Your OpenAI API key (used by the `/chat` AI feature) |
-| `OPENAI_MODEL` | No | OpenAI model to use (defaults to `gpt-4o-mini`) |
-| `LANGSMITH_TRACING` | No | Set to `true` to send LangChain traces for `/api/chat` to LangSmith |
-| `LANGSMITH_API_KEY` | No | LangSmith API key used when tracing is enabled |
-| `LANGSMITH_PROJECT` | No | LangSmith project name for chat traces, e.g. `rjls-marketing-ai` |
-| `LANGSMITH_ENDPOINT` | No | LangSmith API endpoint; only needed for non-default regions or self-hosted LangSmith |
+| Variable             | Required | Description                                                                          |
+| -------------------- | -------- | ------------------------------------------------------------------------------------ |
+| `OPENAI_API_KEY`     | ✅ Yes   | Your OpenAI API key (used by the `/chat` AI feature)                                 |
+| `OPENAI_MODEL`       | No       | OpenAI model to use (defaults to `gpt-4o-mini`)                                      |
+| `LANGSMITH_TRACING`  | No       | Set to `true` to send LangChain traces for `/api/chat` to LangSmith                  |
+| `LANGSMITH_API_KEY`  | No       | LangSmith API key used when tracing is enabled                                       |
+| `LANGSMITH_PROJECT`  | No       | LangSmith project name for chat traces, e.g. `theory-foundry-marketing-ai`           |
+| `LANGSMITH_ENDPOINT` | No       | LangSmith API endpoint; only needed for non-default regions or self-hosted LangSmith |
 
 > **Note:** The `/chat-test` Live AI option will show an error if `OPENAI_API_KEY` is not set.
 
@@ -56,24 +59,36 @@ The chat streams token-by-token responses and maintains conversation history in 
 
 The `/api/chat` LangChain agent includes a stable run name, tags, and metadata for LangSmith traces:
 
-- Run name: `rjls-marketing-chat`
-- Tags: `rjls-marketing-site`, `ai-chat`, and the configured OpenAI model
+- Run name: `theory-foundry-marketing-chat`
+- Tags: `theory-foundry-marketing-site`, `ai-chat`, and the configured OpenAI model
 - Metadata: route, model, message count, and available tool names
 
 To enable tracing, set `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, and optionally `LANGSMITH_PROJECT`. LangSmith traces can include prompts, tool inputs, and model outputs, so only enable it in environments where that data handling is approved.
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy is with the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+The production target is Cloudflare Workers through OpenNext. Build and preview the Worker locally with:
 
-**Required Vercel environment variables:**
+```bash
+pnpm preview
+```
 
-1. Go to your project in the Vercel dashboard → **Settings → Environment Variables**
-2. Add `OPENAI_API_KEY` with your OpenAI API key
-3. Optionally add `OPENAI_MODEL` to override the default model
-4. Optionally add `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, and `LANGSMITH_PROJECT` to trace `/api/chat` runs in LangSmith
+Deploy only as an intentional rollout step with `pnpm deploy`.
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Domain rename rollout
+
+The application permanently redirects requests for `rjlssystems.com` and `www.rjlssystems.com` to
+`https://theoryfoundry.com`, preserving the path and query string. Before production rollout, attach the new domain and
+both legacy domains to the Cloudflare Worker and configure their DNS records. Deployment and DNS changes are not part of
+the repository rename and must be performed separately.
+
+**Required production environment variables:**
+
+1. Add `OPENAI_API_KEY` with your OpenAI API key.
+2. Optionally add `OPENAI_MODEL` to override the default model.
+3. Optionally add `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, and `LANGSMITH_PROJECT` to trace `/api/chat` runs in LangSmith.
+
+See the [OpenNext Cloudflare documentation](https://opennext.js.org/cloudflare) for deployment details.
 
 ## Learn More
 

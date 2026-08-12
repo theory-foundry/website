@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "rljs",
+  "name": "theory-foundry",
   // Set this to today's date
   "compatibility_date": "2026-07-26",
   "compatibility_flags": ["nodejs_compat"],

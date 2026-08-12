@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { RJLS } from "@/constants/RJLS";
+import { THEORY_FOUNDRY } from "@/constants/TheoryFoundry";
 import { ChevronDownIcon, MenuIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -40,10 +40,7 @@ export default function NavBar() {
           href="/"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <span className="grid size-10 flex-none place-items-center rounded-md bg-forest font-mono text-xs text-cream transition-transform duration-200 group-hover:-translate-y-0.5 group-active:translate-y-px dark:bg-forest dark:text-cream">
-            RJ
-          </span>
-          <span className="truncate tracking-[-0.02em]">{RJLS.companyName}</span>
+          <span className="whitespace-nowrap tracking-[-0.02em]">{THEORY_FOUNDRY.companyName}</span>
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">

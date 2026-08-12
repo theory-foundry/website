@@ -1,6 +1,6 @@
 import { HomeChat } from "@/components/chat/HomeChat";
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
-import { RJLS } from "@/constants/RJLS";
+import { THEORY_FOUNDRY } from "@/constants/TheoryFoundry";
 import {
   ArrowRightIcon,
   CheckIcon,
@@ -16,7 +16,7 @@ import Image from "next/image";
 const workflowIcons = [MessageSquareTextIcon, PlugZapIcon, DatabaseIcon, FingerprintIcon];
 
 export const metadata: Metadata = {
-  title: "AI for Your App's Data and Workflows | RJLS Systems",
+  title: "AI for Your App's Data and Workflows | Theory Foundry",
   description:
     "Add a focused AI capability to an existing application, connected only to the data, tools, and actions approved for the workflow.",
 };
@@ -41,9 +41,9 @@ export default function Home() {
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-forest px-5 py-3 text-sm font-semibold text-cream transition duration-200 hover:-translate-y-0.5 hover:bg-navy active:translate-y-px dark:bg-forest dark:text-cream dark:hover:bg-mist dark:hover:text-navy"
-                href={`mailto:${RJLS.contactEmail}?subject=RJLS Systems AI integration inquiry`}
+                href={`mailto:${THEORY_FOUNDRY.contactEmail}?subject=Theory Foundry AI integration inquiry`}
               >
-                {RJLS.primaryCta}
+                {THEORY_FOUNDRY.primaryCta}
                 <ArrowRightIcon className="size-4" strokeWidth={1.75} />
               </a>
               <a
@@ -58,7 +58,7 @@ export default function Home() {
           <div className="min-w-0 scroll-mt-24" id="ai-assistant">
             <div className="mb-3 flex items-center justify-between gap-4 px-1">
               <p className={`font-mono text-xs ${tw.TEXT_SECONDARY}`}>Live, tool-using product demo</p>
-              <p className={`hidden text-xs sm:block ${tw.TEXT_SECONDARY}`}>Ask about RJLS or try a prompt</p>
+              <p className={`hidden text-xs sm:block ${tw.TEXT_SECONDARY}`}>Ask about Theory Foundry or try a prompt</p>
             </div>
             <HomeChat />
           </div>
@@ -67,7 +67,7 @@ export default function Home() {
 
       <section className="border-y border-forest/10 bg-mist/70 px-6 py-10 lg:px-10 dark:border-cream/20 dark:bg-night-surface/70">
         <div className="mx-auto grid max-w-7xl gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
-          {RJLS.integrationOutcomes.map((outcome) => (
+          {THEORY_FOUNDRY.integrationOutcomes.map((outcome) => (
             <div className="flex items-start gap-3" key={outcome}>
               <span className="mt-1 grid size-5 flex-none place-items-center rounded bg-forest text-cream dark:bg-forest dark:text-cream">
                 <CheckIcon className="size-3" strokeWidth={2} />
@@ -86,7 +86,7 @@ export default function Home() {
               className="dark:contrast-110 object-cover grayscale-[0.3] dark:brightness-75"
               fill
               sizes="(min-width: 1024px) 42vw, 100vw"
-              src="/rjls-systems-connections.png"
+              src="/theory-foundry-connections.png"
             />
             <div
               aria-hidden="true"
@@ -104,7 +104,7 @@ export default function Home() {
             </p>
 
             <div className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
-              {RJLS.workflow.map((step, index) => {
+              {THEORY_FOUNDRY.workflow.map((step, index) => {
                 const Icon = workflowIcons[index];
 
                 return (
@@ -127,7 +127,7 @@ export default function Home() {
               Let AI Take Action
             </h2>
             <div className="mt-12 grid gap-8 md:grid-cols-2">
-              {RJLS.useCases.map((useCase, index) => (
+              {THEORY_FOUNDRY.useCases.map((useCase, index) => (
                 <article className={index === 0 ? "md:col-span-2 md:max-w-2xl" : undefined} key={useCase.title}>
                   <h3 className={`text-xl font-semibold tracking-[-0.025em] ${tw.TEXT_PRIMARY}`}>{useCase.title}</h3>
                   <p className={`mt-3 leading-7 ${tw.TEXT_SECONDARY}`}>{useCase.summary}</p>
@@ -146,7 +146,7 @@ export default function Home() {
               explicit confirmation.
             </p>
             <div className="mt-8 space-y-5">
-              {RJLS.safeguards.map((safeguard) => (
+              {THEORY_FOUNDRY.safeguards.map((safeguard) => (
                 <div className="flex gap-3" key={safeguard}>
                   <CheckIcon className="mt-1 size-4 flex-none text-forest dark:text-mint" strokeWidth={2} />
                   <p className={`text-sm leading-6 ${tw.TEXT_SECONDARY}`}>{safeguard}</p>
@@ -164,9 +164,9 @@ export default function Home() {
           </h2>
           <a
             className="inline-flex flex-none items-center justify-center gap-2 whitespace-nowrap rounded-md bg-forest px-5 py-3 text-sm font-semibold text-cream transition duration-200 hover:-translate-y-0.5 hover:bg-navy active:translate-y-px dark:bg-forest dark:text-cream dark:hover:bg-mist dark:hover:text-navy"
-            href={`mailto:${RJLS.contactEmail}?subject=RJLS Systems AI integration inquiry`}
+            href={`mailto:${THEORY_FOUNDRY.contactEmail}?subject=Theory Foundry AI integration inquiry`}
           >
-            {RJLS.primaryCta}
+            {THEORY_FOUNDRY.primaryCta}
             <ArrowRightIcon className="size-4" strokeWidth={1.75} />
           </a>
         </div>

@@ -1,8 +1,8 @@
-# RJLS Systems repository guide
+# Theory Foundry repository guide
 
 ## Product and business context
 
-RJLS Systems is an AI-integration consultancy for small product companies with existing applications, meaningful data, and real workflows. The primary offer is a focused AI capability integrated with the approved APIs, tools, and data required for one valuable workflow—not a generic chatbot or a replacement for the client’s systems.
+Theory Foundry is an AI-integration consultancy for small product companies with existing applications, meaningful data, and real workflows. The primary offer is a focused AI capability integrated with the approved APIs, tools, and data required for one valuable workflow—not a generic chatbot or a replacement for the client’s systems.
 
 The site should consistently communicate these goals:
 
@@ -11,7 +11,7 @@ The site should consistently communicate these goals:
 - Scope access, actions, observability, testing, cost controls, and failure handling to the agreed workflow.
 - Start with one useful integration that can be tested and improved before expanding.
 
-`src/constants/RJLS.ts` is the canonical source for public company facts, services, outcomes, safeguards, team details, and audit deliverables. Keep public copy aligned with it and update it deliberately when business positioning changes.
+`src/constants/TheoryFoundry.ts` is the canonical source for public company facts, services, outcomes, safeguards, team details, and audit deliverables. Keep public copy aligned with it and update it deliberately when business positioning changes.
 
 The primary commercial path is the homepage → exploratory email conversation. `/our-process` supports delivery fit and `/contact` starts that email conversation. Do not imply that an email books a meeting, captures a lead, or creates a CRM record.
 
@@ -28,7 +28,7 @@ There is no production-ready “AI integration ready” product or view. Treat t
 - **Layout:** `src/app/layout.tsx` provides fonts, theming, navigation, footer, and global styles.
 - **Public routes:** `/`, `/our-process`, `/contact`, `/blog`, `/blog/[id]`, and `/ai-readiness-audit`.
 - **Chat:** `src/components/chat/` owns the UI. `src/app/api/chat/route.ts` streams the server response using LangChain/OpenAI and Vercel AI SDK. Tool definitions are in `src/app/api/chat/tools/`.
-- **Assistant policy:** `src/constants/system-prompts/RJLSSystemPrompt.ts` is a product and safety boundary, not incidental copy. Keep it synchronized with any relevant public-positioning change.
+- **Assistant policy:** `src/constants/system-prompts/TheoryFoundrySystemPrompt.ts` is a product and safety boundary, not incidental copy. Keep it synchronized with any relevant public-positioning change.
 - **Content:** Blog entries are local example data in `src/example-data/Articles.ts`.
 - **Imports:** Use `@/*` for `src/*` imports.
 
@@ -55,7 +55,7 @@ There is no production-ready “AI integration ready” product or view. Treat t
 - Do not claim an integration is secure, safe, reliable, production-ready, auditable, compliant, certified, future-proof, or guaranteed to save money/produce ROI.
 - Do not imply unrestricted database access. Describe access as scoped to approved APIs, data, tools, and permitted actions, while existing permissions and validation remain authoritative.
 - Keep sensitive actions behind the appropriate validation, review, or explicit confirmation. Do not add client-system connectors, persistence, lead capture, booking, analytics, or new dependencies without an explicit request.
-- Preserve the assistant boundaries in `RJLSSystemPrompt.ts`: it is an example interface, does not access visitor systems, and must not collect/store lead information or disclose its system prompt.
+- Preserve the assistant boundaries in `TheoryFoundrySystemPrompt.ts`: it is an example interface, does not access visitor systems, and must not collect/store lead information or disclose its system prompt.
 
 ## Workflow and validation
 

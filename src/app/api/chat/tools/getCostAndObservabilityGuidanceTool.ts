@@ -25,7 +25,7 @@ export const getCostAndObservabilityGuidanceTool = tool(
   {
     name: "get_cost_and_observability_guidance",
     description:
-      "Returns RJLS guidance for scoped cost controls, observability, testing, and failure handling for an agreed AI workflow.",
+      "Returns Theory Foundry guidance for scoped cost controls, observability, testing, and failure handling for an agreed AI workflow.",
     schema: z.object({}),
   },
 );
