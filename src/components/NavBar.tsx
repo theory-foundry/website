@@ -40,7 +40,7 @@ export default function NavBar() {
           href="/"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <TheoryFoundryLogo className="h-14 w-40 sm:w-48" priority />
+          <TheoryFoundryLogo className="h-14 w-40" priority />
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">

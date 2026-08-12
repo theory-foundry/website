@@ -11,11 +11,11 @@ export function TheoryFoundryLogo({ className, priority = false }: TheoryFoundry
     <span className={cn("relative block shrink-0 overflow-hidden bg-night", className)}>
       <Image
         alt="Theory Foundry"
-        className="object-cover object-[center_48%]"
+        className="object-cover object-center"
         fill
         priority={priority}
         sizes="(max-width: 767px) 160px, 192px"
-        src="/TheoryFoundryLogoLessMargin.png"
+        src="/TheoryFoundryLogo.png"
       />
     </span>
   );
