@@ -75,7 +75,7 @@ const dynamicToolPart = ({
 };
 
 const serviceReasoning =
-  "Checking the RJLS service catalog first so the answer stays grounded in the firm's actual offer.";
+  "Checking the Theory Foundry service catalog first so the answer stays grounded in the firm's actual offer.";
 
 const serviceToolInput = { sections: ["services", "commonOutcomes", "bestFit"], tone: "business-leader" };
 
@@ -114,7 +114,7 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
       {
         delayMs: 400,
         parts: [
-          reasoningPart("Reviewing RJLS service positioning and common client needs...", "streaming"),
+          reasoningPart("Reviewing Theory Foundry service positioning and common client needs...", "streaming"),
           textPart("Pulling together the most relevant AI integration guidance...", "streaming"),
         ],
         status: "streaming",
@@ -145,7 +145,7 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
             toolName: "get_service_catalog",
           }),
           textPart(
-            "RJLS Systems designs and builds complete AI chat experiences connected to a business's applications, APIs, authentication, and data. The assistant can find information and complete approved updates while existing permissions and business rules remain in control.",
+            "Theory Foundry designs and builds complete AI chat experiences connected to a business's applications, APIs, authentication, and data. The assistant can find information and complete approved updates while existing permissions and business rules remain in control.",
             "streaming",
           ),
         ],
@@ -163,7 +163,7 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
             toolName: "get_service_catalog",
           }),
           textPart(
-            "RJLS Systems designs and builds complete AI chat experiences connected to a business's applications, APIs, authentication, and data. The assistant can find information and complete approved updates while existing permissions and business rules remain in control.\n\nRJLS delivers both the connected AI service and the customer-facing or internal chat interface, so the result is a usable business capability rather than disconnected infrastructure.",
+            "Theory Foundry designs and builds complete AI chat experiences connected to a business's applications, APIs, authentication, and data. The assistant can find information and complete approved updates while existing permissions and business rules remain in control.\n\nTheory Foundry delivers both the connected AI service and the customer-facing or internal chat interface, so the result is a usable business capability rather than disconnected infrastructure.",
           ),
         ],
         status: "ready",
@@ -171,7 +171,7 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
     ],
     id: "service-brief",
     label: "Service brief",
-    prompt: "How could RJLS connect AI chat to our business systems?",
+    prompt: "How could Theory Foundry connect AI chat to our business systems?",
   },
   {
     description: "Shows a failed tool invocation and the assistant's fallback copy.",
@@ -210,7 +210,7 @@ export const CHAT_HARNESS_SCENARIOS: ChatHarnessScenario[] = [
             toolName: "get_ai_risk_checklist",
           }),
           textPart(
-            "The checklist lookup failed, so I would fall back to the core RJLS guidance: start by identifying unmanaged employee AI usage, sensitive data exposure, missing output review, and unbounded model spend.",
+            "The checklist lookup failed, so I would fall back to the core Theory Foundry guidance: start by identifying unmanaged employee AI usage, sensitive data exposure, missing output review, and unbounded model spend.",
           ),
         ],
         status: "ready",

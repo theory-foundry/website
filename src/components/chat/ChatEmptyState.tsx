@@ -26,13 +26,13 @@ export function ChatEmptyState({
   hasError,
   input,
   isLoading,
-  placeholder = "Ask about RJLS, our services, or a workflow you want to improve...",
+  placeholder = "Ask about Theory Foundry, our services, or a workflow you want to improve...",
   suggestions = CHAT_SUGGESTIONS,
   status,
   title = (
     <>
-      <Image alt="RJLS assistant" className="h-8 w-auto" height={32} src="/ai.svg" width={32} />
-      Ask RJLS—and see the integration work
+      <Image alt="Theory Foundry assistant" className="h-8 w-auto" height={32} src="/ai.svg" width={32} />
+      Ask Theory Foundry and see the integration work
     </>
   ),
   onInputChange,

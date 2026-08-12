@@ -1,12 +1,12 @@
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
-import { RJLS } from "@/constants/RJLS";
+import { THEORY_FOUNDRY } from "@/constants/TheoryFoundry";
 import { ArrowUpRightIcon, MailIcon } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Start an AI Integration Conversation | RJLS Systems",
+  title: "Start an AI Integration Conversation | Theory Foundry",
   description:
-    "Tell RJLS Systems about the existing product, people, data, and workflow behind a possible AI integration.",
+    "Tell Theory Foundry about the existing product, people, data, and workflow behind a possible AI integration.",
 };
 
 export default function Contact() {
@@ -23,8 +23,8 @@ export default function Contact() {
             Start with the workflow you want to improve.
           </h1>
           <p className={`mt-8 max-w-[62ch] text-lg leading-8 ${tw.TEXT_SECONDARY}`}>
-            Tell us about the existing product, who uses it, and the information or action they need. A rough example
-            is enough to start an exploratory conversation.
+            Tell us about the existing product, who uses it, and the information or action they need. A rough example is
+            enough to start an exploratory conversation.
           </p>
         </div>
 
@@ -37,9 +37,9 @@ export default function Contact() {
           </p>
           <a
             className="mt-8 inline-flex max-w-full items-center gap-2 break-all text-sm font-semibold text-forest underline decoration-forest/40 underline-offset-4 transition hover:text-night active:translate-y-px dark:text-mint dark:hover:text-mist"
-            href={`mailto:${RJLS.contactEmail}?subject=RJLS Systems AI integration inquiry`}
+            href={`mailto:${THEORY_FOUNDRY.contactEmail}?subject=Theory Foundry AI integration inquiry`}
           >
-            Email RJLS to start the conversation
+            Email Theory Foundry to start the conversation
             <ArrowUpRightIcon className="size-4 flex-none" strokeWidth={1.75} />
           </a>
         </aside>

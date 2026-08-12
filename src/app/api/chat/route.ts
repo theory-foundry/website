@@ -4,7 +4,7 @@ import { SystemMessage } from "@langchain/core/messages";
 import { createAgent } from "langchain";
 import { toBaseMessages } from "@ai-sdk/langchain";
 import { createUIMessageStream, createUIMessageStreamResponse, isToolUIPart, UIMessage } from "ai";
-import { RJLS_SYSTEM_PROMPT } from "@/constants/system-prompts/RJLSSystemPrompt";
+import { THEORY_FOUNDRY_SYSTEM_PROMPT } from "@/constants/system-prompts/TheoryFoundrySystemPrompt";
 import {
   getAIReadinessAuditTool,
   getAIRiskChecklistTool,
@@ -25,7 +25,7 @@ const CHAT_TOOLS = [
 ];
 const CHAT_TOOL_NAMES = CHAT_TOOLS.map((tool) => tool.name);
 
-const SYSTEM_PROMPT = RJLS_SYSTEM_PROMPT;
+const SYSTEM_PROMPT = THEORY_FOUNDRY_SYSTEM_PROMPT;
 
 type StreamEvent = {
   data?: Record<string, unknown>;
@@ -56,8 +56,7 @@ const normalizeToolInputs = (messages: UIMessage[]): UIMessage[] =>
   });
 
 const extractReasoningFromChunk = (chunk: Record<string, unknown>) => {
-  const kwargs =
-    chunk.kwargs && typeof chunk.kwargs === "object" ? (chunk.kwargs as Record<string, unknown>) : chunk;
+  const kwargs = chunk.kwargs && typeof chunk.kwargs === "object" ? (chunk.kwargs as Record<string, unknown>) : chunk;
   const contentBlocks = kwargs.contentBlocks;
 
   if (Array.isArray(contentBlocks)) {
@@ -102,7 +101,9 @@ const extractReasoningFromChunk = (chunk: Record<string, unknown>) => {
   }
 
   const reasoning = reasoningSummary
-    .map((item) => (item && typeof item === "object" && "text" in item && typeof item.text === "string" ? item.text : null))
+    .map((item) =>
+      item && typeof item === "object" && "text" in item && typeof item.text === "string" ? item.text : null,
+    )
     .filter((value): value is string => Boolean(value))
     .join("");
 
@@ -146,8 +147,7 @@ export async function POST(req: NextRequest) {
     // Validate last user message length
     const lastMessage = trimmedMessages[trimmedMessages.length - 1];
     const lastTextPart = lastMessage?.parts?.find((p: { type: string }) => p.type === "text") as
-      | { type: "text"; text: string }
-      | undefined;
+      { type: "text"; text: string } | undefined;
     if (!lastTextPart?.text) {
       return NextResponse.json({ error: "Invalid message format." }, { status: 400 });
     }
@@ -183,7 +183,7 @@ export async function POST(req: NextRequest) {
     const baseMessages = await toBaseMessages(trimmedMessages);
     const agentMessages = [new SystemMessage(SYSTEM_PROMPT), ...baseMessages];
 
-    // Create a ReAct agent with RJLS-facing service and assessment tools
+    // Create a ReAct agent with Theory Foundry-facing service and assessment tools
     const agent = createAgent({
       model: model,
       tools: CHAT_TOOLS,
@@ -197,8 +197,8 @@ export async function POST(req: NextRequest) {
           route: "/api/chat",
           toolNames: CHAT_TOOL_NAMES,
         },
-        runName: "rjls-marketing-chat",
-        tags: ["rjls-marketing-site", "ai-chat", modelName],
+        runName: "theory-foundry-marketing-chat",
+        tags: ["theory-foundry-marketing-site", "ai-chat", modelName],
       })
       .streamEvents({ messages: agentMessages }, { version: "v2" });
 
@@ -230,8 +230,7 @@ export async function POST(req: NextRequest) {
 
             switch (event.event) {
               case "on_chat_model_start": {
-                const runId =
-                  event.run_id ?? (typeof data?.run_id === "string" ? data.run_id : undefined);
+                const runId = event.run_id ?? (typeof data?.run_id === "string" ? data.run_id : undefined);
                 if (runId) {
                   streamState.messageId = runId;
                 }
@@ -293,10 +292,8 @@ export async function POST(req: NextRequest) {
                 break;
               }
               case "on_tool_start": {
-                const runId =
-                  event.run_id ?? (typeof data?.run_id === "string" ? data.run_id : undefined);
-                const toolName =
-                  event.name ?? (typeof data?.name === "string" ? data.name : undefined);
+                const runId = event.run_id ?? (typeof data?.run_id === "string" ? data.run_id : undefined);
+                const toolName = event.name ?? (typeof data?.name === "string" ? data.name : undefined);
 
                 if (!runId || !toolName) {
                   break;
@@ -322,8 +319,7 @@ export async function POST(req: NextRequest) {
                 break;
               }
               case "on_tool_end": {
-                const runId =
-                  event.run_id ?? (typeof data?.run_id === "string" ? data.run_id : undefined);
+                const runId = event.run_id ?? (typeof data?.run_id === "string" ? data.run_id : undefined);
 
                 if (!runId) {
                   break;

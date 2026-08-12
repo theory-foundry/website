@@ -1,10 +1,10 @@
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
-import { RJLS } from "@/constants/RJLS";
+import { THEORY_FOUNDRY } from "@/constants/TheoryFoundry";
 import { ArrowRightIcon, CheckIcon, FingerprintIcon } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: `AI Readiness Roadmap | ${RJLS.companyName}`,
+  title: `AI Readiness Roadmap | ${THEORY_FOUNDRY.companyName}`,
   description:
     "Review current AI usage, identify practical risks and opportunities, and receive a prioritized roadmap for controls and implementation.",
 };
@@ -48,7 +48,7 @@ export default function AIReadinessAudit() {
           </p>
           <a
             className="mt-8 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-forest px-5 py-3 text-sm font-semibold text-cream transition duration-200 hover:-translate-y-0.5 hover:bg-navy active:translate-y-px dark:bg-forest dark:text-cream dark:hover:bg-mist dark:hover:text-navy"
-            href={`mailto:${RJLS.contactEmail}?subject=RJLS Systems AI readiness audit inquiry`}
+            href={`mailto:${THEORY_FOUNDRY.contactEmail}?subject=Theory Foundry AI readiness audit inquiry`}
           >
             Email us about an AI readiness audit
             <ArrowRightIcon className="size-4" strokeWidth={1.75} />
@@ -89,7 +89,7 @@ export default function AIReadinessAudit() {
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
-          {RJLS.auditDeliverables.map((deliverable) => (
+          {THEORY_FOUNDRY.auditDeliverables.map((deliverable) => (
             <div className="flex gap-3 rounded-xl bg-mist p-5 dark:bg-night-surface" key={deliverable}>
               <CheckIcon className="mt-1 size-4 flex-none text-forest dark:text-mint" strokeWidth={2} />
               <p className={`text-sm leading-6 ${tw.TEXT_SECONDARY}`}>{deliverable}</p>

@@ -1,11 +1,11 @@
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
-import { RJLS } from "@/constants/RJLS";
+import { THEORY_FOUNDRY } from "@/constants/TheoryFoundry";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Process | RJLS Systems",
+  title: "Our Process | Theory Foundry",
   description:
-    "RJLS Systems helps small product companies add focused AI capabilities that work with their applications' data and workflows.",
+    "Theory Foundry helps small product companies add focused AI capabilities that work with their applications' data and workflows.",
 };
 
 const capabilities = [
@@ -80,10 +80,12 @@ export default function OurProcess() {
           </h2>
           <p className={`mt-5 max-w-[68ch] text-lg leading-8 ${tw.TEXT_SECONDARY}`}>
             Our first step is to understand the problems you want an AI integration to solve and how the work happens
-            today. We work closely with your team to investigate your product and technical stack before working together to find the best solutions for you.
+            today. We work closely with your team to investigate your product and technical stack before working
+            together to find the best solutions for you.
           </p>
           <p className={`mt-4 max-w-[76ch] leading-7 ${tw.TEXT_SECONDARY}`}>
-            The result is a focused plan shaped with your team. It should reflect your company, your workflow, your existing systems, and the people who will use and support what we build.
+            The result is a focused plan shaped with your team. It should reflect your company, your workflow, your
+            existing systems, and the people who will use and support what we build.
           </p>
 
           <div className="mt-14 grid gap-x-12 gap-y-10 md:grid-cols-2">
@@ -102,7 +104,7 @@ export default function OurProcess() {
         <div className="mx-auto max-w-7xl">
           <h2 className="text-4xl font-semibold tracking-[-0.04em] text-cream">The team</h2>
           <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {RJLS.team.map((member) => (
+            {THEORY_FOUNDRY.team.map((member) => (
               <article
                 className="flex items-center gap-5 rounded-xl bg-cream p-6 dark:bg-night-surface"
                 key={member.name}
@@ -125,10 +127,10 @@ export default function OurProcess() {
           </div>
           <p className="mt-10 max-w-[76ch] text-lg leading-8 text-sage">
             Ralph brings decades of experience across engineering, DevOps, and security. Lukas brings substantial
-            engineering and recent hands-on AI-integration experience, including work integrating AI & MCP with startups and complex
-            environments. This breadth informs practical choices about workflow boundaries, API and backend integration,
-            model evaluation, testing, observability, cost controls, and a handoff that an internal engineering team can
-            understand and take forward.
+            engineering and recent hands-on AI-integration experience, including work integrating AI & MCP with startups
+            and complex environments. This breadth informs practical choices about workflow boundaries, API and backend
+            integration, model evaluation, testing, observability, cost controls, and a handoff that an internal
+            engineering team can understand and take forward.
           </p>
         </div>
       </section>
