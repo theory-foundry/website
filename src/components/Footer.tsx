@@ -1,6 +1,8 @@
 import { THEORY_FOUNDRY } from "@/constants/TheoryFoundry";
 import Link from "next/link";
 
+import { TheoryFoundryLogo } from "./TheoryFoundryLogo";
+
 const footerLinks = [
   { href: "/our-process", label: "Our Process" },
   { href: "/contact", label: "Contact" },
@@ -11,8 +13,11 @@ export function Footer() {
     <footer className="border-t border-forest/10 bg-cream px-6 py-10 lg:px-10 dark:border-cream/20 dark:bg-night">
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1fr_auto] md:items-end">
         <div>
-          <Link className="inline-flex items-center font-semibold text-navy dark:text-cream" href="/">
-            {THEORY_FOUNDRY.companyName}
+          <Link
+            className="inline-flex rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream dark:focus-visible:ring-mint dark:focus-visible:ring-offset-night"
+            href="/"
+          >
+            <TheoryFoundryLogo className="h-16 w-48" />
           </Link>
           <p className="mt-4 max-w-md text-sm leading-6 text-forest dark:text-sage">
             Add AI that works with your app&apos;s data and workflows, with access and actions scoped to the job.

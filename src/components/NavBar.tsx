@@ -6,13 +6,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { THEORY_FOUNDRY } from "@/constants/TheoryFoundry";
 import { ChevronDownIcon, MenuIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import ThemeSwitchButton from "./ThemeSwitchButton";
+import { TheoryFoundryLogo } from "./TheoryFoundryLogo";
 
 const publicLinks = [
   { href: "/our-process", title: "Our Process" },
@@ -36,11 +36,11 @@ export default function NavBar() {
     >
       <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-6 px-6 lg:px-10">
         <Link
-          className="group inline-flex min-w-0 items-center gap-3 rounded-md font-semibold text-navy focus-visible:outline-none dark:text-cream"
+          className="group inline-flex min-w-0 items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream dark:focus-visible:ring-mint dark:focus-visible:ring-offset-night"
           href="/"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <span className="whitespace-nowrap tracking-[-0.02em]">{THEORY_FOUNDRY.companyName}</span>
+          <TheoryFoundryLogo className="h-14 w-40 sm:w-48" priority />
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
