@@ -15,7 +15,7 @@ export function TheoryFoundryLogo({ className, priority = false }: TheoryFoundry
         fill
         priority={priority}
         sizes="(max-width: 767px) 160px, 192px"
-        src="/TheoryFoundryLogo.png"
+        src="/TheoryFoundryLogoTransparent.png"
       />
     </span>
   );
