@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Resume Agent | RJLS Systems",
+  title: "Resume Agent | Theory Foundry",
   description:
     "A reusable template for a personal resume site with an AI chat experience, available as a Next.js reference site or a framework-neutral widget with gateway and MCP service.",
 };

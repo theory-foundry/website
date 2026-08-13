@@ -1,13 +1,13 @@
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
-import { RJLS } from "@/constants/RJLS";
+import { THEORY_FOUNDRY } from "@/constants/TheoryFoundry";
 import { ArrowRightIcon, CheckIcon, PlugZapIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "AI Integration & MCP | RJLS Systems",
+  title: "AI Integration & MCP | Theory Foundry",
   description:
-    "RJLS Systems designs focused AI integrations that work with approved application data, tools, APIs, and business workflows.",
+    "Theory Foundry designs focused AI integrations that work with approved application data, tools, APIs, and business workflows.",
 };
 
 export default function AiIntegrationMcpPage() {
@@ -27,9 +27,9 @@ export default function AiIntegrationMcpPage() {
             </p>
             <a
               className="mt-8 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-forest px-5 py-3 text-sm font-semibold text-cream transition duration-200 hover:-translate-y-0.5 hover:bg-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream active:translate-y-px dark:bg-forest dark:text-cream dark:hover:bg-mist dark:hover:text-navy dark:focus-visible:ring-mint dark:focus-visible:ring-offset-night"
-              href={`mailto:${RJLS.contactEmail}?subject=RJLS Systems AI integration inquiry`}
+              href={`mailto:${THEORY_FOUNDRY.contactEmail}?subject=Theory Foundry AI integration inquiry`}
             >
-              {RJLS.primaryCta}
+              {THEORY_FOUNDRY.primaryCta}
               <ArrowRightIcon aria-hidden="true" className="size-4" strokeWidth={1.75} />
             </a>
           </div>
@@ -41,7 +41,7 @@ export default function AiIntegrationMcpPage() {
               fill
               priority
               sizes="(min-width: 1024px) 52vw, 100vw"
-              src="/rjls-systems-connections.png"
+              src="/theory-foundry-connections.png"
             />
             <div
               aria-hidden="true"
@@ -71,7 +71,7 @@ export default function AiIntegrationMcpPage() {
         </p>
 
         <div className="mt-12 grid gap-x-12 gap-y-8 md:grid-cols-2">
-          {RJLS.integrationOutcomes.map((outcome) => (
+          {THEORY_FOUNDRY.integrationOutcomes.map((outcome) => (
             <div className="flex items-start gap-4 border-t border-forest/15 pt-5 dark:border-cream/25" key={outcome}>
               <CheckIcon
                 aria-hidden="true"
@@ -90,7 +90,7 @@ export default function AiIntegrationMcpPage() {
             What the engagement includes.
           </h2>
           <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
-            {RJLS.services.map((service) => (
+            {THEORY_FOUNDRY.services.map((service) => (
               <article className="border-l-2 border-forest/35 pl-6 dark:border-mint/40" key={service.title}>
                 <h3 className={`text-xl font-semibold tracking-[-0.025em] ${tw.TEXT_PRIMARY}`}>{service.title}</h3>
                 <p className={`mt-3 max-w-[52ch] leading-7 ${tw.TEXT_SECONDARY}`}>{service.summary}</p>
@@ -111,7 +111,7 @@ export default function AiIntegrationMcpPage() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
-          {RJLS.safeguards.map((safeguard) => (
+          {THEORY_FOUNDRY.safeguards.map((safeguard) => (
             <div className="border-t border-forest/15 pt-5 dark:border-cream/25" key={safeguard}>
               <p className={`text-sm leading-6 ${tw.TEXT_SECONDARY}`}>{safeguard}</p>
             </div>

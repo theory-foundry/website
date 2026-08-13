@@ -7,7 +7,7 @@ import NavBar from "@/components/NavBar";
 import { Body } from "@/components/Body";
 import { Footer } from "@/components/Footer";
 import { cn } from "@/lib/utils";
-import { RJLS } from "@/constants/RJLS";
+import { THEORY_FOUNDRY } from "@/constants/TheoryFoundry";
 
 const geist = localFont({
   display: "swap",
@@ -22,20 +22,20 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(`https://${RJLS.website}`),
+  metadataBase: new URL(`https://${THEORY_FOUNDRY.website}`),
   title: {
-    default: "AI for Your App's Data and Workflows | RJLS Systems",
+    default: "AI for Your App's Data and Workflows | Theory Foundry",
     template: "%s",
   },
   description:
-    "RJLS Systems adds focused AI capabilities to existing applications, using only the data, tools, and actions approved for each workflow.",
+    "Theory Foundry adds focused AI capabilities to existing applications, using only the data, tools, and actions approved for each workflow.",
   openGraph: {
-    title: "AI for Your App's Data and Workflows | RJLS Systems",
+    title: "AI for Your App's Data and Workflows | Theory Foundry",
     description:
       "Add a useful AI interface to an existing application or service, with access and actions scoped to the workflow.",
     images: [
       {
-        alt: "RJLS Systems builds AI that works with existing products' data and workflows.",
+        alt: "Theory Foundry builds AI that works with existing products' data and workflows.",
         height: 630,
         url: "/og.png",
         width: 1200,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI for Your App's Data and Workflows | RJLS Systems",
+    title: "AI for Your App's Data and Workflows | Theory Foundry",
     description:
       "Add a useful AI interface to an existing application or service, with access and actions scoped to the workflow.",
     images: ["/og.png"],

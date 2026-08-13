@@ -1,6 +1,6 @@
 import { tool } from "@langchain/core/tools";
 import { z } from "zod";
-import { RJLS } from "@/constants/RJLS";
+import { THEORY_FOUNDRY } from "@/constants/TheoryFoundry";
 
 export const getAIReadinessAuditTool = tool(
   async () =>
@@ -17,9 +17,8 @@ export const getAIReadinessAuditTool = tool(
           "Prioritize remediation and implementation opportunities by risk, effort, and business value.",
           "Deliver an executive summary and implementation roadmap.",
         ],
-        deliverables: RJLS.auditDeliverables,
-        nextStep:
-          `Email ${RJLS.contactEmail} with the subject "AI Readiness Audit" to start an audit-specific conversation.`,
+        deliverables: THEORY_FOUNDRY.auditDeliverables,
+        nextStep: `Email ${THEORY_FOUNDRY.contactEmail} with the subject "AI Readiness Audit" to start an audit-specific conversation.`,
       },
       null,
       2,
@@ -27,7 +26,7 @@ export const getAIReadinessAuditTool = tool(
   {
     name: "get_ai_readiness_audit",
     description:
-      "Returns the RJLS Systems AI readiness audit fit, process, purpose, stages, deliverables, and inquiry path.",
+      "Returns the Theory Foundry AI readiness audit fit, process, purpose, stages, deliverables, and inquiry path.",
     schema: z.object({}),
   },
 );
