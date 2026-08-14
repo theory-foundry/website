@@ -1,13 +1,11 @@
 "use client";
 
 import type { UIMessage } from "ai";
-import type { Ref } from "react";
 
 import { ChatLoadingMessage } from "./ChatLoadingMessage";
 import { ChatMessage } from "./ChatMessage";
 
 type ChatMessageListProps = {
-  bottomRef: Ref<HTMLDivElement>;
   copyError: string | null;
   lastAssistantMessageId?: string;
   messages: UIMessage[];
@@ -17,7 +15,6 @@ type ChatMessageListProps = {
 };
 
 export function ChatMessageList({
-  bottomRef,
   copyError,
   lastAssistantMessageId,
   messages,
@@ -38,7 +35,6 @@ export function ChatMessageList({
         />
       ))}
       {showLoadingMessage && <ChatLoadingMessage />}
-      <div ref={bottomRef} />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useChat } from "@ai-sdk/react";
 import type { PromptInputMessage } from "@/components/ai-elements/prompt-input";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { ChatConversationView } from "./ChatConversationView";
 import { ChatEmptyState } from "./ChatEmptyState";
@@ -15,8 +15,6 @@ export default function ChatUI() {
   });
   const [input, setInput] = useState("");
   const [copyError, setCopyError] = useState<string | null>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
-
   const hasMessages = messages.length > 0;
   const isLoading = status === "streaming" || status === "submitted";
   const lastMessage = messages[messages.length - 1];
@@ -29,14 +27,10 @@ export default function ChatUI() {
     hasMessages && isLoading && (lastMessage?.role !== "assistant" || !hasRenderableMessageContent(lastMessage));
 
   useEffect(() => {
-    if (hasMessages) {
-      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-
     if (error) {
       console.error("ERROR CALLING AI: ", error);
     }
-  }, [hasMessages, messages, status, error]);
+  }, [error]);
 
   function handleSubmit(message: PromptInputMessage) {
     const text = message.text.trim();
@@ -68,10 +62,9 @@ export default function ChatUI() {
   }
 
   return (
-    <div className="flex h-full min-h-[32rem] w-full flex-1">
+    <div className="flex h-[40rem] w-full flex-1">
       {hasMessages ? (
         <ChatConversationView
-          bottomRef={bottomRef}
           copyError={copyError}
           hasError={Boolean(error)}
           input={input}

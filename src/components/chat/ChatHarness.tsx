@@ -43,7 +43,6 @@ export default function ChatHarness() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<UIMessage[]>([]);
   const [status, setStatus] = useState<ChatStatus>("ready");
-  const bottomRef = useRef<HTMLDivElement>(null);
   const lastRunRef = useRef<{ prompt: string; scenarioId: ChatHarnessScenarioId } | null>(null);
   const runIdRef = useRef(0);
   const timeoutsRef = useRef<number[]>([]);
@@ -63,12 +62,6 @@ export default function ChatHarness() {
     timeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
     timeoutsRef.current = [];
   };
-
-  useEffect(() => {
-    if (hasMessages) {
-      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [hasMessages, messages, status]);
 
   useEffect(() => {
     return () => {
@@ -261,10 +254,9 @@ export default function ChatHarness() {
         </div>
       </div>
 
-      <div className="flex h-full min-h-[70vh] w-full flex-1">
+      <div className="flex h-[40rem] w-full flex-1">
         {hasMessages ? (
           <ChatConversationView
-            bottomRef={bottomRef}
             copyError={copyError}
             eyebrow="UI Harness"
             hasError={false}

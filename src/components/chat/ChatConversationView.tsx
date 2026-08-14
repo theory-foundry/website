@@ -3,13 +3,11 @@
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 import type { PromptInputMessage } from "@/components/ai-elements/prompt-input";
 import type { ChatStatus, UIMessage } from "ai";
-import type { Ref } from "react";
 
 import { ChatMessageList } from "./ChatMessageList";
 import { ChatPromptInput } from "./ChatPromptInput";
 
 type ChatConversationViewProps = {
-  bottomRef: Ref<HTMLDivElement>;
   copyError: string | null;
   eyebrow?: string;
   hasError: boolean;
@@ -30,7 +28,6 @@ type ChatConversationViewProps = {
 };
 
 export function ChatConversationView({
-  bottomRef,
   copyError,
   eyebrow = "Theory Foundry product demo",
   hasError,
@@ -51,7 +48,7 @@ export function ChatConversationView({
 }: ChatConversationViewProps) {
   return (
     <div
-      className={`flex h-full min-h-[32rem] w-full flex-col overflow-hidden rounded-xl border border-forest/10 ${tw.BG_SECONDARY} shadow-[0_24px_70px_-34px_rgba(35,61,77,0.45)] dark:border-cream/20 dark:shadow-[0_24px_70px_-34px_rgba(33,94,97,0.42)]`}
+      className={`flex h-full w-full flex-col overflow-hidden rounded-xl border border-forest/10 ${tw.BG_SECONDARY} shadow-[0_24px_70px_-34px_rgba(35,61,77,0.45)] dark:border-cream/20 dark:shadow-[0_24px_70px_-34px_rgba(33,94,97,0.42)]`}
     >
       <div className="flex items-center justify-between gap-4 border-b border-forest/10 px-5 py-4 sm:px-6 dark:border-cream/20">
         <div>
@@ -69,7 +66,6 @@ export function ChatConversationView({
 
       <div className="flex-1 overflow-y-auto px-5 py-6 sm:px-8">
         <ChatMessageList
-          bottomRef={bottomRef}
           copyError={copyError}
           lastAssistantMessageId={lastAssistantMessageId}
           messages={messages}
