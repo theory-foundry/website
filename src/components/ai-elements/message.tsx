@@ -32,7 +32,7 @@ export const MessageContent = ({ children, className, ...props }: MessageContent
   <div
     className={cn(
       "min-w-0 max-w-full text-sm leading-7",
-      "group-[.is-user]:max-w-[82%] group-[.is-user]:rounded-lg group-[.is-user]:rounded-br-sm group-[.is-user]:bg-forest group-[.is-user]:px-4 group-[.is-user]:py-3 group-[.is-user]:text-cream dark:group-[.is-user]:bg-forest dark:group-[.is-user]:text-cream",
+      "group-[.is-user]:max-w-[82%] group-[.is-user]:rounded-lg group-[.is-user]:rounded-br-sm group-[.is-user]:bg-forest group-[.is-user]:px-4 group-[.is-user]:py-3 group-[.is-user]:text-cream dark:group-[.is-user]:border dark:group-[.is-user]:border-mint/25 dark:group-[.is-user]:bg-forest-deep dark:group-[.is-user]:text-cream",
       "group-[.is-assistant]:w-full group-[.is-assistant]:text-navy dark:group-[.is-assistant]:text-cream",
       className,
     )}
@@ -66,7 +66,7 @@ export const MessageAction = ({
   <button
     aria-label={label || tooltip}
     className={cn(
-      `inline-flex items-center justify-center rounded-md border border-forest/10 p-2 transition hover:bg-forest/5 disabled:cursor-not-allowed disabled:opacity-50 dark:border-cream/20 dark:hover:bg-cream/[0.12] ${tw.BG_SECONDARY} ${tw.TEXT_PRIMARY}`,
+      `inline-flex items-center justify-center rounded-md border border-forest/10 bg-mist p-2 transition hover:bg-forest/5 disabled:cursor-not-allowed disabled:opacity-50 dark:border-forest-soft/70 dark:bg-night-raised dark:hover:border-mint/45 dark:hover:bg-night ${tw.TEXT_PRIMARY}`,
       className,
     )}
     title={tooltip}
@@ -85,7 +85,7 @@ export const MessageResponse = memo(
   ({ className, ...props }: MessageResponseProps) => (
     <Streamdown
       className={cn(
-        "size-full break-words text-navy dark:text-cream [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_a]:text-forest [&_a]:underline dark:[&_a]:text-mint [&_code]:rounded [&_code]:bg-forest/10 [&_code]:px-1.5 [&_code]:py-0.5 dark:[&_code]:bg-cream/15 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-forest/10 [&_pre]:p-4 dark:[&_pre]:bg-cream/[0.12]",
+        "size-full break-words text-navy dark:text-cream [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_a]:text-forest [&_a]:underline dark:[&_a]:text-mint [&_code]:rounded [&_code]:bg-forest/10 [&_code]:px-1.5 [&_code]:py-0.5 dark:[&_code]:bg-night-raised [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-forest/10 [&_pre]:p-4 dark:[&_pre]:bg-night",
         className,
       )}
       plugins={streamdownPlugins}

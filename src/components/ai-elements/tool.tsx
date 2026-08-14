@@ -16,7 +16,7 @@ export type ToolProps = ComponentProps<typeof Collapsible>;
 export const Tool = ({ className, ...props }: ToolProps) => (
   <Collapsible
     className={cn(
-      `not-prose group inline-flex max-w-full flex-col self-start overflow-hidden rounded-md border border-forest/10 align-top data-[state=open]:w-full dark:border-cream/20 ${tw.BG_SECONDARY}`,
+      "not-prose group inline-flex max-w-full flex-col self-start overflow-hidden rounded-md border border-forest/10 bg-mist align-top data-[state=open]:w-full dark:border-forest-soft/70 dark:bg-night-raised",
       className,
     )}
     {...props}
@@ -90,7 +90,7 @@ export type ToolContentProps = ComponentProps<typeof CollapsibleContent>;
 export const ToolContent = ({ className, ...props }: ToolContentProps) => (
   <CollapsibleContent
     className={cn(
-      "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=open]:animate-in space-y-4 border-t border-forest/10 p-4 outline-none dark:border-cream/20",
+      "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=open]:animate-in space-y-4 border-t border-forest/10 p-4 outline-none dark:border-forest-soft/70",
       className,
     )}
     {...props}
@@ -125,7 +125,7 @@ export const ToolInput = ({ className, input, ...props }: ToolInputProps) => {
   return (
     <div className={cn("space-y-2 overflow-hidden", className)} {...props}>
       <h4 className={`font-mono text-xs font-medium ${tw.TEXT_SECONDARY}`}>Parameters</h4>
-      <div className="rounded-md bg-forest/5 dark:bg-cream/10">
+      <div className="rounded-md bg-forest/5 dark:bg-night">
         <CodeBlock code={JSON.stringify(input, null, 2)} language="json" />
       </div>
     </div>
@@ -156,7 +156,7 @@ export const ToolOutput = ({ className, output, errorText, ...props }: ToolOutpu
       <div
         className={cn(
           "overflow-x-auto rounded-md text-xs [&_table]:w-full",
-          errorText ? "bg-destructive/10 text-destructive" : `bg-forest/5 dark:bg-cream/10 ${tw.TEXT_PRIMARY}`,
+          errorText ? "bg-destructive/10 text-destructive" : `bg-forest/5 dark:bg-night ${tw.TEXT_PRIMARY}`,
         )}
       >
         {errorText && <div>{errorText}</div>}
