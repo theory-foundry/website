@@ -46,6 +46,20 @@ The AI Integration & MCP consulting offer is available at
 The Resume Agent product showcase is available at
 [http://localhost:3000/products/resume-agent](http://localhost:3000/products/resume-agent).
 
+## Validation
+
+Run the complete local validation suite with:
+
+```bash
+pnpm verify
+```
+
+This runs lint, a no-emit TypeScript check, and a production build. If this repository's development server is running,
+the production build automatically runs from a temporary copy of the working tree so it does not clean or replace the
+live server's `.next` files. To force this behavior, run `pnpm verify:build -- --isolated`.
+
+Do not run `pnpm build` directly while `pnpm dev` is running from the same checkout.
+
 ## AI Chat Feature
 
 The portfolio includes an embedded LLM chat powered by:
