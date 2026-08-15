@@ -61,7 +61,7 @@ There is no production-ready “AI integration ready” product or view. Treat t
 
 1. Inspect the route/component and the relevant source of truth before editing; preserve the existing public-message hierarchy.
 2. Keep changes focused and avoid unrelated formatting or dependency churn.
-3. Run `pnpm verify` for changes that can affect production behavior. It runs lint, a no-emit TypeScript check, and a production build. The build verifier detects a same-repository `next dev` process and builds from an isolated temporary copy so it cannot clean or rewrite the live server's `.next` directory. Never run `pnpm build` directly while this checkout's development server is running. Use `pnpm verify:build -- --isolated` to force isolation when needed. If a check cannot run, report the exact gap.
+3. Run `pnpm verify` for changes that can affect production behavior. It runs lint, a no-emit TypeScript check, and a production build. The build verifier detects a same-repository `next dev` process and builds from an isolated temporary copy so it cannot clean or rewrite the live server's `.next` directory. Never run `pnpm build` directly while this checkout's development server is running. Use `pnpm verify:build --isolated` to force isolation when needed. If a check cannot run, report the exact gap.
 4. For visual or interaction changes, manually check the affected route at desktop and mobile widths in light and dark themes; use `/chat-test` for chat-state changes.
 5. Update `README.md` when setup, environment variables, routes, or developer workflows change. Note that it currently mentions a `/chat` route; the actual testing route is `/chat-test`.
 
