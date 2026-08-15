@@ -119,7 +119,7 @@ the repository rename and must be performed separately.
 
 See the [OpenNext Cloudflare documentation](https://opennext.js.org/cloudflare) for deployment details.
 
-## Learn More
+## Learn More:
 
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Vercel AI SDK Documentation](https://sdk.vercel.ai/docs)
