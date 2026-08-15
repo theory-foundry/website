@@ -32,7 +32,7 @@ export const MessageContent = ({ children, className, ...props }: MessageContent
   <div
     className={cn(
       "min-w-0 max-w-full text-sm leading-7",
-      "group-[.is-user]:max-w-[82%] group-[.is-user]:rounded-lg group-[.is-user]:rounded-br-sm group-[.is-user]:bg-forest group-[.is-user]:px-4 group-[.is-user]:py-3 group-[.is-user]:text-cream dark:group-[.is-user]:border dark:group-[.is-user]:border-mint/25 dark:group-[.is-user]:bg-forest-deep dark:group-[.is-user]:text-cream",
+      "group-[.is-user]:max-w-[82%] group-[.is-user]:rounded-lg group-[.is-user]:rounded-br-sm group-[.is-user]:border group-[.is-user]:border-forest/10 group-[.is-user]:bg-cream group-[.is-user]:px-4 group-[.is-user]:py-3 group-[.is-user]:text-navy dark:group-[.is-user]:border-mint/25 dark:group-[.is-user]:bg-forest-deep dark:group-[.is-user]:text-cream",
       "group-[.is-assistant]:w-full group-[.is-assistant]:text-navy dark:group-[.is-assistant]:text-cream",
       className,
     )}
