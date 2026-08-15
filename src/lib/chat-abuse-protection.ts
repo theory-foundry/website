@@ -26,7 +26,7 @@ export function getNextUtcReset(now = new Date()): string {
   return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1)).toISOString();
 }
 
-export function getDailyLimit(rawLimit = process.env.CHAT_DAILY_LIMIT): number {
+export function getDailyLimit(rawLimit: string | undefined = process.env.CHAT_DAILY_LIMIT): number {
   if (rawLimit === undefined || rawLimit.trim() === "") {
     return DEFAULT_DAILY_LIMIT;
   }

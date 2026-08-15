@@ -2,9 +2,18 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
   "name": "theory-foundry-website",
+  "keep_vars": true,
   // Set this to today's date
   "compatibility_date": "2026-07-26",
   "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "TURNSTILE_HOSTNAMES": "theoryfoundry.com",
+    "CHAT_DAILY_LIMIT": "10",
+    "OPENAI_MODEL": "gpt-5.6-luna",
+  },
+  "secrets": {
+    "required": ["OPENAI_API_KEY", "TURNSTILE_SECRET", "CHAT_IP_HASH_SECRET"],
+  },
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS",
@@ -13,6 +22,7 @@
     {
       "binding": "CHAT_RATE_LIMIT_DB",
       "database_name": "theory-foundry-chat-rate-limit",
+      "database_id": "ca77aa75-9c88-47b2-b94f-b303ccfbe945",
       "migrations_dir": "migrations",
     },
   ],

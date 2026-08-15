@@ -15,6 +15,16 @@ import { createChatMessageStream } from "@/lib/chat-stream";
 import { startChatAgentStream } from "./chat-agent";
 
 type ChatErrorCode = "CHAT_UNAVAILABLE" | "DAILY_LIMIT_REACHED" | "INVALID_REQUEST" | "TURNSTILE_FAILED";
+type ChatUnavailableReason =
+  | "cloudflare_context_unavailable"
+  | "invalid_daily_limit"
+  | "missing_chat_ip_hash_secret"
+  | "missing_client_ip"
+  | "missing_openai_api_key"
+  | "missing_rate_limit_database"
+  | "quota_database_error"
+  | "turnstile_unavailable"
+  | "unexpected_error";
 
 const createErrorResponse = ({
   code,
@@ -37,12 +47,15 @@ const createErrorResponse = ({
   return NextResponse.json({ error: { code, message, ...(resetAt ? { resetAt } : {}) } }, { headers, status });
 };
 
-const unavailableResponse = () =>
-  createErrorResponse({
+const unavailableResponse = (reason: ChatUnavailableReason) => {
+  console.error(`[/api/chat] unavailable: ${reason}`);
+
+  return createErrorResponse({
     code: "CHAT_UNAVAILABLE",
     message: "The assistant is temporarily unavailable. Please try again later.",
     status: 503,
   });
+};
 
 export async function POST(request: NextRequest) {
   try {
@@ -53,7 +66,7 @@ export async function POST(request: NextRequest) {
 
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
-      return unavailableResponse();
+      return unavailableResponse("missing_openai_api_key");
     }
 
     const clientIp = getClientIp(request);
@@ -63,14 +76,25 @@ export async function POST(request: NextRequest) {
 
     try {
       cloudflareContext = await getCloudflareContext<{ asn?: number }>({ async: true });
+    } catch {
+      return unavailableResponse("cloudflare_context_unavailable");
+    }
+
+    try {
       dailyLimit = getDailyLimit();
     } catch {
-      return unavailableResponse();
+      return unavailableResponse("invalid_daily_limit");
     }
 
     const rateLimitDatabase = cloudflareContext.env.CHAT_RATE_LIMIT_DB;
-    if (!clientIp || !ipHashSecret || !rateLimitDatabase) {
-      return unavailableResponse();
+    if (!clientIp) {
+      return unavailableResponse("missing_client_ip");
+    }
+    if (!ipHashSecret) {
+      return unavailableResponse("missing_chat_ip_hash_secret");
+    }
+    if (!rateLimitDatabase) {
+      return unavailableResponse("missing_rate_limit_database");
     }
 
     const turnstileResult = await verifyTurnstileToken({
@@ -79,12 +103,14 @@ export async function POST(request: NextRequest) {
     });
     if (!turnstileResult.ok) {
       const verificationFailed = turnstileResult.reason === "invalid";
+      if (!verificationFailed) {
+        return unavailableResponse("turnstile_unavailable");
+      }
+
       return createErrorResponse({
-        code: verificationFailed ? "TURNSTILE_FAILED" : "CHAT_UNAVAILABLE",
-        message: verificationFailed
-          ? "Verification failed. Please try again."
-          : "The assistant is temporarily unavailable. Please try again later.",
-        status: verificationFailed ? 403 : 503,
+        code: "TURNSTILE_FAILED",
+        message: "Verification failed. Please try again.",
+        status: 403,
       });
     }
 
@@ -97,7 +123,7 @@ export async function POST(request: NextRequest) {
         limit: dailyLimit,
       });
     } catch {
-      return unavailableResponse();
+      return unavailableResponse("quota_database_error");
     }
 
     if (!quota.allowed) {
@@ -125,8 +151,7 @@ export async function POST(request: NextRequest) {
       },
       stream: createChatMessageStream(agentStream as AsyncIterable<unknown>),
     });
-  } catch (error) {
-    console.error("[/api/chat] error:", error);
-    return unavailableResponse();
+  } catch {
+    return unavailableResponse("unexpected_error");
   }
 }

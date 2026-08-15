@@ -118,6 +118,23 @@ Deploy command:  pnpm run cf:deploy
 Version command: pnpm run cf:upload
 ```
 
+`NEXT_PUBLIC_TURNSTILE_SITE_KEY` must be configured in Cloudflare's **Build variables and secrets** because Next.js
+inlines it into the browser bundle during the build. It is a public widget key, not a secret.
+
+Runtime configuration is split between `wrangler.jsonc` and Cloudflare Worker secrets:
+
+| Location                        | Name                                                           |
+| ------------------------------- | -------------------------------------------------------------- |
+| `wrangler.jsonc` runtime vars   | `TURNSTILE_HOSTNAMES`, `CHAT_DAILY_LIMIT`, `OPENAI_MODEL`      |
+| Cloudflare Worker secrets       | `OPENAI_API_KEY`, `TURNSTILE_SECRET`, `CHAT_IP_HASH_SECRET`    |
+| Optional dashboard runtime vars | `LANGSMITH_TRACING`, `LANGSMITH_PROJECT`, `LANGSMITH_ENDPOINT` |
+| Optional dashboard secret       | `LANGSMITH_API_KEY`                                            |
+| Cloudflare build variable       | `NEXT_PUBLIC_TURNSTILE_SITE_KEY`                               |
+
+The top-level `keep_vars` setting in `wrangler.jsonc` preserves optional runtime variables managed in the dashboard
+when OpenNext deploys through Wrangler. Encrypted Worker secrets are preserved independently. Keep `.env`, `.env.*`,
+and `.dev.vars*` files local; only the placeholder-only `.env.example` belongs in source control.
+
 The deploy command publishes the production branch immediately. The version command is used for non-production branch
 builds and uploads a preview version without promoting it to production. For deliberate local use, `pnpm preview`,
 `pnpm deploy`, and `pnpm upload` combine the corresponding Cloudflare command with `cf:build`.
@@ -132,14 +149,13 @@ The application permanently redirects requests for `rjlssystems.com` and `www.rj
 both legacy domains to the Cloudflare Worker and configure their DNS records. Deployment and DNS changes are not part of
 the repository rename and must be performed separately.
 
-**Required production environment variables:**
+**Required production configuration:**
 
-1. Add `OPENAI_API_KEY` with your OpenAI API key.
-2. Create a managed Turnstile widget for `theoryfoundry.com`, set `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, store its secret as
-   `TURNSTILE_SECRET`, and set `TURNSTILE_HOSTNAMES=theoryfoundry.com`.
-3. Generate and store a long random `CHAT_IP_HASH_SECRET`; optionally set `CHAT_DAILY_LIMIT` (default `10`).
-4. Create the `theory-foundry-chat-rate-limit` D1 database, add its generated `database_id` to the
-   `CHAT_RATE_LIMIT_DB` binding in `wrangler.jsonc`, and apply migrations before promoting the Worker:
+1. Add `NEXT_PUBLIC_TURNSTILE_SITE_KEY` to Cloudflare's build variables using the managed widget for
+   `theoryfoundry.com`.
+2. Store `OPENAI_API_KEY`, `TURNSTILE_SECRET`, and a long random `CHAT_IP_HASH_SECRET` as Cloudflare Worker secrets.
+3. Keep the non-secret production defaults and the `CHAT_RATE_LIMIT_DB` binding in `wrangler.jsonc`.
+4. Apply D1 migrations before promoting the Worker:
 
    ```bash
    pnpm exec wrangler d1 migrations apply CHAT_RATE_LIMIT_DB --remote
@@ -147,8 +163,7 @@ the repository rename and must be performed separately.
 
 5. Add a zone-level rate limiting rule for exact path `/api/chat`: five requests per IP in 10 seconds, blocked for 10
    seconds. This is burst protection; the D1 check remains the authoritative daily quota.
-6. Optionally add `OPENAI_MODEL` to override the default model.
-7. Optionally add `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, and `LANGSMITH_PROJECT` to trace `/api/chat` runs in LangSmith.
+6. Optionally add `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, and `LANGSMITH_PROJECT` to trace `/api/chat` runs in LangSmith.
 
 See the [OpenNext Cloudflare documentation](https://opennext.js.org/cloudflare) for deployment details.
 
