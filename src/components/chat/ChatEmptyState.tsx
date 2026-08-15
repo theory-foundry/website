@@ -10,9 +10,10 @@ import { ChatPromptInput } from "./ChatPromptInput";
 import { CHAT_SUGGESTIONS } from "./chat-config";
 
 type ChatEmptyStateProps = {
-  hasError: boolean;
+  errorMessage: string | null;
   input: string;
   isLoading: boolean;
+  isVerifying?: boolean;
   placeholder?: string;
   suggestions?: string[];
   status: ChatStatus;
@@ -23,9 +24,10 @@ type ChatEmptyStateProps = {
 };
 
 export function ChatEmptyState({
-  hasError,
+  errorMessage,
   input,
   isLoading,
+  isVerifying = false,
   placeholder = "Ask about Theory Foundry, our services, or a workflow you want to improve...",
   suggestions = CHAT_SUGGESTIONS,
   status,
@@ -55,6 +57,7 @@ export function ChatEmptyState({
           className="mt-8 w-full max-w-2xl"
           input={input}
           isLoading={isLoading}
+          isVerifying={isVerifying}
           onInputChange={onInputChange}
           onStop={onStop}
           onSubmit={onSubmit}
@@ -67,8 +70,9 @@ export function ChatEmptyState({
           <div className="mt-5 grid w-full max-w-2xl gap-2 sm:grid-cols-3">
             {suggestions.map((suggestion) => (
               <button
-                className={`rounded-md border border-forest/10 bg-cream px-3 py-3 text-left text-xs leading-5 transition duration-200 hover:-translate-y-0.5 hover:border-forest/35 hover:bg-cream active:translate-y-px dark:border-forest-soft/70 dark:bg-night dark:hover:border-mint/60 dark:hover:bg-night-raised ${tw.TEXT_SECONDARY}`}
+                className={`rounded-md border border-forest/10 bg-cream px-3 py-3 text-left text-xs leading-5 transition duration-200 hover:-translate-y-0.5 hover:border-forest/35 hover:bg-cream active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50 dark:border-forest-soft/70 dark:bg-night dark:hover:border-mint/60 dark:hover:bg-night-raised ${tw.TEXT_SECONDARY}`}
                 key={suggestion}
+                disabled={isVerifying}
                 onClick={() => onInputChange(suggestion)}
                 type="button"
               >
@@ -78,9 +82,9 @@ export function ChatEmptyState({
           </div>
         )}
 
-        {hasError && (
-          <p className="mt-6 text-center text-sm text-red-700 dark:text-red-300">
-            The assistant could not connect. Please try again.
+        {errorMessage && (
+          <p className="mt-6 text-center text-sm text-red-700 dark:text-red-300" role="alert">
+            {errorMessage}
           </p>
         )}
       </div>

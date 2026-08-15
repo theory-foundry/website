@@ -1,360 +1,132 @@
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { createUIMessageStreamResponse } from "ai";
 import { NextRequest, NextResponse } from "next/server";
-import { ChatOpenAI } from "@langchain/openai";
-import { SystemMessage } from "@langchain/core/messages";
-import { createAgent } from "langchain";
-import { toBaseMessages } from "@ai-sdk/langchain";
-import { createUIMessageStream, createUIMessageStreamResponse, isToolUIPart, UIMessage } from "ai";
-import { THEORY_FOUNDRY_SYSTEM_PROMPT } from "@/constants/system-prompts/TheoryFoundrySystemPrompt";
+
 import {
-  getAIReadinessAuditTool,
-  getAIRiskChecklistTool,
-  getCostAndObservabilityGuidanceTool,
-  getContactInfoTool,
-  getServiceCatalogTool,
-} from "./tools";
+  consumeDailyQuota,
+  deleteExpiredQuotaRecords,
+  getClientIp,
+  getDailyLimit,
+  verifyTurnstileToken,
+} from "@/lib/chat-abuse-protection";
+import { parseChatRequest } from "@/lib/chat-request";
+import { createChatMessageStream } from "@/lib/chat-stream";
 
-const MAX_INPUT_LENGTH = 2000;
-const MAX_MESSAGES = 20;
-const REASONING_MODEL_PREFIXES = ["o1", "o3", "gpt-5"];
-const CHAT_TOOLS = [
-  getServiceCatalogTool,
-  getAIReadinessAuditTool,
-  getAIRiskChecklistTool,
-  getCostAndObservabilityGuidanceTool,
-  getContactInfoTool,
-];
-const CHAT_TOOL_NAMES = CHAT_TOOLS.map((tool) => tool.name);
+import { startChatAgentStream } from "./chat-agent";
 
-const SYSTEM_PROMPT = THEORY_FOUNDRY_SYSTEM_PROMPT;
+type ChatErrorCode = "CHAT_UNAVAILABLE" | "DAILY_LIMIT_REACHED" | "INVALID_REQUEST" | "TURNSTILE_FAILED";
 
-type StreamEvent = {
-  data?: Record<string, unknown>;
-  event?: string;
-  name?: string;
-  run_id?: string;
+const createErrorResponse = ({
+  code,
+  message,
+  resetAt,
+  status,
+}: {
+  code: ChatErrorCode;
+  message: string;
+  resetAt?: string;
+  status: number;
+}) => {
+  const headers = new Headers();
+
+  if (resetAt) {
+    const retryAfterSeconds = Math.max(1, Math.ceil((new Date(resetAt).getTime() - Date.now()) / 1000));
+    headers.set("Retry-After", String(retryAfterSeconds));
+  }
+
+  return NextResponse.json({ error: { code, message, ...(resetAt ? { resetAt } : {}) } }, { headers, status });
 };
 
-const normalizeToolInputs = (messages: UIMessage[]): UIMessage[] =>
-  messages.map((message) => {
-    if (message.role !== "assistant") {
-      return message;
-    }
-
-    return {
-      ...message,
-      parts: message.parts.map((part) => {
-        if (!isToolUIPart(part) || part.input !== undefined) {
-          return part;
-        }
-
-        return {
-          ...part,
-          input: "rawInput" in part ? part.rawInput : {},
-        };
-      }),
-    };
+const unavailableResponse = () =>
+  createErrorResponse({
+    code: "CHAT_UNAVAILABLE",
+    message: "The assistant is temporarily unavailable. Please try again later.",
+    status: 503,
   });
 
-const extractReasoningFromChunk = (chunk: Record<string, unknown>) => {
-  const kwargs = chunk.kwargs && typeof chunk.kwargs === "object" ? (chunk.kwargs as Record<string, unknown>) : chunk;
-  const contentBlocks = kwargs.contentBlocks;
-
-  if (Array.isArray(contentBlocks)) {
-    const reasoning = contentBlocks
-      .map((block) => {
-        if (!block || typeof block !== "object") {
-          return null;
-        }
-
-        if ("reasoning" in block && typeof block.reasoning === "string") {
-          return block.reasoning;
-        }
-
-        if ("thinking" in block && typeof block.thinking === "string") {
-          return block.thinking;
-        }
-
-        return null;
-      })
-      .filter((value): value is string => Boolean(value))
-      .join("");
-
-    if (reasoning) {
-      return reasoning;
-    }
-  }
-
-  const additionalKwargs =
-    kwargs.additional_kwargs && typeof kwargs.additional_kwargs === "object"
-      ? (kwargs.additional_kwargs as Record<string, unknown>)
-      : undefined;
-  const reasoningSummary =
-    additionalKwargs?.reasoning &&
-    typeof additionalKwargs.reasoning === "object" &&
-    "summary" in additionalKwargs.reasoning &&
-    Array.isArray(additionalKwargs.reasoning.summary)
-      ? additionalKwargs.reasoning.summary
-      : undefined;
-
-  if (!reasoningSummary) {
-    return undefined;
-  }
-
-  const reasoning = reasoningSummary
-    .map((item) =>
-      item && typeof item === "object" && "text" in item && typeof item.text === "string" ? item.text : null,
-    )
-    .filter((value): value is string => Boolean(value))
-    .join("");
-
-  return reasoning || undefined;
-};
-
-const extractTextFromChunk = (chunk: Record<string, unknown>) => {
-  const content = chunk.content;
-
-  if (typeof content === "string") {
-    return content;
-  }
-
-  if (!Array.isArray(content)) {
-    return "";
-  }
-
-  return content
-    .map((part) => {
-      if (!part || typeof part !== "object" || !("type" in part) || part.type !== "text" || !("text" in part)) {
-        return "";
-      }
-
-      return typeof part.text === "string" ? part.text : "";
-    })
-    .join("");
-};
-
-export async function POST(req: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
-    const body = await req.json();
-    const uiMessages: UIMessage[] = body.messages ?? [];
-
-    if (!Array.isArray(uiMessages) || uiMessages.length === 0) {
-      return NextResponse.json({ error: "No messages provided." }, { status: 400 });
-    }
-
-    // Enforce history length limit
-    const trimmedMessages = normalizeToolInputs(uiMessages.slice(-MAX_MESSAGES));
-
-    // Validate last user message length
-    const lastMessage = trimmedMessages[trimmedMessages.length - 1];
-    const lastTextPart = lastMessage?.parts?.find((p: { type: string }) => p.type === "text") as
-      { type: "text"; text: string } | undefined;
-    if (!lastTextPart?.text) {
-      return NextResponse.json({ error: "Invalid message format." }, { status: 400 });
-    }
-    if (lastTextPart.text.length > MAX_INPUT_LENGTH) {
-      return NextResponse.json({ error: "Message too long. Please keep it under 2000 characters." }, { status: 400 });
+    const parsedRequest = await parseChatRequest(request);
+    if (!parsedRequest.ok) {
+      return createErrorResponse(parsedRequest.error);
     }
 
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
-      return NextResponse.json({ error: "LLM API key is not configured." }, { status: 500 });
+      return unavailableResponse();
     }
 
-    const modelName = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
-    const supportsReasoning = REASONING_MODEL_PREFIXES.some((prefix) => modelName.startsWith(prefix));
+    const clientIp = getClientIp(request);
+    const ipHashSecret = process.env.CHAT_IP_HASH_SECRET;
+    let cloudflareContext: Awaited<ReturnType<typeof getCloudflareContext<{ asn?: number }>>>;
+    let dailyLimit: number;
 
-    const model = new ChatOpenAI({
-      openAIApiKey: apiKey,
-      modelName,
-      streaming: true,
-      ...(supportsReasoning
-        ? {
-            reasoning: {
-              effort: "medium",
-              summary: "auto",
-            },
-          }
-        : {
-            temperature: 0.7,
-          }),
+    try {
+      cloudflareContext = await getCloudflareContext<{ asn?: number }>({ async: true });
+      dailyLimit = getDailyLimit();
+    } catch {
+      return unavailableResponse();
+    }
+
+    const rateLimitDatabase = cloudflareContext.env.CHAT_RATE_LIMIT_DB;
+    if (!clientIp || !ipHashSecret || !rateLimitDatabase) {
+      return unavailableResponse();
+    }
+
+    const turnstileResult = await verifyTurnstileToken({
+      clientIp,
+      token: parsedRequest.turnstileToken,
     });
+    if (!turnstileResult.ok) {
+      const verificationFailed = turnstileResult.reason === "invalid";
+      return createErrorResponse({
+        code: verificationFailed ? "TURNSTILE_FAILED" : "CHAT_UNAVAILABLE",
+        message: verificationFailed
+          ? "Verification failed. Please try again."
+          : "The assistant is temporarily unavailable. Please try again later.",
+        status: verificationFailed ? 403 : 503,
+      });
+    }
 
-    // Convert UIMessages to LangChain BaseMessages
-    const baseMessages = await toBaseMessages(trimmedMessages);
-    const agentMessages = [new SystemMessage(SYSTEM_PROMPT), ...baseMessages];
+    let quota;
+    try {
+      quota = await consumeDailyQuota({
+        clientIp,
+        database: rateLimitDatabase,
+        hashSecret: ipHashSecret,
+        limit: dailyLimit,
+      });
+    } catch {
+      return unavailableResponse();
+    }
 
-    // Create a ReAct agent with Theory Foundry-facing service and assessment tools
-    const agent = createAgent({
-      model: model,
-      tools: CHAT_TOOLS,
-    });
+    if (!quota.allowed) {
+      return createErrorResponse({
+        code: "DAILY_LIMIT_REACHED",
+        message: "This network has reached the daily demo limit. Please try again after 00:00 UTC.",
+        resetAt: quota.resetAt,
+        status: 429,
+      });
+    }
 
-    const agentStream = await agent
-      .withConfig({
-        metadata: {
-          messageCount: trimmedMessages.length,
-          model: modelName,
-          route: "/api/chat",
-          toolNames: CHAT_TOOL_NAMES,
-        },
-        runName: "theory-foundry-marketing-chat",
-        tags: ["theory-foundry-marketing-site", "ai-chat", modelName],
-      })
-      .streamEvents({ messages: agentMessages }, { version: "v2" });
+    cloudflareContext.ctx.waitUntil(
+      deleteExpiredQuotaRecords(rateLimitDatabase).catch(() => {
+        console.error("[/api/chat] quota retention cleanup failed");
+      }),
+    );
+
+    const agentStream = await startChatAgentStream({ apiKey, messages: parsedRequest.messages });
 
     return createUIMessageStreamResponse({
-      stream: createUIMessageStream({
-        execute: async ({ writer }) => {
-          const streamState = {
-            messageId: "langchain-msg-1",
-            reasoningMessageId: null as string | null,
-            reasoningStarted: false,
-            started: false,
-            textMessageId: null as string | null,
-            textStarted: false,
-          };
-
-          writer.write({ type: "start" });
-
-          for await (const rawEvent of agentStream as AsyncIterable<unknown>) {
-            if (!rawEvent || typeof rawEvent !== "object") {
-              continue;
-            }
-
-            const event = rawEvent as StreamEvent;
-            const data = event.data && typeof event.data === "object" ? event.data : undefined;
-
-            if (event.run_id && !streamState.started) {
-              streamState.messageId = event.run_id;
-            }
-
-            switch (event.event) {
-              case "on_chat_model_start": {
-                const runId = event.run_id ?? (typeof data?.run_id === "string" ? data.run_id : undefined);
-                if (runId) {
-                  streamState.messageId = runId;
-                }
-                break;
-              }
-              case "on_chat_model_stream": {
-                const chunk = data?.chunk;
-                if (!chunk || typeof chunk !== "object") {
-                  break;
-                }
-
-                const chunkRecord = chunk as Record<string, unknown>;
-
-                if (typeof chunkRecord.id === "string") {
-                  streamState.messageId = chunkRecord.id;
-                }
-
-                const reasoning = extractReasoningFromChunk(chunkRecord);
-                if (reasoning) {
-                  if (!streamState.reasoningStarted) {
-                    streamState.reasoningMessageId = streamState.messageId;
-                    writer.write({ id: streamState.messageId, type: "reasoning-start" });
-                    streamState.reasoningStarted = true;
-                    streamState.started = true;
-                  }
-
-                  writer.write({
-                    delta: reasoning,
-                    id: streamState.reasoningMessageId ?? streamState.messageId,
-                    type: "reasoning-delta",
-                  });
-                }
-
-                const text = extractTextFromChunk(chunkRecord);
-                if (!text) {
-                  break;
-                }
-
-                if (streamState.reasoningStarted && !streamState.textStarted) {
-                  writer.write({
-                    id: streamState.reasoningMessageId ?? streamState.messageId,
-                    type: "reasoning-end",
-                  });
-                  streamState.reasoningStarted = false;
-                }
-
-                if (!streamState.textStarted) {
-                  streamState.textMessageId = streamState.messageId;
-                  writer.write({ id: streamState.messageId, type: "text-start" });
-                  streamState.textStarted = true;
-                  streamState.started = true;
-                }
-
-                writer.write({
-                  delta: text,
-                  id: streamState.textMessageId ?? streamState.messageId,
-                  type: "text-delta",
-                });
-                break;
-              }
-              case "on_tool_start": {
-                const runId = event.run_id ?? (typeof data?.run_id === "string" ? data.run_id : undefined);
-                const toolName = event.name ?? (typeof data?.name === "string" ? data.name : undefined);
-
-                if (!runId || !toolName) {
-                  break;
-                }
-
-                writer.write({
-                  dynamic: true,
-                  toolCallId: runId,
-                  toolName,
-                  type: "tool-input-start",
-                });
-
-                if (data && "input" in data) {
-                  writer.write({
-                    dynamic: true,
-                    input: data.input,
-                    toolCallId: runId,
-                    toolName,
-                    type: "tool-input-available",
-                  });
-                }
-
-                break;
-              }
-              case "on_tool_end": {
-                const runId = event.run_id ?? (typeof data?.run_id === "string" ? data.run_id : undefined);
-
-                if (!runId) {
-                  break;
-                }
-
-                writer.write({
-                  output: data?.output,
-                  toolCallId: runId,
-                  type: "tool-output-available",
-                });
-                break;
-              }
-            }
-          }
-
-          if (streamState.reasoningStarted) {
-            writer.write({
-              id: streamState.reasoningMessageId ?? streamState.messageId,
-              type: "reasoning-end",
-            });
-          }
-
-          if (streamState.textStarted) {
-            writer.write({
-              id: streamState.textMessageId ?? streamState.messageId,
-              type: "text-end",
-            });
-          }
-
-          writer.write({ type: "finish" });
-        },
-      }),
+      headers: {
+        "RateLimit-Limit": String(quota.limit),
+        "RateLimit-Remaining": String(quota.remaining),
+        "RateLimit-Reset": String(Math.floor(new Date(quota.resetAt).getTime() / 1000)),
+      },
+      stream: createChatMessageStream(agentStream as AsyncIterable<unknown>),
     });
-  } catch (err) {
-    console.error("[/api/chat] error:", err);
-    return NextResponse.json({ error: "An unexpected error occurred." }, { status: 500 });
+  } catch (error) {
+    console.error("[/api/chat] error:", error);
+    return unavailableResponse();
   }
 }

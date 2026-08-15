@@ -9,4 +9,11 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS",
   },
+  "d1_databases": [
+    {
+      "binding": "CHAT_RATE_LIMIT_DB",
+      "database_name": "theory-foundry-chat-rate-limit",
+      "migrations_dir": "migrations",
+    },
+  ],
 }
