@@ -31,8 +31,8 @@ export function ChatEmptyState({
   status,
   title = (
     <>
-      <Image alt="Theory Foundry assistant" className="h-8 w-auto" height={32} src="/ai.svg" width={32} />
-      Ask Theory Foundry and see the integration work
+      <Image alt="" aria-hidden className="h-14 w-14" height={56} src="/ai.svg" width={56} />
+      Ask Theory Foundry
     </>
   ),
   onInputChange,
@@ -40,15 +40,15 @@ export function ChatEmptyState({
   onSubmit,
 }: ChatEmptyStateProps) {
   return (
-    <div className="flex w-full flex-1 items-center justify-center overflow-hidden rounded-xl border border-forest/10 bg-mist/90 shadow-[0_24px_70px_-34px_rgba(35,61,77,0.45)] dark:border-cream/20 dark:bg-night-surface/90 dark:shadow-[0_24px_70px_-34px_rgba(33,94,97,0.42)]">
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center px-5 py-12 text-center sm:px-8">
+    <div className="flex w-full flex-1 items-center justify-center overflow-hidden rounded-xl border border-forest/10 bg-mist/90 shadow-[0_24px_70px_-34px_rgba(35,61,77,0.45)] dark:border-forest-soft/70 dark:bg-night-panel dark:shadow-[0_28px_80px_-34px_rgba(0,0,0,0.8)]">
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center px-5 py-6 text-center sm:px-8">
         <h2
-          className={`flex items-center gap-3 text-2xl font-semibold tracking-[-0.035em] sm:text-3xl ${tw.TEXT_PRIMARY}`}
+          className={`flex flex-col items-center gap-4 text-2xl font-semibold tracking-[-0.035em] sm:text-3xl ${tw.TEXT_PRIMARY}`}
         >
           {title}
         </h2>
-        <p className={`mt-4 max-w-md text-sm leading-6 ${tw.TEXT_SECONDARY}`}>
-          Get answers about our offerings while this working demo uses scoped tools behind the conversation.
+        <p className={`mt-3 max-w-md text-sm leading-6 ${tw.TEXT_SECONDARY}`}>
+          Explore our services through our AI Agent
         </p>
 
         <ChatPromptInput
@@ -67,7 +67,7 @@ export function ChatEmptyState({
           <div className="mt-5 grid w-full max-w-2xl gap-2 sm:grid-cols-3">
             {suggestions.map((suggestion) => (
               <button
-                className={`rounded-md border border-forest/10 bg-cream px-3 py-3 text-left text-xs leading-5 transition duration-200 hover:-translate-y-0.5 hover:border-forest/35 hover:bg-cream active:translate-y-px dark:border-cream/20 dark:bg-night dark:hover:border-mint/35 dark:hover:bg-night ${tw.TEXT_SECONDARY}`}
+                className={`rounded-md border border-forest/10 bg-cream px-3 py-3 text-left text-xs leading-5 transition duration-200 hover:-translate-y-0.5 hover:border-forest/35 hover:bg-cream active:translate-y-px dark:border-forest-soft/70 dark:bg-night dark:hover:border-mint/60 dark:hover:bg-night-raised ${tw.TEXT_SECONDARY}`}
                 key={suggestion}
                 onClick={() => onInputChange(suggestion)}
                 type="button"

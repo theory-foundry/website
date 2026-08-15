@@ -46,6 +46,20 @@ The AI Integration & MCP consulting offer is available at
 The Resume Agent product showcase is available at
 [http://localhost:3000/products/resume-agent](http://localhost:3000/products/resume-agent).
 
+## Validation
+
+Run the complete local validation suite with:
+
+```bash
+pnpm verify
+```
+
+This runs lint, a no-emit TypeScript check, and a production build. If this repository's development server is running,
+the production build automatically runs from a temporary copy of the working tree so it does not clean or replace the
+live server's `.next` files. To force this behavior, run `pnpm verify:build --isolated`.
+
+Do not run `pnpm build` directly while `pnpm dev` is running from the same checkout.
+
 ## AI Chat Feature
 
 The portfolio includes an embedded LLM chat powered by:
@@ -74,6 +88,21 @@ pnpm preview
 ```
 
 Deploy only as an intentional rollout step with `pnpm deploy`.
+
+Cloudflare Workers Builds should use the stage-specific scripts so the OpenNext build runs exactly once:
+
+```text
+Build command:   pnpm run cf:build
+Deploy command:  pnpm run cf:deploy
+Version command: pnpm run cf:upload
+```
+
+The deploy command publishes the production branch immediately. The version command is used for non-production branch
+builds and uploads a preview version without promoting it to production. For deliberate local use, `pnpm preview`,
+`pnpm deploy`, and `pnpm upload` combine the corresponding Cloudflare command with `cf:build`.
+
+These OpenNext commands perform a production Next.js build. Do not run them from this checkout while `pnpm dev` is
+running; use `pnpm verify` for routine validation because it isolates the build automatically.
 
 ### Domain rename rollout
 

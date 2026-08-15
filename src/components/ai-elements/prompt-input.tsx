@@ -44,7 +44,7 @@ export const PromptInput = ({ className, onSubmit, children, ...props }: PromptI
   return (
     <form
       className={cn(
-        `rounded-lg border border-forest/10 p-3 shadow-[0_14px_40px_-26px_rgba(35,61,77,0.55)] transition focus-within:border-forest/45 focus-within:ring-2 focus-within:ring-forest/10 dark:border-cream/20 dark:shadow-[0_14px_40px_-26px_rgba(33,94,97,0.42)] dark:focus-within:border-mint/45 dark:focus-within:ring-mint/10 ${tw.BG_SECONDARY}`,
+        "group rounded-lg border border-forest/10 bg-mist p-3 shadow-[0_14px_40px_-26px_rgba(35,61,77,0.55)] transition focus-within:border-forest/45 dark:border-forest-soft/80 dark:bg-night-raised dark:shadow-[0_16px_42px_-24px_rgba(0,0,0,0.85)] dark:focus-within:border-mint/70",
         className,
       )}
       onSubmit={handleSubmit}
@@ -89,7 +89,7 @@ export const PromptInputTextarea = ({
   return (
     <textarea
       className={cn(
-        `min-h-[3.25rem] w-full resize-none bg-transparent px-1 py-2 text-sm outline-none placeholder:text-forest-soft dark:placeholder:text-sage ${tw.TEXT_PRIMARY}`,
+        `min-h-[3.25rem] w-full resize-none bg-transparent px-1 py-2 text-sm outline-none placeholder:text-forest-soft focus-visible:outline-none dark:placeholder:text-sage ${tw.TEXT_PRIMARY}`,
         className,
       )}
       name={name}
@@ -105,7 +105,7 @@ export type PromptInputFooterProps = HTMLAttributes<HTMLDivElement>;
 export const PromptInputFooter = ({ className, ...props }: PromptInputFooterProps) => (
   <div
     className={cn(
-      "mt-2 flex items-center justify-between gap-3 border-t border-forest/10 pt-3 dark:border-cream/20",
+      "mt-2 flex items-center justify-between gap-3 border-t border-forest/10 pt-3 transition-colors group-focus-within:border-forest/45 dark:border-forest-soft/70 dark:group-focus-within:border-mint/70",
       className,
     )}
     {...props}

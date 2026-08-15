@@ -1,6 +1,6 @@
 {
   "name": "theory-foundry-website",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "packageManager": "pnpm@11.10.0",
   "scripts": {
@@ -8,8 +8,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "typecheck": "tsc --noEmit --incremental false",
+    "verify": "pnpm lint && pnpm typecheck && pnpm verify:build",
+    "verify:build": "node scripts/verify-build.mjs",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare deploy",
+    "cf:upload": "opennextjs-cloudflare upload",
+    "preview": "pnpm run cf:build && pnpm run cf:preview",
+    "deploy": "pnpm run cf:build && pnpm run cf:deploy",
+    "upload": "pnpm run cf:build && pnpm run cf:upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {

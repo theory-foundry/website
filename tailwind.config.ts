@@ -31,6 +31,8 @@ const config: Config = {
         "forest-deep": "#1B5053",
         navy: "#233D4D",
         night: "#08151D",
+        "night-panel": "#061219",
+        "night-raised": "#102A33",
         "night-surface": "#123039",
       },
       fontFamily: {

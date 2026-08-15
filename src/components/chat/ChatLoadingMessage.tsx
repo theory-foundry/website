@@ -11,7 +11,7 @@ export function ChatLoadingMessage() {
         <div
           aria-live="polite"
           aria-label="Assistant is responding"
-          className={`relative inline-flex min-w-[12rem] overflow-hidden rounded-lg rounded-bl-sm border border-forest/10 px-4 py-3 text-sm dark:border-cream/20 ${tw.BG_SECONDARY} ${tw.TEXT_PRIMARY}`}
+          className={`relative inline-flex min-w-[12rem] overflow-hidden rounded-lg rounded-bl-sm border border-forest/10 bg-mist px-4 py-3 text-sm dark:border-forest-soft/70 dark:bg-night-raised ${tw.TEXT_PRIMARY}`}
           role="status"
         >
           <span className="sr-only">Assistant is responding</span>

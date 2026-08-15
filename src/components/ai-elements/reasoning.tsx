@@ -113,7 +113,7 @@ export const Reasoning = memo(
       <ReasoningContext.Provider value={contextValue}>
         <Collapsible
           className={cn(
-            `not-prose mb-4 w-full max-w-2xl self-start overflow-hidden rounded-lg border border-forest/10 dark:border-cream/20 ${tw.BG_SECONDARY}`,
+            "not-prose mb-4 w-full max-w-2xl self-start overflow-hidden rounded-lg border border-forest/10 bg-mist dark:border-forest-soft/70 dark:bg-night-raised",
             className,
           )}
           onOpenChange={handleOpenChange}
@@ -156,7 +156,7 @@ export const ReasoningTrigger = memo(
         {children ?? (
           <>
             <div className="flex min-w-0 flex-1 items-center gap-2">
-              <span className="inline-flex items-center gap-1 rounded-md border border-forest/10 bg-forest/5 px-2 py-0.5 font-mono text-[10px] font-medium text-forest dark:border-cream/20 dark:bg-cream/10 dark:text-sage">
+              <span className="inline-flex items-center gap-1 rounded-md border border-forest/10 bg-forest/5 px-2 py-0.5 font-mono text-[10px] font-medium text-forest dark:border-forest-soft/70 dark:bg-night dark:text-sage">
                 <BrainIcon className="size-3" />
                 Reasoning
               </span>
@@ -183,14 +183,14 @@ const streamdownPlugins = { cjk, code, math, mermaid };
 export const ReasoningContent = memo(({ className, children, ...props }: ReasoningContentProps) => (
   <CollapsibleContent
     className={cn(
-      "border-t border-forest/10 px-3 pb-3 pt-2.5 text-xs leading-6 dark:border-cream/20",
+      "border-t border-forest/10 px-3 pb-3 pt-2.5 text-xs leading-6 dark:border-forest-soft/70",
       "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=open]:animate-in text-navy outline-none dark:text-sage",
       className,
     )}
     {...props}
   >
     <Streamdown
-      className="break-words [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_code]:rounded [&_code]:bg-forest/10 [&_code]:px-1 [&_code]:py-0.5 dark:[&_code]:bg-cream/15 [&_ol]:pl-5 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-forest/10 [&_pre]:p-3 dark:[&_pre]:bg-cream/[0.12] [&_ul]:pl-5"
+      className="break-words [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_code]:rounded [&_code]:bg-forest/10 [&_code]:px-1 [&_code]:py-0.5 dark:[&_code]:bg-night [&_ol]:pl-5 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-forest/10 [&_pre]:p-3 dark:[&_pre]:bg-night [&_ul]:pl-5"
       plugins={streamdownPlugins}
     >
       {children}
