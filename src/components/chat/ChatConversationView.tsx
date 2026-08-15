@@ -10,10 +10,11 @@ import { ChatPromptInput } from "./ChatPromptInput";
 type ChatConversationViewProps = {
   copyError: string | null;
   eyebrow?: string;
-  hasError: boolean;
+  errorMessage: string | null;
   input: string;
   inputPlaceholder?: string;
   isLoading: boolean;
+  isVerifying?: boolean;
   lastAssistantMessageId?: string;
   messages: UIMessage[];
   showLoadingMessage: boolean;
@@ -30,10 +31,11 @@ type ChatConversationViewProps = {
 export function ChatConversationView({
   copyError,
   eyebrow = "Theory Foundry product demo",
-  hasError,
+  errorMessage,
   input,
   inputPlaceholder = "Ask about Theory Foundry, our services, or your product workflow...",
   isLoading,
+  isVerifying = false,
   lastAssistantMessageId,
   messages,
   showLoadingMessage,
@@ -54,7 +56,8 @@ export function ChatConversationView({
           <h2 className={`mt-1 text-lg font-semibold tracking-[-0.025em] ${tw.TEXT_PRIMARY}`}>{title}</h2>
         </div>
         <button
-          className={`whitespace-nowrap rounded-md border border-forest/10 px-3 py-2 text-sm transition duration-200 hover:bg-forest/5 active:translate-y-px dark:border-forest-soft/70 dark:hover:bg-night-raised ${tw.BTN_NONE}`}
+          className={`whitespace-nowrap rounded-md border border-forest/10 px-3 py-2 text-sm transition duration-200 hover:bg-forest/5 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50 dark:border-forest-soft/70 dark:hover:bg-night-raised ${tw.BTN_NONE}`}
+          disabled={isVerifying}
           onClick={onNewChat}
           type="button"
         >
@@ -69,6 +72,7 @@ export function ChatConversationView({
           messages={messages}
           showLoadingMessage={showLoadingMessage}
           onCopyResponse={onCopyResponse}
+          isInteractionDisabled={isVerifying}
           onRegenerate={onRegenerate}
         />
       </div>
@@ -78,6 +82,7 @@ export function ChatConversationView({
           className="mx-auto w-full max-w-3xl"
           input={input}
           isLoading={isLoading}
+          isVerifying={isVerifying}
           onInputChange={onInputChange}
           onStop={onStop}
           onSubmit={onSubmit}
@@ -85,9 +90,9 @@ export function ChatConversationView({
           status={status}
           textareaClassName="max-h-40 min-h-[3.25rem]"
         />
-        {hasError && (
-          <p className="mt-3 text-center text-sm text-red-700 dark:text-red-300">
-            The assistant could not connect. Please try again.
+        {errorMessage && (
+          <p className="mt-3 text-center text-sm text-red-700 dark:text-red-300" role="alert">
+            {errorMessage}
           </p>
         )}
       </div>

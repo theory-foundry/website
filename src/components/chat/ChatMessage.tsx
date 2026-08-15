@@ -19,6 +19,7 @@ import { hasRenderableMessageContent } from "./chat-utils";
 
 type ChatMessageProps = {
   copyError: string | null;
+  isInteractionDisabled?: boolean;
   isLatestAssistantMessage: boolean;
   message: UIMessage;
   onCopyResponse: (text: string) => void | Promise<void>;
@@ -27,6 +28,7 @@ type ChatMessageProps = {
 
 export function ChatMessage({
   copyError,
+  isInteractionDisabled = false,
   isLatestAssistantMessage,
   message,
   onCopyResponse,
@@ -101,7 +103,12 @@ export function ChatMessage({
       {message.role === "assistant" && showActions && (
         <MessageToolbar className="mt-0">
           <MessageActions>
-            <MessageAction label="Retry response" onClick={() => void onRegenerate()} tooltip="Retry">
+            <MessageAction
+              disabled={isInteractionDisabled}
+              label="Retry response"
+              onClick={() => void onRegenerate()}
+              tooltip="Retry"
+            >
               <RefreshCwIcon className="size-3.5" />
             </MessageAction>
             <MessageAction label="Copy response" onClick={() => void onCopyResponse(textContent)} tooltip="Copy">

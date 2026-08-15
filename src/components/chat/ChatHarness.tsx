@@ -259,7 +259,7 @@ export default function ChatHarness() {
           <ChatConversationView
             copyError={copyError}
             eyebrow="UI Harness"
-            hasError={false}
+            errorMessage={null}
             input={input}
             inputPlaceholder={`Type any prompt and replay the "${activeScenario.label}" script...`}
             isLoading={isLoading}
@@ -277,7 +277,7 @@ export default function ChatHarness() {
           />
         ) : (
           <ChatEmptyState
-            hasError={false}
+            errorMessage={null}
             input={input}
             isLoading={isLoading}
             placeholder={`Type a prompt or load the "${activeScenario.label}" scenario...`}

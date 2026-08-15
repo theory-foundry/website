@@ -19,14 +19,19 @@ Copy `.env.example` to `.env.local` and fill in your credentials:
 cp .env.example .env.local
 ```
 
-| Variable             | Required | Description                                                                          |
-| -------------------- | -------- | ------------------------------------------------------------------------------------ |
-| `OPENAI_API_KEY`     | ✅ Yes   | Your OpenAI API key (used by the `/chat` AI feature)                                 |
-| `OPENAI_MODEL`       | No       | OpenAI model to use (defaults to `gpt-4o-mini`)                                      |
-| `LANGSMITH_TRACING`  | No       | Set to `true` to send LangChain traces for `/api/chat` to LangSmith                  |
-| `LANGSMITH_API_KEY`  | No       | LangSmith API key used when tracing is enabled                                       |
-| `LANGSMITH_PROJECT`  | No       | LangSmith project name for chat traces, e.g. `theory-foundry-marketing-ai`           |
-| `LANGSMITH_ENDPOINT` | No       | LangSmith API endpoint; only needed for non-default regions or self-hosted LangSmith |
+| Variable                         | Required | Description                                                                          |
+| -------------------------------- | -------- | ------------------------------------------------------------------------------------ |
+| `OPENAI_API_KEY`                 | ✅ Yes   | Your OpenAI API key (used by the `/api/chat` AI endpoint)                            |
+| `OPENAI_MODEL`                   | No       | OpenAI model to use (defaults to `gpt-4o-mini`)                                      |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | ✅ Yes   | Public Turnstile widget key; use Cloudflare's test key locally                       |
+| `TURNSTILE_SECRET`               | ✅ Yes   | Server-only Turnstile secret; use Cloudflare's test secret locally                   |
+| `TURNSTILE_HOSTNAMES`            | ✅ Yes   | Comma-separated hostnames accepted from Siteverify                                   |
+| `CHAT_IP_HASH_SECRET`            | ✅ Yes   | Secret used to HMAC IP-based quota identifiers                                       |
+| `CHAT_DAILY_LIMIT`               | No       | Accepted prompts per IP per UTC day (defaults to `10`)                               |
+| `LANGSMITH_TRACING`              | No       | Set to `true` to send LangChain traces for `/api/chat` to LangSmith                  |
+| `LANGSMITH_API_KEY`              | No       | LangSmith API key used when tracing is enabled                                       |
+| `LANGSMITH_PROJECT`              | No       | LangSmith project name for chat traces, e.g. `theory-foundry-marketing-ai`           |
+| `LANGSMITH_ENDPOINT`             | No       | LangSmith API endpoint; only needed for non-default regions or self-hosted LangSmith |
 
 > **Note:** The `/chat-test` Live AI option will show an error if `OPENAI_API_KEY` is not set.
 
@@ -54,9 +59,11 @@ Run the complete local validation suite with:
 pnpm verify
 ```
 
-This runs lint, a no-emit TypeScript check, and a production build. If this repository's development server is running,
-the production build automatically runs from a temporary copy of the working tree so it does not clean or replace the
-live server's `.next` files. To force this behavior, run `pnpm verify:build --isolated`.
+This checks that the Wrangler-generated Cloudflare binding types match `wrangler.jsonc`, then runs tests, lint, a
+no-emit TypeScript check, and a production build. After changing Cloudflare bindings or `.env.example`, regenerate the
+committed declarations with `pnpm cf-typegen`. If this repository's development server is running, the production build
+automatically runs from a temporary copy of the working tree so it does not clean or replace the live server's `.next`
+files. To force this behavior, run `pnpm verify:build --isolated`.
 
 Do not run `pnpm build` directly while `pnpm dev` is running from the same checkout.
 
@@ -68,6 +75,20 @@ The portfolio includes an embedded LLM chat powered by:
 - **Backend:** [LangChain.js](https://js.langchain.com/) (`@langchain/openai`) — API route at `/api/chat`
 
 The chat streams token-by-token responses and maintains conversation history in the UI session.
+
+### Abuse protection
+
+Every live chat request requires a fresh Cloudflare Turnstile token and consumes one request from a D1-backed per-IP
+quota. The default quota is 10 accepted prompts per UTC day. The Worker stores only a date-scoped HMAC identifier, never
+the visitor's raw IP address. Requests fail closed when Turnstile, D1, the Cloudflare client-IP header, or required
+secrets are unavailable.
+
+Local development uses Cloudflare's published always-pass Turnstile test keys from `.env.example`. Apply the D1 schema
+to the local database before exercising Live AI in `/chat-test`:
+
+```bash
+pnpm exec wrangler d1 migrations apply CHAT_RATE_LIMIT_DB --local
+```
 
 ### LangSmith Observability
 
@@ -114,8 +135,20 @@ the repository rename and must be performed separately.
 **Required production environment variables:**
 
 1. Add `OPENAI_API_KEY` with your OpenAI API key.
-2. Optionally add `OPENAI_MODEL` to override the default model.
-3. Optionally add `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, and `LANGSMITH_PROJECT` to trace `/api/chat` runs in LangSmith.
+2. Create a managed Turnstile widget for `theoryfoundry.com`, set `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, store its secret as
+   `TURNSTILE_SECRET`, and set `TURNSTILE_HOSTNAMES=theoryfoundry.com`.
+3. Generate and store a long random `CHAT_IP_HASH_SECRET`; optionally set `CHAT_DAILY_LIMIT` (default `10`).
+4. Create the `theory-foundry-chat-rate-limit` D1 database, add its generated `database_id` to the
+   `CHAT_RATE_LIMIT_DB` binding in `wrangler.jsonc`, and apply migrations before promoting the Worker:
+
+   ```bash
+   pnpm exec wrangler d1 migrations apply CHAT_RATE_LIMIT_DB --remote
+   ```
+
+5. Add a zone-level rate limiting rule for exact path `/api/chat`: five requests per IP in 10 seconds, blocked for 10
+   seconds. This is burst protection; the D1 check remains the authoritative daily quota.
+6. Optionally add `OPENAI_MODEL` to override the default model.
+7. Optionally add `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, and `LANGSMITH_PROJECT` to trace `/api/chat` runs in LangSmith.
 
 See the [OpenNext Cloudflare documentation](https://opennext.js.org/cloudflare) for deployment details.
 

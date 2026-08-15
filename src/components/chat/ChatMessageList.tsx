@@ -7,6 +7,7 @@ import { ChatMessage } from "./ChatMessage";
 
 type ChatMessageListProps = {
   copyError: string | null;
+  isInteractionDisabled?: boolean;
   lastAssistantMessageId?: string;
   messages: UIMessage[];
   showLoadingMessage: boolean;
@@ -16,6 +17,7 @@ type ChatMessageListProps = {
 
 export function ChatMessageList({
   copyError,
+  isInteractionDisabled = false,
   lastAssistantMessageId,
   messages,
   showLoadingMessage,
@@ -27,6 +29,7 @@ export function ChatMessageList({
       {messages.map((message) => (
         <ChatMessage
           copyError={copyError}
+          isInteractionDisabled={isInteractionDisabled}
           isLatestAssistantMessage={lastAssistantMessageId === message.id}
           key={message.id}
           message={message}
