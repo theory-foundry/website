@@ -1,6 +1,6 @@
 {
   "name": "theory-foundry-website",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "packageManager": "pnpm@11.10.0",
   "scripts": {
